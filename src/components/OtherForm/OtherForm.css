@@ -1,0 +1,10 @@
+.other-container {
+    display: flex;
+    justify-content: center;
+  }
+
+.main-other-form {
+    width: 75%;
+    border: solid;
+    justify-content: center;
+}

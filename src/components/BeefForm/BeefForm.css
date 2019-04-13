@@ -1,0 +1,11 @@
+.beef-container {
+    display: flex;
+    justify-content: center;
+  }
+
+.main-beef-form {
+    width: 75%;
+    border: solid;
+    justify-content: center;
+    /* background-color: lightgrey; */
+}

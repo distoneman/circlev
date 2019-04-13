@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import routes from './routes';
+import Nav from './components/Nav/Nav';
 
 // import "./App.css";
 import jsPDF from "jspdf";
@@ -20,6 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         {/* <iframe title="pdf" id="output" src={doc.output("dataurlstring")}></iframe> */}
+        <Nav/>
         {routes}
       </div>
     );

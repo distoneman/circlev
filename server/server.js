@@ -17,5 +17,5 @@ massive(CONNECTION_STRING).then(connection => {
 
 
 app.get('/api/test', testCtrl.getAllTest);
-app.post('/beef/save', beefCtrl.addOne);
-app.get('/beef/prices', beefCtrl.beefPrices)
+app.post('/beef/save', beefCtrl.addBeef);
+app.get('/beef/prices', beefCtrl.beefPrices);

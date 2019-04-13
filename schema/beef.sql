@@ -1,6 +1,7 @@
 create table beef (
     beef_id serial primary key,
     invoice_date date,
+    sold_by varchar(150),
     customer varchar(150),
     phone varchar(12),
     cell_phone boolean,
