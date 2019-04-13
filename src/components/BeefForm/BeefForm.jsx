@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+import Moment from 'react-moment';
+import moment from 'moment'
 
 import './BeefForm.css'
 
@@ -8,7 +10,7 @@ export default class BeefForm extends Component {
     super(props);
     this.state = {
       soldBy: "",
-      date: "",
+      date: moment(new Date(), "MM/DD/YYYY"),
       customer: "",
       phone: "",
       baskets: 0,
@@ -17,7 +19,7 @@ export default class BeefForm extends Component {
       cutWrap: 0,
       patties: 0,
       brand: 0,
-      beefPrices: {}
+      beefPrices: {},
     };
   }
 
@@ -50,49 +52,55 @@ export default class BeefForm extends Component {
     // console.log(`${key} is ${this.state[key]}`);
   }
 
+
   render() {
     return (
       <div className='beef-container'>
         <div className="main-beef-form">
           <div>Beef Form</div>
           <hr />
-          Sold By:{" "}
+          Sold By:
           <input type="text" onChange={e => this.handleChange("soldBy", e)} />
           <br />
-          Date:{" "}
-          <input type="text" onChange={e => this.handleChange("date", e)} />
+          Date:
+          <input  type="text" value={moment(this.state.date).format('MM/DD/YYYY')}
+            onChange={e => this.handleChange("date", e)} />
           <br />
-          Customer:{" "}
+          Customer:
           <input type="text" onChange={e => this.handleChange("customer", e)} />
           <br />
-          Phone:{" "}
+          Phone:
           <input type="text" onChange={e => this.handleChange("phone", e)} />
           <br />
-          Baskets:{" "}
+          Baskets:
           <input type="type" onChange={e => this.handleChange("baskets", e)} />
           <br />
           Row: <input type="text" onChange={e => this.handleChange("row", e)} />
           <br />
-          Beef Slaughter:{" "}
+          Beef Slaughter:
           <input
-            type="text"
+            type="text" value={this.state.slaughter}
             onChange={e => this.handleChange("slaughter", e)}
           />
           <span>{this.state.beefPrices.slaughter}</span>
           <span>{this.state.slaughter * this.state.beefPrices.slaughter}</span>
           <br />
-          Cut & Wrap:{" "}
+          Cut & Wrap:
           <input type="text" onChange={e => this.handleChange("cutWrap", e)} />
           <span>{this.state.beefPrices.cut_wrap}</span>
           <span>{this.state.cutWrap * this.state.beefPrices.cut_wrap}</span>
           <br />
-          Patties:{" "}
+          Patties:
           <input type="text" onChange={e => this.handleChange("patties", e)} />
           <br />
-          Brand Inspection:{" "}
+          Brand Inspection:
           <input type="text" onChange={e => this.handleChange("brand", e)} />
           <br />
           <button onClick={() => this.save()}>Save</button>
+          <br />
+          <Moment format="MM/DD/YYYY">
+            {this.state.date}
+          </Moment>
         </div>
       </div>
     );

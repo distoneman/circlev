@@ -12,13 +12,15 @@ module.exports = {
         const total_cut = price_cut * cutWrap;
         const price_patties = prices[0].patties;
         const total_patties = price_patties * patties;
+        const price_brand = prices[0].brand;
+        const total_brand = price_brand * brand;
         console.log(price_slaughter)
         let response = await db.saveBeef({
             soldBy, date, customer, phone, baskets, row, 
             slaughter, price_slaughter, total_slaughter,
             cutWrap, price_cut, total_cut,
             patties, price_patties, total_patties,
-            brand
+            brand, price_brand, total_brand
         });
         res.status(200).send(response);
     },

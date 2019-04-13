@@ -16,22 +16,22 @@ export default class Nav extends Component {
             <div className='nav-bar'>
                 <div>
                     <Link to="/beef">
-                        <img src={imgBeef} alt="Beef Icon" className="beef-icon" />
+                        <img src={imgBeef} alt="Beef Icon" className="nav-icon" />
                     </Link>
                 </div>
                 <div className="pork-icon-container">
                     <Link to="/pork">
-                        <img src={imgPork} alt="Pork Icon" className="beef-icon" />
+                        <img src={imgPork} alt="Pork Icon" className="nav-icon" />
                     </Link>
                 </div>
                 <div className="sheep-icon-container">
                     <Link to="/sheep">
-                        <img src={imgSheep} alt="Sheep Icon" className="beef-icon" />
+                        <img src={imgSheep} alt="Sheep Icon" className="nav-icon" />
                     </Link>
                 </div>
                 <div className="other-icon-container">
                     <Link to="/other">
-                        <img src={imgOther} alt="Other Icon" className="beef-icon" />
+                        <img src={imgOther} alt="Other Icon" className="nav-icon" />
                     </Link>
                 </div>
             </div>
