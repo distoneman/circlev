@@ -2,7 +2,8 @@ module.exports = {
     addBeef: async (req, res) => {
         // console.log(req.body)
         const animal_type = 'BEEF';
-        const {soldBy, date, customer, phone, baskets,
+        const {soldBy, iDate, customer, phone, cell_phone, 
+            email, baskets,
             row, slaughter, cutWrap, patties, brand} = req.body;
         const db = req.app.get('db')
         let prices = await db.getPrices({ animal_type });
@@ -14,9 +15,10 @@ module.exports = {
         const total_patties = price_patties * patties;
         const price_brand = prices[0].brand;
         const total_brand = price_brand * brand;
-        console.log(price_slaughter)
+        console.log(iDate.toString())
         let response = await db.saveBeef({
-            soldBy, date, customer, phone, baskets, row, 
+            soldBy, iDate, customer, phone, cell_phone,
+            email, baskets, row, 
             slaughter, price_slaughter, total_slaughter,
             cutWrap, price_cut, total_cut,
             patties, price_patties, total_patties,

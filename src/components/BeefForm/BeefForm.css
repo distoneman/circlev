@@ -1,11 +1,82 @@
 .beef-container {
-    display: flex;
+    /* display: flex; */
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14pt;
     justify-content: center;
+    margin-left: 8em;
   }
 
-.main-beef-form {
-    width: 75%;
-    border: solid;
-    justify-content: center;
-    /* background-color: lightgrey; */
+.beef-form {
+  width: 40em;
+  padding: 1em;
+  padding-top: 2em;
+  border: solid 1px hotpink;
+  background-color: antiquewhite;
+  /* margin-left: 8em; */
+}
+
+.beef-title {
+  font-size: 24pt;
+}
+
+.beef-header-container {
+  display: grid;
+  grid-template-columns: .5fr 2fr;
+  grid-gap: .3em .6em;
+  vertical-align: baseline;
+}
+
+.beef-prices-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr 1fr;
+  grid-gap: 0.3em 0.6em;
+  vertical-align: baseline;
+}
+
+.beef-input-phone {
+  font-size: 12pt;
+  width: 25em;
+
+}
+
+.beef-price-input {
+  font-size: 12pt;
+  padding: 4px 7px;
+  margin: 4px 4px;
+  box-sizing: border-box;
+  width: 6em;
+  border-radius: 5px;
+  box-align: right;
+}
+
+
+label, span {
+  padding: 4px 7px;
+  margin: 4px 4px;
+}
+
+.beef-label-right {
+  text-align: right;
+}
+
+.beef-text-input {
+  font-size: 12pt;
+  padding: 4px 7px;
+  margin: 4px 4px;
+  box-sizing: border-box;
+  width: 38em;
+}
+
+.beef-input-short {
+  width: 10em;
+}
+
+.beef-save-btn {
+  font-size: 14pt;
+  font-weight: 400;
+  width: 5em;
+  background:#744a29;;
+  color: white;
+  border-radius: 4px;
+  text-shadow: 0 1px 1px #00000033;
 }

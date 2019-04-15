@@ -3,6 +3,8 @@ INSERT INTO beef (
     invoice_date,
     customer,
     phone,
+    cell_phone,
+    email,
     baskets,
     row_num,
     slaughter,
@@ -20,9 +22,11 @@ INSERT INTO beef (
 )
 VALUES (
     $(soldBy),
-    $(date),
+    $(iDate),
     $(customer),
     $(phone),
+    $(cell_phone),
+    $(email),
     $(baskets),
     $(row),
     $(slaughter),
