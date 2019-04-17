@@ -18,7 +18,14 @@ INSERT INTO beef (
     total_patties,
     qty_brand,
     price_brand,
-    total_brand
+    total_brand,
+    qty_other,
+    desc_other,
+    price_other,
+    total_other,
+    total,
+    net_weight,
+    message
 )
 VALUES (
     $(soldBy),
@@ -40,5 +47,12 @@ VALUES (
     $(total_patties),
     $(brand),
     $(price_brand),
-    $(total_brand)
+    $(total_brand),
+    $(qty_other),
+    $(desc_other),
+    $(price_other),
+    $(total_other),
+    $(total),
+    $(net_weight),
+    $(message)
 )

@@ -1,8 +1,7 @@
 const express = require('express');
 const massive = require('massive');
-const moment = require('moment')
+// const moment = require('moment')
 require('dotenv').config();
-const testCtrl = require ('./controller')
 const beefCtrl = require ('./beefController')
 
 const { SERVER_PORT, CONNECTION_STRING} = process.env;
@@ -17,6 +16,5 @@ massive(CONNECTION_STRING).then(connection => {
 }).catch(err => console.log(err));
 
 
-app.get('/api/test', testCtrl.getAllTest);
 app.post('/beef/save', beefCtrl.addBeef);
 app.get('/beef/prices', beefCtrl.beefPrices);

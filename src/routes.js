@@ -5,6 +5,7 @@ import BeefForm from  './components/BeefForm/BeefForm';
 import PorkForm from './components/PorkForm/PorkForm';
 import SheepForm from './components/SheepForm/SheepForm';
 import OtherForm from './components/OtherForm/OtherForm';
+import Search from './components/Search/Search';
 
 export default (
     <Switch>
@@ -13,5 +14,6 @@ export default (
         <Route path='/pork' component={PorkForm}/>
         <Route path='/sheep' component={SheepForm}/>
         <Route path='/other' component={OtherForm}/>
+        <Route path='/search' component={Search}/>
     </Switch>
 )

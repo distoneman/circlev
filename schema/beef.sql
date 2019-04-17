@@ -3,11 +3,11 @@ create table beef (
     invoice_date date,
     sold_by varchar(150),
     customer varchar(150),
-    phone varchar(12),
+    phone varchar(30),
     cell_phone boolean,
     email varchar(200),
     baskets varchar(10),
-    row_num varchar(10),
+    row_num varchar(25),
     slaughter numeric(10,2),
     price_slaughter numeric(10,2),
     total_slaughter numeric(10,2),
@@ -25,6 +25,7 @@ create table beef (
     price_other numeric(10,2),
     total_other numeric(10,2),
     total numeric(12,2),
+    net_weight numeric(10,2),
     message text,
     address text
 )

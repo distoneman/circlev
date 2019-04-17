@@ -21,7 +21,7 @@
 
 .beef-header-container {
   display: grid;
-  grid-template-columns: .5fr 2fr;
+  grid-template-columns: 1fr 2fr;
   grid-gap: .3em .6em;
   vertical-align: baseline;
 }
@@ -39,6 +39,16 @@
 
 }
 
+.beef-message-input {
+  font-size: 12pt;
+  grid-column: 1 / 3;
+  width: auto;
+  padding: 4px 7px;
+  margin: 4px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
 .beef-price-input {
   font-size: 12pt;
   padding: 4px 7px;
@@ -49,6 +59,14 @@
   box-align: right;
 }
 
+.beef-desc-other {
+  font-size: 12pt;
+  padding: 4px 7px;
+  margin: 4px 4px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  box-align: right;
+}
 
 label, span {
   padding: 4px 7px;
@@ -64,11 +82,12 @@ label, span {
   padding: 4px 7px;
   margin: 4px 4px;
   box-sizing: border-box;
+  border-radius: 5px;
   width: 38em;
 }
 
 .beef-input-short {
-  width: 10em;
+  width: 15em;
 }
 
 .beef-save-btn {
@@ -79,4 +98,10 @@ label, span {
   color: white;
   border-radius: 4px;
   text-shadow: 0 1px 1px #00000033;
+}
+
+.beef-pdf-iframe {
+  height: 1px;
+  width: 1px;
+  display: none;
 }
