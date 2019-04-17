@@ -7,6 +7,7 @@ import imgBeef from './../../images/beef.png';
 import imgPork from './../../images/pork.png';
 import imgSheep from './../../images/sheep.png';
 import imgOther from './../../images/other.png';
+import imgV from './../../images/v.png';
 import imgSearch from './../../images/search.png';
 
 export default class Nav extends Component {
@@ -32,7 +33,7 @@ export default class Nav extends Component {
                 </div>
                 <div className="other-icon-container">
                     <Link to="/other">
-                        <img src={imgOther} alt="Other Icon" className="nav-icon" />
+                        <img src={imgV} alt="Other Icon" className="nav-icon" />
                     </Link>
                 </div>
                 <div className="search-icon-container">
