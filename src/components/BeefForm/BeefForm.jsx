@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from 'moment';
 import InputMask from 'react-input-mask';
 import jsPDF from "jspdf";
+import BeefInvoice from "./BeefInvoice";
 
 import './BeefForm.css'
 
@@ -82,22 +83,30 @@ export default class BeefForm extends Component {
     doc.text(this.state.customer, 15, 45);
     doc.text(this.state.phone, 15, 55);
     doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
-    doc.text(this.state.slaughter, 20, 85, {align: 'right'});
-    doc.text('Beef Slaughter', 27, 85);
-    doc.text(`$${this.state.beefPrices.slaughter}`, 102, 85, {align: 'right'});
-    doc.text(slaughterTotal, 132, 85, {align: 'right'})
-    doc.text(this.state.cutWrap, 20, 95, {align: 'right'})
-    doc.text('Cut & Wrap', 27, 95);
-    doc.text(`$${this.state.beefPrices.cut_wrap}`, 102, 95, {align: 'right'});
-    doc.text(cutWrapTotal, 132, 95, {align: 'right'});
-    doc.text(this.state.patties, 20, 105, {align: 'right'})
-    doc.text('Patties', 27, 105);
-    doc.text(`$${this.state.beefPrices.patties}`, 102, 105, {align: 'right'});
-    doc.text(pattiesTotal, 132, 105, {align: 'right'});
-    doc.text(this.state.brand, 20, 115, {align: 'right'});
-    doc.text('Brand Inspection', 27, 115);
-    doc.text(`$${this.state.beefPrices.brand}`, 102, 115, {align: 'right'});
-    doc.text(brandTotal, 132, 115, {align: 'right'});
+    if(this.state.slaughter !== 0) {
+      doc.text(this.state.slaughter, 20, 85, {align: 'right'});
+      doc.text('Beef Slaughter', 27, 85);
+      doc.text(`$${this.state.beefPrices.slaughter}`, 102, 85, {align: 'right'});
+      doc.text(slaughterTotal, 132, 85, {align: 'right'})
+    }  
+    if(this.state.cutWrap !== 0) {
+      doc.text(this.state.cutWrap, 20, 95, {align: 'right'})
+      doc.text('Cut & Wrap', 27, 95);
+      doc.text(`$${this.state.beefPrices.cut_wrap}`, 102, 95, {align: 'right'});
+      doc.text(cutWrapTotal, 132, 95, {align: 'right'});
+    }
+    if(this.state.patties !== 0){
+      doc.text(this.state.patties, 20, 105, {align: 'right'})
+      doc.text('Patties', 27, 105);
+      doc.text(`$${this.state.beefPrices.patties}`, 102, 105, {align: 'right'});
+      doc.text(pattiesTotal, 132, 105, {align: 'right'});
+    }
+    if(this.state.brand !== 0){
+      doc.text(this.state.brand, 20, 115, {align: 'right'});
+      doc.text('Brand Inspection', 27, 115);
+      doc.text(`$${this.state.beefPrices.brand}`, 102, 115, {align: 'right'});
+      doc.text(brandTotal, 132, 115, {align: 'right'});
+    }
     if(this.state.qtyOther !== 0){
       doc.text(this.state.qtyOther, 20, 125, {align: 'right'});
       doc.text(this.state.descOther, 27, 125);
