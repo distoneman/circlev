@@ -3,9 +3,7 @@ import axios from "axios";
 import moment from 'moment';
 import InputMask from 'react-input-mask';
 import jsPDF from "jspdf";
-import BeefInvoice from "./BeefInvoice";
-
-import './BeefForm.css'
+import './BeefForm.css';
 
 export default class BeefForm extends Component {
   constructor(props) {
