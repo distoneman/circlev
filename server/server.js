@@ -22,3 +22,5 @@ app.get('/beef/prices', beefCtrl.beefPrices);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
+app.get('/search/beefSoldBy/:soldBy', searchCtrl.beefSoldBy);
+app.get('/search/beefID/:ID', searchCtrl.beefID);
