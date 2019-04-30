@@ -74,6 +74,8 @@ label, span {
 }
 
 .beef-label-right {
+  padding: 4px 7px;
+  margin: 4px 4px;
   text-align: right;
 }
 

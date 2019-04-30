@@ -12,15 +12,15 @@
   }
 
 .pork-icon-container {
-  padding-top: 1em;
+  padding-top: .8em;
 }
 
 .sheep-icon-container {
-  padding-top: 1.8em;
+  padding-top: 1.5em;
 }
 
 .other-icon-container {
-  padding-top: 2.25em;
+  padding-top: 2em;
 }
 
 .nav-icon {
@@ -30,6 +30,6 @@
 
 .search-icon {
   width: 5.5em;
-  padding-top: 3.2em;
+  padding-top: 2.8em;
   padding-left: .4em;
 }
