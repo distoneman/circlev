@@ -8,7 +8,7 @@ import imgPork from './../../images/pork.png';
 import imgSheep from './../../images/sheep.png';
 import imgOther from './../../images/other.png';
 // import imgV from './../../images/v.png';
-import imgSearch from './../../images/search.png';
+import imgSearch from './../../images/search2.png';
 
 export default class Nav extends Component {
 
