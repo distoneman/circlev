@@ -25,5 +25,12 @@ module.exports = {
         const db = req.app.get('db');
         let response = await db.beef.searchBeefID({ID});
         res.status(200).send(response)
+    },
+    beefInvoiceDate: async (req, res) => {
+        console.log("invoice date")
+        let invoiceDate = req.query.invoiceDate;
+        const db = req.app.get('db');
+        let response = await db.beef.searchBeefDate({invoiceDate});
+        res.status(200).send(response)
     }
 }

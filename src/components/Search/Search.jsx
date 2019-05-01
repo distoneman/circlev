@@ -41,6 +41,14 @@ export default class Search extends Component {
                 searchResults: res.data
             })
         }
+        if(this.state.searchField === "invoiceDate") {
+            console.log("search date")
+            const res = await axios.get(`/search/${this.state.searchType}InvoiceDate/?invoiceDate=${this.state.searchCriteria}`)
+            console.log(res.data)
+            this.setState({
+                searchResults: res.data
+            })
+        }
     }
 
     searchOne = async (invoiceID) => {
@@ -158,6 +166,7 @@ export default class Search extends Component {
                             onChange={e => this.handleChange("searchField", e)}>
                             <option value="customer">Customer</option>
                             <option value="soldBy">Sold By</option>
+                            <option value="invoiceDate">Invoice Date</option>
                         </select>
                         <label className='search-label'>Search Criteria:</label>
                         <input type="text" className="search-user-input"
