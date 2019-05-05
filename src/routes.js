@@ -11,7 +11,7 @@ import BeefInvoice from './components/BeefForm/BeefInvoice';
 export default (
     <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/beef' component={BeefForm}/>
+        <Route path='/beef/:ID?' component={BeefForm}/>
         <Route path='/pork' component={PorkForm}/>
         <Route path='/sheep' component={SheepForm}/>
         <Route path='/other' component={OtherForm}/>

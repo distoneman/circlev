@@ -62,6 +62,11 @@ export default class Search extends Component {
 
     }
 
+    deleteInvoice = async(invoiceID) => {
+        await axios.delete(`/${this.state.searchType}/delete/${invoiceID}`)
+        this.search();
+    }
+
     printInvoice = async (invoiceID) => {
         // console.log(invoiceID)
         await this.searchOne(invoiceID)
@@ -142,6 +147,7 @@ export default class Search extends Component {
                     total={invoice.total}
                     weight={invoice.net_weight}
                     printInvoice={this.printInvoice}
+                    deleteInvoice={this.deleteInvoice}
                 />
             )
         })

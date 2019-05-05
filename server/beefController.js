@@ -38,5 +38,12 @@ module.exports = {
         const db = req.app.get('db');
         let prices = await db.beef.getPrices({ animal_type });
         res.status(200).send(prices)
+    },
+    beefDelete: async(req, res) => {
+        console.log(req.params.ID);
+        let ID = req.params.ID;
+        const db = req.app.get('db');
+        let response = await db.beef.deleteBeefInvoice({ID});
+        res.status(200).send(response)
     }
 }

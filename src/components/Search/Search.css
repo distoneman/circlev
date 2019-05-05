@@ -87,10 +87,10 @@
 .invoice-view {
     background-color:antiquewhite;
     position: absolute;
-    left: 10rem;
+    left: 15rem;
     z-index: 1;
-    height: 20rem;
-    width: 45rem;
+    height: 18rem;
+    width: 40rem;
     border-radius: 10px;
     border: solid 2px #744a29;
     box-shadow: 5px 5px 5px rgb(87, 86, 86);

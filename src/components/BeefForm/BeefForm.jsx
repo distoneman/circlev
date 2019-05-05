@@ -33,12 +33,17 @@ export default class BeefForm extends Component {
   }
 
   async componentDidMount() {
-    let res = await axios.get("/beef/prices");
-    await this.setState({ beefPrices: res.data[0] });
+    if(this.props.match.params.ID === undefined){
+      console.log("null")
+      let res = await axios.get("/beef/prices");
+      await this.setState({ beefPrices: res.data[0] });
+    } else {
+      console.log('parameter')
+    }
   }
 
   save = async () => {
-    const res = await axios.post("/beef/save", {
+    await axios.post("/beef/save", {
       soldBy: this.state.soldBy,
       iDate: moment(this.state.iDate).format('l'),
       customer: this.state.customer,
@@ -167,6 +172,7 @@ export default class BeefForm extends Component {
               onChange={e => this.handleChange("soldBy", e)} />
             <label className='beef-label-right'>Customer:</label>
             <input type="text" className="beef-text-input"
+              value={this.state.customer}
               onChange={e => this.handleChange("customer", e)} />
             <label className='beef-label-right'>E-Mail:</label>
             <input type="text" className="beef-text-input"

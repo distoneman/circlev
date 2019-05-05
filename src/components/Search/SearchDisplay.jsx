@@ -48,7 +48,8 @@ export default class SearchDisplay extends Component {
                                 onClick={() => this.props.printInvoice(this.props.id)} />
                             <FaSearch className='fa-icon' onClick={this.toggleView} />
                             <FaEdit className='fa-icon' />
-                            <FaTrashAlt className='fa-icon' />
+                            <FaTrashAlt className='fa-icon' 
+                                onClick={() => this.props.deleteInvoice(this.props.id)}/>
                             <FaEnvelope className='fa-icon' />
                             <FaComment className='fa-icon' />
                         </div>
