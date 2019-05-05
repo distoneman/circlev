@@ -18,7 +18,8 @@ module.exports = {
         const price_brand = prices[0].brand;
         const total_brand = price_brand * brand;
         const total_other = qty_other * price_other;
-        console.log(iDate.toString())
+        // console.log(iDate.toString())
+        // console.log(iDate)
         let response = await db.beef.saveBeef({
             soldBy, iDate, customer, phone, cell_phone,
             email, baskets, row, 

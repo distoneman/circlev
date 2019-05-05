@@ -38,11 +38,9 @@ export default class BeefForm extends Component {
   }
 
   save = async () => {
-    console.log("save");
-    console.log(this.state.iDate)
     const res = await axios.post("/beef/save", {
       soldBy: this.state.soldBy,
-      iDate: this.state.iDate,
+      iDate: moment(this.state.iDate).format('l'),
       customer: this.state.customer,
       phone: this.state.phone,
       cell_phone: this.state.cellPhone,

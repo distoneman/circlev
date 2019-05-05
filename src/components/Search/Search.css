@@ -52,7 +52,7 @@
     font-size: 14pt;
     font-weight: 400;
     width: 5em;
-    background:#744a29;;
+    background:#744a29;
     color: white;
     border-radius: 4px;
     text-shadow: 0 1px 1px #00000033;
@@ -81,4 +81,47 @@
 .fa-icon {
     font-size: 12pt;
     padding-right: 6px;
+    cursor: pointer;
+}
+
+.invoice-view {
+    background-color:antiquewhite;
+    position: absolute;
+    left: 10rem;
+    z-index: 1;
+    height: 20rem;
+    width: 45rem;
+    border-radius: 10px;
+    border: solid 2px #744a29;
+    box-shadow: 5px 5px 5px rgb(87, 86, 86);
+    padding: 1.5em;
+}
+
+.close-invoice-view-modal {
+    cursor: pointer;
+    color: #744a29;
+    transition: color .2s;
+    font-weight: 900;
+    position: absolute;
+    right: 1.1rem;
+    top: 1rem;
+    border: none;
+    background: none;
+    font-size: 1rem;
+}
+
+.beef-invoice-view-container {
+    display: grid ;
+    grid-template-columns: .5fr 1.5fr .5fr .5fr;
+    margin-top: 1.5em;
+}
+
+.beef-invoice-item {
+    border: solid 1px #474545;
+    padding: .5em;
+    font-size: 11pt;
+}
+
+.invoice-view-right {
+    text-align: right;
 }

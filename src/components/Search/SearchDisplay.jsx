@@ -1,28 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Search.css';
+import InvoiceView from './InvoiceView';
 import { FaPrint, FaTrashAlt, FaEdit, FaSearch, FaEnvelope, FaComment } from 'react-icons/fa';
-import { IoIosMail, IoIosText } from "react-icons/io";
+// import { IoIosMail, IoIosText } from "react-icons/io";
 
 
-export default function SearchDisplay(props){
-    return(
-        <div className='search-results-container'>
-            <div className='search-item'>{props.iDate}</div>
-            <div className='search-item'>{props.customer}</div>
-            <div className='search-item'>{props.soldBy}</div>
-            <div className='search-item'>{props.phone}</div>
-            <div className='search-item'>${props.total}</div>
-            <div className='search-item'>{props.weight}</div>
-            <div className='search-item'>
-                <FaPrint className='fa-icon'
-                    onClick={() => props.printInvoice(props.id)}/>
-                <FaSearch className='fa-icon' />
-                <FaEdit className='fa-icon' />
-                <FaTrashAlt className='fa-icon'/>
-                <FaEnvelope className='fa-icon' />
-                <FaComment className='fa-icon' />
+export default class SearchDisplay extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            viewModal: false
+        }
+
+    }
+
+    toggleView = () => {
+        this.setState({
+            viewModal: !this.state.viewModal
+        })
+        console.log(this.state.viewModal)
+    }
+
+    render() {
+
+        return (
+            <div>
+                {this.state.viewModal ? (
+                    <div className="invoice-view">
+                        <button className='close-invoice-view-modal' onClick={this.toggleView}>X</button>
+                        <InvoiceView 
+                            searchType={this.props.searchType}
+                            id={this.props.id}
+                        />
+                    </div>
+                ) : (
+                    null
+                )}
+                    <div className='search-results-container'>
+                        <div className='search-item'>{this.props.iDate}</div>
+                        <div className='search-item'>{this.props.customer}</div>
+                        <div className='search-item'>{this.props.soldBy}</div>
+                        <div className='search-item'>{this.props.phone}</div>
+                        <div className='search-item'>${this.props.total}</div>
+                        <div className='search-item'>{this.props.weight}</div>
+                        <div className='search-item'>
+                            <FaPrint className='fa-icon'
+                                onClick={() => this.props.printInvoice(this.props.id)} />
+                            <FaSearch className='fa-icon' onClick={this.toggleView} />
+                            <FaEdit className='fa-icon' />
+                            <FaTrashAlt className='fa-icon' />
+                            <FaEnvelope className='fa-icon' />
+                            <FaComment className='fa-icon' />
+                        </div>
+                    </div>
             </div>
-        </div>
-
-    )
+            )
+        }
 }

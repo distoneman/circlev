@@ -29,7 +29,7 @@ export default class Search extends Component {
         console.log("search")
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -134,6 +134,7 @@ export default class Search extends Component {
                 <SearchDisplay
                     key={invoice.beef_id}
                     id={invoice.beef_id}
+                    searchType={this.state.searchType}
                     iDate={iDate}
                     customer={invoice.customer}
                     soldBy={invoice.sold_by}
