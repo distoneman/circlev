@@ -134,6 +134,7 @@ export default class Search extends Component {
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
             let iDate = moment(invoice.invoice_date).format('MM/DD/YYYY')
+            let editURL = `/beef/${invoice.beef_id}`
             return (
 
                 <SearchDisplay
@@ -148,6 +149,7 @@ export default class Search extends Component {
                     weight={invoice.net_weight}
                     printInvoice={this.printInvoice}
                     deleteInvoice={this.deleteInvoice}
+                    editURL={editURL}
                 />
             )
         })

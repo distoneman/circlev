@@ -10,24 +10,26 @@ export default class BeefForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      edit: false,
+      invoiceID: 0,
       soldBy: "",
       iDate: new Date(),
       customer: "",
       email: "",
       phone: "",
       cellPhone: false,
-      baskets: 0,
+      baskets: '',
       row: "",
-      netWeight: 0,
-      slaughter: 0,
-      cutWrap: 0,
-      patties: 0,
-      brand: 0,
-      qtyOther: 0,
+      netWeight: '',
+      slaughter: '',
+      cutWrap: '',
+      patties: '',
+      brand: '',
+      qtyOther: '',
       descOther: "",
-      priceOther: 0,
+      priceOther: '',
       beefPrices: {},
-      total: 0,
+      total: '',
       message: ""
     };
   }
@@ -37,8 +39,41 @@ export default class BeefForm extends Component {
       console.log("null")
       let res = await axios.get("/beef/prices");
       await this.setState({ beefPrices: res.data[0] });
+      console.log(this.state.beefPrices)
     } else {
+      this.setState({edit: true})
       console.log('parameter')
+      let res = await axios.get(`/search/beefID/${this.props.match.params.ID}`);
+      console.log(res.data)
+      let invoicePrices = {
+        slaughter: res.data[0].price_slaughter,
+        cut_wrap: res.data[0].price_cut,
+        patties: res.data[0].price_patties,
+        brand: res.data[0].price_brand
+      }
+      // this.setState({beefPrices: invoicePrices});
+      await this.setState({
+        invoiceID: res.data[0].beef_id,
+        beefPrices: invoicePrices,
+        soldBy: res.data[0].sold_by,
+        iDate: res.data[0].invoice_date,
+        customer: res.data[0].customer,
+        email: res.data[0].email,
+        phone: res.data[0].phone,
+        cellPhone: res.data[0].cell_phone,
+        baskets: res.data[0].baskets,
+        row: res.data[0].row_num,
+        netWeight: res.data[0].net_weight,
+        slaughter: res.data[0].slaughter,
+        cutWrap: res.data[0].qty_cut,
+        patties: res.data[0].qty_patties,
+        brand: res.data[0].qty_brand,
+        qtyOther: res.data[0].qty_other,
+        descOther: res.data[0].desc_other,
+        priceOther: res.data[0].price_other,
+        total: res.data[0].total,
+        message: res.data[0].message
+      })
     }
   }
 
@@ -65,6 +100,11 @@ export default class BeefForm extends Component {
     });
     this.printInvoice();
   };
+
+  update = async () => {
+    console.log('update')
+    console.log(this.state.invoiceID)
+  }
 
   printInvoice = () => {
     const doc = new jsPDF({
@@ -166,40 +206,48 @@ export default class BeefForm extends Component {
             <InputMask mask="99/99/9999" maskChar={null}
               className="beef-text-input beef-input-short"
               onChange={e => this.handleChange("iDate", e)}
-              defaultValue={moment(this.state.iDate).format('MM/DD/YYYY')} />
+              value={moment(this.state.iDate).format('MM/DD/YYYY')} />
+              {/* value={moment(this.state.iDate).format('MM/DD/YYYY')} /> */}
             <label className='beef-label-right'>Sold By:</label>
             <input type="text" className="beef-text-input"
-              onChange={e => this.handleChange("soldBy", e)} />
+              onChange={e => this.handleChange("soldBy", e)}
+              value={this.state.soldBy} />
             <label className='beef-label-right'>Customer:</label>
             <input type="text" className="beef-text-input"
               value={this.state.customer}
               onChange={e => this.handleChange("customer", e)} />
             <label className='beef-label-right'>E-Mail:</label>
             <input type="text" className="beef-text-input"
+              value={this.state.email}
               onChange={e => this.handleChange("email", e)} />
             <label className='beef-label-right'>Phone:</label>
             <div>
               <InputMask mask="999-999-9999" maskChar={null}
                 className="beef-text-input beef-input-short"
+                value={this.state.phone}
                 onChange={e => this.handleChange("phone", e)} />
               <label>Cell:</label>
               <input type="checkbox"
+                checked={this.state.cellPhone}
                 onClick={e => this.toggleCell()} />
             </div>
             <label className='beef-label-right'>Baskets:</label>
             <input type="type" className="beef-text-input beef-input-short"
+              value={this.state.baskets}
               onChange={e => this.handleChange("baskets", e)} />
             <label className='beef-label-right'>Row:</label>
             <input type="text" className="beef-text-input beef-input-short"
+              value={this.state.row}
               onChange={e => this.handleChange("row", e)} />
             <label className='beef-label-right'>Net Weight:</label>
             <input type="text" className="beef-text-input beef-input-short"
+              value={this.state.netWeight}
               onChange={e => this.handleChange("netWeight", e)}/>
           </div>
           <hr />
           <div className='beef-prices-container'>
             <input className='beef-price-input'
-              type="text"
+              type="text" value={this.state.slaughter}
               onChange={e => this.handleChange("slaughter", e)}
             />
             <label>Beef Slaughter</label>
@@ -207,31 +255,31 @@ export default class BeefForm extends Component {
             <span>{(this.state.slaughter * this.state.beefPrices.slaughter).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("cutWrap", e)}
-            />
+              value={this.state.cutWrap} />
             <label>Cut & Wrap</label>
             <span>${this.state.beefPrices.cut_wrap}</span>
             <span>{(this.state.cutWrap * this.state.beefPrices.cut_wrap).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("patties", e)}
-            />
+              value={this.state.patties} />
             <label>Patties</label>
             <span>${this.state.beefPrices.patties}</span>
             <span>{(this.state.patties * this.state.beefPrices.patties).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("brand", e)}
-            />
+              value={this.state.brand} />
             <label>Brand Inspection</label>
             <span>${this.state.beefPrices.brand}</span>
             <span>{(this.state.beefPrices.brand * this.state.brand).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("qtyOther", e)}
-            />
+              value={this.state.qty_other} />
             <input type="text" className='beef-desc-other'
               onChange={e => this.handleChange("descOther", e)}
-            />
+              value={this.state.descOther} />
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("priceOther", e)}
-            />
+              value={this.state.priceOther} />
             <span>{(this.state.qtyOther * this.state.priceOther).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <div></div>
             <div></div>
@@ -239,11 +287,16 @@ export default class BeefForm extends Component {
             <span>{this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <textarea className='beef-message-input' 
               onChange={e => this.handleChange("message", e)}
-              cols="30" rows="5"/>
+              cols="30" rows="5" value={this.state.message} />
             <div></div>
             <div></div>
-            <button className='beef-save-btn'
-              onClick={() => this.save()}>Save</button>
+            {this.state.edit === false ? (
+              <button className='beef-save-btn'
+                onClick={() => this.save()}>Save</button>
+            ) : (
+              <button className='beef-save-btn'
+                onClick={() => this.update()}>Update</button>
+            )}
           </div>
         </div>
         <iframe title="pdf" id="output" className='beef-pdf-iframe'></iframe>

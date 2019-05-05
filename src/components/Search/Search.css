@@ -82,6 +82,7 @@
     font-size: 12pt;
     padding-right: 6px;
     cursor: pointer;
+    color: black;
 }
 
 .invoice-view {
