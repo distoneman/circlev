@@ -158,7 +158,9 @@ export default class BeefForm extends Component {
 
   resetState = async () => {
     console.log('reset state')
-    this.setState({
+    let res = await axios.get("/beef/prices");
+    await this.setState({
+      beefPrices: res.data[0],
       edit: false,
       invoiceID: 0,
       soldBy: "",
@@ -177,7 +179,6 @@ export default class BeefForm extends Component {
       qtyOther: 0,
       descOther: "",
       priceOther: 0,
-      beefPrices: {},
       total: 0,
       message: ""
     })
@@ -236,7 +237,7 @@ export default class BeefForm extends Component {
     doc.text(total, 132, 135, {align: 'right'});
     doc.text(this.state.message, 27, 150, {maxWidth: '90'})
     doc.text(`${this.state.netWeight} Net Weight Misc. Beef Cuts`, 27, 200)
-    doc.save('invoice.pdf')
+    // doc.save('invoice.pdf')
     doc.autoPrint({});
     var iframe = document.getElementById('output');
     iframe.src = doc.output('dataurlstring');
