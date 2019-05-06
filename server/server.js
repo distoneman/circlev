@@ -11,6 +11,8 @@ const app = express();
 
 app.use(express.json());
 
+app.use( express.static( `${__dirname}/../build` ) )
+
 massive(CONNECTION_STRING).then(connection => {
     app.set('db', connection)
     app.listen(SERVER_PORT, () => console.log(`Server running on port ${SERVER_PORT}`))

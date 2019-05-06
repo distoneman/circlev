@@ -51,7 +51,7 @@ export default class BeefForm extends Component {
         patties: res.data[0].price_patties,
         brand: res.data[0].price_brand
       }
-      // this.setState({beefPrices: invoicePrices});
+      this.setState({beefPrices: invoicePrices});
       await this.setState({
         invoiceID: res.data[0].beef_id,
         beefPrices: invoicePrices,
