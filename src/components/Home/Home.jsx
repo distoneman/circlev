@@ -4,9 +4,9 @@ import image from './../../images/home_image.jpg';
 import './Home.css'
 
 export default class Home extends Component {
-    constructor(props){
-        super(props)
-    }
+    // constructor(props){
+    //     super(props)
+    // }
     render(){
         return(
             <div>

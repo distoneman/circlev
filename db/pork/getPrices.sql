@@ -1,0 +1,1 @@
+SELECT * from pork_prices;

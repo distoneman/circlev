@@ -1,5 +1,4 @@
 .beef-container {
-    /* display: flex; */
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14pt;
     justify-content: center;
@@ -12,7 +11,6 @@
   padding-top: 2em;
   border: solid 1px hotpink;
   background-color: antiquewhite;
-  /* margin-left: 8em; */
 }
 
 .beef-title {
@@ -36,7 +34,6 @@
 .beef-input-phone {
   font-size: 12pt;
   width: 25em;
-
 }
 
 .beef-message-input {
