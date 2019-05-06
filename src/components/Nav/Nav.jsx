@@ -9,6 +9,7 @@ import imgSheep from './../../images/sheep.png';
 import imgOther from './../../images/other.png';
 // import imgV from './../../images/v.png';
 import imgSearch from './../../images/search2.png';
+import imgSettings from './../../images/settings.png';
 
 export default class Nav extends Component {
 
@@ -40,6 +41,9 @@ export default class Nav extends Component {
                     <Link to="/search">
                         <img src={imgSearch} alt="Search Icon" className="search-icon"/>
                     </Link>
+                </div>
+                <div className="settings-icon-container">
+                    <img src={imgSettings} alt="" className="settings-icon"/>
                 </div>
             </div>
         )

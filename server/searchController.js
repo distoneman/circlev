@@ -27,7 +27,7 @@ module.exports = {
         res.status(200).send(response)
     },
     beefInvoiceDate: async (req, res) => {
-        console.log("invoice date")
+        // console.log("invoice date")
         let invoiceDate = req.query.invoiceDate;
         const db = req.app.get('db');
         let response = await db.beef.searchBeefDate({invoiceDate});

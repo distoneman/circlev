@@ -20,6 +20,7 @@ massive(CONNECTION_STRING).then(connection => {
 app.post('/beef/save', beefCtrl.addBeef);
 app.get('/beef/prices', beefCtrl.beefPrices);
 app.delete('/beef/delete/:ID', beefCtrl.beefDelete);
+app.put('/beef/update', beefCtrl.beefUpdate);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);

@@ -40,10 +40,23 @@ module.exports = {
         res.status(200).send(prices)
     },
     beefDelete: async(req, res) => {
-        console.log(req.params.ID);
+        // console.log(req.params.ID);
         let ID = req.params.ID;
         const db = req.app.get('db');
         let response = await db.beef.deleteBeefInvoice({ID});
+        res.status(200).send(response)
+    },
+    beefUpdate: async (req, res) => {
+        const {beef_id, iDate, customer, soldBy, phone, cell_phone, email, 
+            baskets, row, slaughter, total_slaughter, cutWrap, total_cut, 
+            qty_patties, total_patties, brand, total_brand, qty_other, desc_other, 
+            price_other, total_other, total, net_weight, message} = req.body;
+        const db = req.app.get('db');
+        let response = await db.beef.updateBeef({beef_id, iDate, customer,
+            soldBy, phone, cell_phone, email, baskets, row, slaughter, 
+            total_slaughter, cutWrap, total_cut, qty_patties, 
+            total_patties, brand, total_brand, qty_other, desc_other, 
+            price_other, total_other, total, net_weight, message})
         res.status(200).send(response)
     }
 }

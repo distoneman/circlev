@@ -4,7 +4,7 @@ import moment from 'moment';
 import InputMask from 'react-input-mask';
 import jsPDF from "jspdf";
 import './BeefForm.css';
-// import BeefInvoice from './BeefInvoice';
+import Swal from 'sweetalert2';
 
 export default class BeefForm extends Component {
   constructor(props) {
@@ -20,16 +20,16 @@ export default class BeefForm extends Component {
       cellPhone: false,
       baskets: '',
       row: "",
-      netWeight: '',
-      slaughter: '',
-      cutWrap: '',
-      patties: '',
-      brand: '',
-      qtyOther: '',
+      netWeight: 0,
+      slaughter: 0,
+      cutWrap: 0,
+      patties: 0,
+      brand: 0,
+      qtyOther: 0,
       descOther: "",
-      priceOther: '',
+      priceOther: 0,
       beefPrices: {},
-      total: '',
+      total: 0,
       message: ""
     };
   }
@@ -78,6 +78,7 @@ export default class BeefForm extends Component {
   }
 
   save = async () => {
+    console.log("save")
     await axios.post("/beef/save", {
       soldBy: this.state.soldBy,
       iDate: moment(this.state.iDate).format('l'),
@@ -98,12 +99,88 @@ export default class BeefForm extends Component {
       net_weight: this.state.netWeight,
       message: this.state.message
     });
-    this.printInvoice();
+    await this.printInvoice();
+    this.resetState();
   };
 
   update = async () => {
-    console.log('update')
-    console.log(this.state.invoiceID)
+    let total_slaughter = this.state.slaughter * this.state.beefPrices.slaughter;
+    let total_cut = this.state.cutWrap * this.state.beefPrices.cut_wrap;
+    let total_patties = this.state.patties * this.state.beefPrices.patties;
+    let total_brand = this.state.brand * this.state.beefPrices.brand;
+    let total_other = this.state.qtyOther * this.state.priceOther;
+    let total = total_slaughter + total_cut + total_patties + total_brand + total_other;
+    await axios.put('/beef/update', {
+      beef_id: this.state.invoiceID,
+      iDate: moment(this.state.iDate).format('l'),
+      customer: this.state.customer,
+      soldBy: this.state.soldBy,
+      phone: this.state.phone,
+      cell_phone: this.state.cellPhone,
+      email: this.state.email,
+      baskets: this.state.baskets,
+      row: this.state.row,
+      slaughter: this.state.slaughter,
+      total_slaughter: total_slaughter,
+      cutWrap: this.state.cutWrap,
+      total_cut: total_cut,
+      qty_patties: this.state.patties,
+      total_patties: total_patties,
+      brand: this.state.brand,
+      total_brand: total_brand,
+      qty_other: this.state.qtyOther,
+      desc_other: this.state.descOther,
+      price_other: this.state.priceOther,
+      total_other: total_other,
+      total: total,
+      net_weight: this.state.netWeight,
+      message: this.state.message
+    })
+    Swal.fire({
+      title: 'Invoice Updated',
+      // text: "You won't be able to revert this!",
+      // type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Print Invoice'
+    }).then((result) => {
+      if (result.value) {
+        this.printInvoice();
+        // this.resetState();
+        // Swal.fire(
+        //   'Invoice Printed'
+        // )
+      }
+      this.resetState()
+    })
+  }
+
+  resetState = async () => {
+    console.log('reset state')
+    this.setState({
+      edit: false,
+      invoiceID: 0,
+      soldBy: "",
+      iDate: new Date(),
+      customer: "",
+      email: "",
+      phone: "",
+      cellPhone: false,
+      baskets: '',
+      row: "",
+      netWeight: 0,
+      slaughter: 0,
+      cutWrap: 0,
+      patties: 0,
+      brand: 0,
+      qtyOther: 0,
+      descOther: "",
+      priceOther: 0,
+      beefPrices: {},
+      total: 0,
+      message: ""
+    })
   }
 
   printInvoice = () => {
@@ -125,36 +202,36 @@ export default class BeefForm extends Component {
     doc.text(this.state.customer, 15, 45);
     doc.text(this.state.phone, 15, 55);
     doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
-    if(this.state.slaughter !== 0) {
-      doc.text(this.state.slaughter, 20, 85, {align: 'right'});
+    // if(this.state.slaughter !== 0) {
+      doc.text(this.state.slaughter.toString(), 20, 85, {align: 'right'});
       doc.text('Beef Slaughter', 27, 85);
       doc.text(`$${this.state.beefPrices.slaughter}`, 102, 85, {align: 'right'});
       doc.text(slaughterTotal, 132, 85, {align: 'right'})
-    }  
-    if(this.state.cutWrap !== 0) {
-      doc.text(this.state.cutWrap, 20, 95, {align: 'right'})
+    // }  
+    // if(this.state.cutWrap !== 0) {
+      doc.text(this.state.cutWrap.toString(), 20, 95, {align: 'right'})
       doc.text('Cut & Wrap', 27, 95);
       doc.text(`$${this.state.beefPrices.cut_wrap}`, 102, 95, {align: 'right'});
       doc.text(cutWrapTotal, 132, 95, {align: 'right'});
-    }
-    if(this.state.patties !== 0){
-      doc.text(this.state.patties, 20, 105, {align: 'right'})
+    // }
+    // if(this.state.patties !== 0){
+      doc.text(this.state.patties.toString(), 20, 105, {align: 'right'})
       doc.text('Patties', 27, 105);
       doc.text(`$${this.state.beefPrices.patties}`, 102, 105, {align: 'right'});
       doc.text(pattiesTotal, 132, 105, {align: 'right'});
-    }
-    if(this.state.brand !== 0){
-      doc.text(this.state.brand, 20, 115, {align: 'right'});
+    // }
+    // if(this.state.brand !== 0){
+      doc.text(this.state.brand.toString(), 20, 115, {align: 'right'});
       doc.text('Brand Inspection', 27, 115);
       doc.text(`$${this.state.beefPrices.brand}`, 102, 115, {align: 'right'});
       doc.text(brandTotal, 132, 115, {align: 'right'});
-    }
-    if(this.state.qtyOther !== 0){
-      doc.text(this.state.qtyOther, 20, 125, {align: 'right'});
+    // }
+    // if(this.state.qtyOther !== 0){
+      doc.text(this.state.qtyOther.toString(), 20, 125, {align: 'right'});
       doc.text(this.state.descOther, 27, 125);
       doc.text(`$${this.state.priceOther}`, 102, 125, {align: 'right'});
       doc.text(otherTotal, 132, 125, {align: 'right'});
-    }
+    // }
     doc.text('Total', 100, 135);
     doc.text(total, 132, 135, {align: 'right'});
     doc.text(this.state.message, 27, 150, {maxWidth: '90'})
@@ -273,7 +350,7 @@ export default class BeefForm extends Component {
             <span>{(this.state.beefPrices.brand * this.state.brand).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
             <input type="text" className='beef-price-input'
               onChange={e => this.handleChange("qtyOther", e)}
-              value={this.state.qty_other} />
+              value={this.state.qtyOther} />
             <input type="text" className='beef-desc-other'
               onChange={e => this.handleChange("descOther", e)}
               value={this.state.descOther} />

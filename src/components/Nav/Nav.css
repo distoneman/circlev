@@ -33,3 +33,12 @@
   padding-top: 2.8em;
   padding-left: .4em;
 }
+
+.settings-icon-container {
+  margin-top: 3.2em;
+  margin-left: .2em;
+}
+
+.settings-icon {
+  width: 5.8em;
+}

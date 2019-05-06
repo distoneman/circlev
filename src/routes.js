@@ -6,7 +6,7 @@ import PorkForm from './components/PorkForm/PorkForm';
 import SheepForm from './components/SheepForm/SheepForm';
 import OtherForm from './components/OtherForm/OtherForm';
 import Search from './components/Search/Search';
-import BeefInvoice from './components/BeefForm/BeefInvoice';
+// import BeefInvoice from './components/BeefForm/BeefInvoice';
 
 export default (
     <Switch>
@@ -16,6 +16,6 @@ export default (
         <Route path='/sheep' component={SheepForm}/>
         <Route path='/other' component={OtherForm}/>
         <Route path='/search' component={Search}/>
-        <Route path='/beef-invoice/:beef-id' component={BeefInvoice}/>
+        {/* <Route path='/beef-invoice/:beef-id' component={BeefInvoice}/> */}
     </Switch>
 )
