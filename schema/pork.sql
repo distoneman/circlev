@@ -1,6 +1,8 @@
+DROP TABLE pork;
+
 CREATE TABLE pork(
     pork_id serial PRIMARY KEY,
-    invoice_data DATE,
+    invoice_date DATE,
     sold_by VARCHAR(150),
     customer VARCHAR(150),
     phone VARCHAR(30),
@@ -21,14 +23,14 @@ CREATE TABLE pork(
     price_link NUMERIC(10,2),
     total_link NUMERIC(10,2),
     qty_bulk NUMERIC(10,2),
-    price_bulk NUMERIC(10,2),
-    total_bulk NUMERIC(10,2),
     qty_fat NUMERIC(10,2),
     price_fat NUMERIC(10,2),
     total_fat NUMERIC(10,2),
     qty_other NUMERIC(10,2),
+    price_other NUMERIC(10,2),
     desc_other VARCHAR(150),
     total_other NUMERIC(10,2),
+    total NUMERIC(12,2),
     lard NUMERIC(10,2),
     net_weight NUMERIC(10,2),
     message text

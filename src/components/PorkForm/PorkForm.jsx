@@ -11,7 +11,7 @@ export default class PorkForm extends Component {
         this.state = {
             edit: false,
             soldBy: '',
-            date: '',
+            iDate: new Date(),
             customer: '',
             phone: '',
             baskets: 0,
@@ -40,32 +40,61 @@ export default class PorkForm extends Component {
 
     save = async () => {
         console.log("save");
-        // const res = await axios.post("/beef/save", {
-        //   soldBy: this.state.soldBy,
-        //   date: this.state.date,
-        //   customer: this.state.customer,
-        //   phone: this.state.phone,
-        //   baskets: this.state.baskets,
-        //   row: this.state.row,
-        //   slaughter: this.state.slaughter,
-        //   cutWrap: this.state.cutWrap,
-        //   patties: this.state.patties,
-        //   brand: this.state.brand
-        // });
+        const res = await axios.post("/pork/save", {
+          soldBy: this.state.soldBy,
+          iDate: moment(this.state.iDate).format('l'),
+          customer: this.state.customer,
+          phone: this.state.phone,
+          cell_phone: this.state.cellPhone,
+          baskets: this.state.baskets,
+          row: this.state.row,
+          slaughter: this.state.slaughter,
+          cutWrap: this.state.cutWrap,
+          cure: this.state.cure,
+          links: this.state.links,
+          bulk: this.state.bulk,
+          fat: this.state.fat,
+          qty_other: this.state.qtyOther,
+          desc_other: this.state.descOther,
+          price_other: this.state.priceOther,
+          total: this.state.total,
+          lard: this.state.lard,
+          net_weight: this.state.netWeight,
+          message: this.state.message
+        });
     };
 
-    handleChange(key, value) {
-        this.setState({
+    async handleChange(key, value) {
+        await this.setState({
             [key]: value.target.value
         });
-        console.log(`${key} is ${this.state[key]}`);
+        await this.calcTotal();
+        // console.log(`${key} is ${this.state[key]}`);
+    }
+
+    async toggleCell() {
+        await this.setState({
+          cellPhone: !this.state.cellPhone
+        })
+        // console.log(this.state.cellPhone)
+      } 
+      
+    calcTotal = () => {
+        let slaughterTotal = this.state.slaughter * this.state.porkPrices.slaughter;
+        let cutWrapTotal = this.state.cutWrap * this.state.porkPrices.cut_wrap;
+        let cureTotal = this.state.cure * this.state.porkPrices.cure;
+        let linkTotal = this.state.links * this.state.porkPrices.links;
+        let fatTotal = this.state.fat * this.state.porkPrices.fat;
+        let otherTotal = this.state.qtyOther * this.state.priceOther;
+        let total = slaughterTotal + cutWrapTotal + cureTotal + linkTotal + fatTotal + otherTotal;
+        this.setState({total: total});
     }
 
     render() {
         return (
             <div className='pork-container'>
                 <div className="pork-form">
-                    <span className='pork-title'>Pork Form</span>
+                    <span className='pork-title'>Pork</span>
                     <hr />
                     <div className='pork-header-container'>
                         <label className='pork-label-right'>Date:</label>
@@ -136,8 +165,8 @@ export default class PorkForm extends Component {
                             onChange={e => this.handleChange("links", e)}
                             value={this.state.links} />
                         <label>Links/Patties</label>
-                        <span>${this.state.porkPrices.link}</span>
-                        <span>{(this.state.links * this.state.porkPrices.link).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
+                        <span>${this.state.porkPrices.links}</span>
+                        <span>{(this.state.links * this.state.porkPrices.links).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
                         <input type="text" className='pork-price-input'
                             onChange={e => this.handleChange("bulk", e)}
                             value={this.state.bulk} />

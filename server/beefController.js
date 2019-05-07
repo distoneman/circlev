@@ -7,7 +7,7 @@ module.exports = {
             patties, brand, qty_other, desc_other,
             price_other, total, net_weight,
             message} = req.body;
-        const db = req.app.get('db')
+        const db = req.app.get('db');
         let prices = await db.beef.getPrices({ animal_type });
         const price_slaughter = prices[0].slaughter;
         const total_slaughter = price_slaughter * slaughter;
@@ -18,8 +18,6 @@ module.exports = {
         const price_brand = prices[0].brand;
         const total_brand = price_brand * brand;
         const total_other = qty_other * price_other;
-        // console.log(iDate.toString())
-        // console.log(iDate)
         let response = await db.beef.saveBeef({
             soldBy, iDate, customer, phone, cell_phone,
             email, baskets, row, 
