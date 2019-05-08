@@ -32,5 +32,32 @@ module.exports = {
         const db = req.app.get('db');
         let response = await db.beef.searchBeefDate({invoiceDate});
         res.status(200).send(response)
+    },
+    porkCustomer: async (req, res) => {
+        let customer = `%${req.params.customer}%`;
+        const db = req.app.get('db');
+        let response = await db.pork.searchPorkCust({
+            customer
+        });
+        res.status(200).send(response)
+    },
+    porkSoldBy: async (req, res) => {
+        // console.log('search controller')
+        const soldBy = `%${req.params.soldBy}%`;
+        const db = req.app.get('db');
+        let response = await db.pork.searchPorkSoldBy({
+            soldBy
+        });
+        res.status(200).send(response)
+    },
+    porkInvoiceDate: async (req, res) => {
+        console.log('invoice date')
+        let invoiceDate = req.query.invoiceDate;
+        const db = req.app.get('db');
+        let response = await db.pork.searchPorkDate({invoiceDate});
+        res.status(2000).send(response);
+    },
+    porkID: async (req, res) => {
+        console.log('search by ID')
     }
 }

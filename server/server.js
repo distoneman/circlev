@@ -34,3 +34,7 @@ app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
 app.get('/search/beefSoldBy/:soldBy', searchCtrl.beefSoldBy);
 app.get('/search/beefID/:ID', searchCtrl.beefID);
 app.get('/search/beefInvoiceDate/', searchCtrl.beefInvoiceDate);
+app.get(`/search/porkCustomer/:customer`, searchCtrl.porkCustomer);
+app.get(`/search/porkSoldBy/:soldBy`, searchCtrl.porkSoldBy);
+app.get('/search/porkID/:ID', searchCtrl.porkID);
+app.get('/search/porkInvoiceDate/', searchCtrl.porkInvoiceDate);
