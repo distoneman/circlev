@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import moment from 'moment';
-import InputMask from 'react-input-mask'
+import InputMask from 'react-input-mask';
+import jsPDF from "jspdf";
 
 import './PorkForm.css'
 
@@ -29,7 +30,13 @@ export default class PorkForm extends Component {
             netWeight: 0,
             message: '',
             total: 0,
-            porkPrices: {}
+            porkPrices: {},
+            slaughterTotal: 0,
+            cutWrapTotal: 0,
+            cureTotal: 0,
+            linkTotal: 0,
+            fatTotal: 0,
+            otherTotal: 0
         };
     }
     async componentDidMount() {
@@ -41,27 +48,28 @@ export default class PorkForm extends Component {
     save = async () => {
         console.log("save");
         const res = await axios.post("/pork/save", {
-          soldBy: this.state.soldBy,
-          iDate: moment(this.state.iDate).format('l'),
-          customer: this.state.customer,
-          phone: this.state.phone,
-          cell_phone: this.state.cellPhone,
-          baskets: this.state.baskets,
-          row: this.state.row,
-          slaughter: this.state.slaughter,
-          cutWrap: this.state.cutWrap,
-          cure: this.state.cure,
-          links: this.state.links,
-          bulk: this.state.bulk,
-          fat: this.state.fat,
-          qty_other: this.state.qtyOther,
-          desc_other: this.state.descOther,
-          price_other: this.state.priceOther,
-          total: this.state.total,
-          lard: this.state.lard,
-          net_weight: this.state.netWeight,
-          message: this.state.message
+            soldBy: this.state.soldBy,
+            iDate: moment(this.state.iDate).format('l'),
+            customer: this.state.customer,
+            phone: this.state.phone,
+            cell_phone: this.state.cellPhone,
+            baskets: this.state.baskets,
+            row: this.state.row,
+            slaughter: this.state.slaughter,
+            cutWrap: this.state.cutWrap,
+            cure: this.state.cure,
+            links: this.state.links,
+            bulk: this.state.bulk,
+            fat: this.state.fat,
+            qty_other: this.state.qtyOther,
+            desc_other: this.state.descOther,
+            price_other: this.state.priceOther,
+            total: this.state.total,
+            lard: this.state.lard,
+            net_weight: this.state.netWeight,
+            message: this.state.message
         });
+        await this.printInvoice();
     };
 
     async handleChange(key, value) {
@@ -74,11 +82,11 @@ export default class PorkForm extends Component {
 
     async toggleCell() {
         await this.setState({
-          cellPhone: !this.state.cellPhone
+            cellPhone: !this.state.cellPhone
         })
         // console.log(this.state.cellPhone)
-      } 
-      
+    }
+
     calcTotal = () => {
         let slaughterTotal = this.state.slaughter * this.state.porkPrices.slaughter;
         let cutWrapTotal = this.state.cutWrap * this.state.porkPrices.cut_wrap;
@@ -87,14 +95,99 @@ export default class PorkForm extends Component {
         let fatTotal = this.state.fat * this.state.porkPrices.fat;
         let otherTotal = this.state.qtyOther * this.state.priceOther;
         let total = slaughterTotal + cutWrapTotal + cureTotal + linkTotal + fatTotal + otherTotal;
-        this.setState({total: total});
+        this.setState({
+            total: total,
+            slaughterTotal: slaughterTotal,
+            cutWrapTotal: cutWrapTotal,
+            cureTotal: cureTotal,
+            linkTotal: linkTotal,
+            fatTotal: fatTotal,
+            otherTotal: otherTotal
+        });
+    }
+
+    printInvoice = () => {
+        console.log(this.state.slaughterTotal);
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [396, 612]  //5.5in by 8.5in paper
+        });
+        doc.setFontSize(11);
+        // let slaughterTotal = (this.state.slaughter * this.state.beefPrices.slaughter).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        // // console.log(slaughterTotal)
+        // let cutWrapTotal = (this.state.cutWrap * this.state.beefPrices.cut_wrap).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        // let pattiesTotal = (this.state.patties * this.state.beefPrices.patties).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        // let brandTotal = (this.state.brand * this.state.beefPrices.brand).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        // let otherTotal = (this.state.qtyOther * this.state.priceOther).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        // let total = this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' });
+        doc.text(this.state.soldBy, 18, 39);
+        doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
+        doc.text(this.state.customer, 15, 45);
+        doc.text(this.state.phone, 15, 55);
+        doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
+        // if(this.state.slaughter !== 0) {
+        doc.text(this.state.slaughter.toString()
+            , 20, 85, { align: 'right' });
+        doc.text('Pork Slaughter', 27, 85);
+        doc.text(`$${this.state.porkPrices.slaughter}`, 102, 85, { align: 'right' });
+        doc.text(this.state.slaughterTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 85, { align: 'right' })
+        // }  
+        // if(this.state.cutWrap !== 0) {
+        doc.text(this.state.cutWrap.toString(), 20, 95, { align: 'right' })
+        doc.text('Cut & Wrap', 27, 95);
+        doc.text(`$${this.state.porkPrices.cut_wrap}`, 102, 95, { align: 'right' });
+        doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 95, { align: 'right' });
+        // }
+        // if(this.state.patties !== 0){
+        doc.text(this.state.cure.toString(), 20, 105, { align: 'right' })
+        doc.text('Cure', 27, 105);
+        doc.text(`$${this.state.porkPrices.cure}`, 102, 105, { align: 'right' });
+        doc.text(this.state.cureTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 105, { align: 'right' });
+        // }
+        // if(this.state.brand !== 0){
+        doc.text(this.state.links.toString(), 20, 115, { align: 'right' });
+        doc.text('Link/Patty Sausage', 27, 115);
+        doc.text(`$${this.state.porkPrices.links}`, 102, 115, { align: 'right' });
+        doc.text(this.state.linkTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 115, { align: 'right' });
+        // }
+        doc.text(this.state.bulk.toString(), 20, 125, { align: 'right' });
+        doc.text('Bulk Sausage', 27, 125);
+        //
+        doc.text(this.state.fat.toString(), 20, 135, { align: 'right' });
+        doc.text('Fat Rendered', 27, 135);
+        doc.text(`$${this.state.porkPrices.fat}`, 102, 135, { align: 'right' });
+        doc.text(this.state.fatTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 135, { align: 'right' });
+
+        if(this.state.qtyOther !== 0){
+        doc.text(this.state.qtyOther.toString(), 20, 145, { align: 'right' });
+        doc.text(this.state.descOther, 27, 145);
+        doc.text(`$${this.state.priceOther}`, 102, 145, { align: 'right' });
+        doc.text(this.state.otherTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 145, { align: 'right' });
+        }
+        doc.text('Total', 100, 155);
+        doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+            132, 155, { align: 'right' });
+        doc.text(`${this.state.lard}lbs of Lard`,60, 165 )
+        doc.text(this.state.message, 27, 180, { maxWidth: '90' })
+        doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 210)
+        doc.save('invoice.pdf')
+        doc.autoPrint({});
+        var iframe = document.getElementById('output');
+        iframe.src = doc.output('dataurlstring');
     }
 
     render() {
         return (
             <div className='pork-container'>
                 <div className="pork-form">
-                    <span className='pork-title'>Pork</span>
+                    <span className='pork-title'>Pig</span>
                     <hr />
                     <div className='pork-header-container'>
                         <label className='pork-label-right'>Date:</label>

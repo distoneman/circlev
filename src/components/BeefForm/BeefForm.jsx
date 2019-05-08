@@ -227,16 +227,16 @@ export default class BeefForm extends Component {
       doc.text(`$${this.state.beefPrices.brand}`, 102, 115, {align: 'right'});
       doc.text(brandTotal, 132, 115, {align: 'right'});
     // }
-    // if(this.state.qtyOther !== 0){
+    if(this.state.qtyOther !== 0){
       doc.text(this.state.qtyOther.toString(), 20, 125, {align: 'right'});
       doc.text(this.state.descOther, 27, 125);
       doc.text(`$${this.state.priceOther}`, 102, 125, {align: 'right'});
       doc.text(otherTotal, 132, 125, {align: 'right'});
-    // }
+    }
     doc.text('Total', 100, 135);
     doc.text(total, 132, 135, {align: 'right'});
     doc.text(this.state.message, 27, 150, {maxWidth: '90'})
-    doc.text(`${this.state.netWeight} Net Weight Misc. Beef Cuts`, 27, 200)
+    doc.text(`${this.state.netWeight} Net Weight Misc. Beef Cuts`, 60, 200)
     // doc.save('invoice.pdf')
     doc.autoPrint({});
     var iframe = document.getElementById('output');
