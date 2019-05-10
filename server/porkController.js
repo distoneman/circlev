@@ -1,9 +1,9 @@
 module.exports = {
     addPork: async (req, res) => {
-        const {soldBy, iDate, customer, email, phone, cell_phone, 
+        const { soldBy, iDate, customer, email, phone, cell_phone,
             baskets, row, slaughter, cutWrap, cure, links, bulk, fat,
             qty_other, desc_other, price_other, total, lard,
-            net_weight, message} = req.body;
+            net_weight, message } = req.body;
         const db = req.app.get('db');
         let prices = await db.pork.getPrices();
         const price_slaughter = prices[0].slaughter;
@@ -22,7 +22,7 @@ module.exports = {
             email, baskets, row, slaughter, price_slaughter,
             total_slaughter, cutWrap, price_cut, total_cut,
             cure, price_cure, total_cure, links, price_links,
-            total_links, bulk, fat, price_fat, total_fat, 
+            total_links, bulk, fat, price_fat, total_fat,
             qty_other, desc_other, price_other, total_other,
             total, lard, net_weight, message
         })
@@ -32,5 +32,12 @@ module.exports = {
         const db = req.app.get('db');
         let prices = await db.pork.getPrices()
         res.status(200).send(prices);
-    }
+    },
+    porkDelete: async (req, res) => {
+        let ID = req.params.ID;
+        const db = req.app.get('db');
+        let response = await db.pork.deletePorkInvoice({ ID });
+        res.status(200).send(response)
+    },
+
 }

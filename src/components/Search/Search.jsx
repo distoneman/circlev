@@ -136,12 +136,18 @@ export default class Search extends Component {
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
             let iDate = moment(invoice.invoice_date).format('MM/DD/YYYY')
-            let editURL = `/beef/${invoice.beef_id}`
-            return (
+            if(this.state.searchType === 'beef') {
+                var id = invoice.beef_id
+                var editURL = `/beef/${id}`
+            }
+            if(this.state.searchType === 'pork') {
+                var id = invoice.pork_id
+            }
 
+            return (
                 <SearchDisplay
-                    key={invoice.beef_id}
-                    id={invoice.beef_id}
+                    key={id}
+                    id={id}
                     searchType={this.state.searchType}
                     iDate={iDate}
                     customer={invoice.customer}

@@ -111,16 +111,21 @@
     font-size: 1rem;
 }
 
-.beef-invoice-view-container {
+.invoice-view-container {
     display: grid ;
     grid-template-columns: .5fr 1.5fr .5fr .5fr;
     margin-top: 1.5em;
 }
 
-.beef-invoice-item {
+.invoice-item {
     border: solid 1px #474545;
     padding: .5em;
     font-size: 11pt;
+}
+
+.invoice-header {
+    background: lightgrey;
+    font-weight: 700;
 }
 
 .invoice-view-right {

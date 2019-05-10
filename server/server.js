@@ -28,6 +28,7 @@ app.put('/beef/update', beefCtrl.beefUpdate);
 // PORK
 app.get('/pork/prices', porkCtrl.porkPrices);
 app.post('/pork/save', porkCtrl.addPork);
+app.delete('/pork/delete/:ID', porkCtrl.porkDelete);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
