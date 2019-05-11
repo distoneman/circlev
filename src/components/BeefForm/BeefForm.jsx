@@ -3,8 +3,9 @@ import axios from "axios";
 import moment from 'moment';
 import InputMask from 'react-input-mask';
 import jsPDF from "jspdf";
-import './BeefForm.css';
 import Swal from 'sweetalert2';
+
+import './BeefForm.css';
 
 export default class BeefForm extends Component {
   constructor(props) {

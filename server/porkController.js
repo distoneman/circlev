@@ -40,7 +40,6 @@ module.exports = {
         res.status(200).send(response)
     },
     updatePork: async (req, res) => {
-        console.log('pork update')
         const {pork_id, iDate, soldBy, customer, phone,
             cellPhone, email, baskets, row, qty_slaughter,
             total_slaughter, qty_cut, total_cut, qty_cure,

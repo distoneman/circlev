@@ -3,6 +3,7 @@ import axios from "axios";
 import moment from 'moment';
 import InputMask from 'react-input-mask';
 import jsPDF from "jspdf";
+import Swal from 'sweetalert2';
 
 import './PorkForm.css'
 
@@ -49,7 +50,7 @@ export default class PorkForm extends Component {
             await this.setState({ porkPrices: res.data[0] });
             console.log(this.state.porkPrices);
         } else {
-            this.setState({edit: true});
+            this.setState({ edit: true });
             console.log("edit")
             let res = await axios.get(`/search/porkID/${this.props.match.params.ID}`);
             console.log(res.data)
@@ -60,7 +61,7 @@ export default class PorkForm extends Component {
                 links: res.data[0].price_link,
                 fat: res.data[0].price_fat
             }
-            await this.setState({porkPrices: invoicePrices})
+            await this.setState({ porkPrices: invoicePrices })
             await this.setState({
                 invoiceID: res.data[0].pork_id,
                 soldBy: res.data[0].sold_by,
@@ -123,10 +124,11 @@ export default class PorkForm extends Component {
     };
 
     update = async () => {
-        console.log(this.state.total)
+        this.calcTotal();
+        // console.log(this.state.total)
         // let total_slaughter = this.state.slaughter * this.state.porkPrices.slaughter;
         // let total_cut = this.state.cut * this.state.porkPrices.cut
-        await axios.put(`/pork/update`,{
+        await axios.put(`/pork/update`, {
             pork_id: this.state.invoiceID,
             iDate: moment(this.state.iDate).format('l'),
             soldBy: this.state.soldBy,
@@ -156,6 +158,62 @@ export default class PorkForm extends Component {
             net_weight: this.state.netWeight,
             message: this.state.message
         })
+        Swal.fire({
+            title: 'Invoice Updated',
+            // text: "You won't be able to revert this!",
+            // type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Print Invoice'
+        }).then((result) => {
+            if (result.value) {
+                this.printInvoice();
+                // this.resetState();
+                // Swal.fire(
+                //   'Invoice Printed'
+                // )
+            }
+            this.resetState()
+            // this.props.history.push('/pork')  //redirect
+        })
+
+    }
+
+    resetState = async () => {
+        let res = await axios.get("/pork/prices");
+        await this.setState ({
+            porkPrices: res.data[0],
+            edit: false,
+            invoiceID: 0,
+            soldBy: '',
+            iDate: new Date(),
+            customer: '',
+            phone: '',
+            cellPhone: false,
+            email: '',
+            baskets: 0,
+            row: '',
+            slaughter: 0,
+            cutWrap: 0,
+            cure: 0,
+            links: 0,
+            bulk: 0,
+            fat: 0,
+            qtyOther: 0,
+            descOther: '',
+            priceOther: 0,
+            lard: 0,
+            netWeight: 0,
+            message: '',
+            total: 0,
+            slaughterTotal: 0,
+            cutWrapTotal: 0,
+            cureTotal: 0,
+            linkTotal: 0,
+            fatTotal: 0,
+            otherTotal: 0
+        });
     }
 
     async handleChange(key, value) {
@@ -193,20 +251,13 @@ export default class PorkForm extends Component {
     }
 
     printInvoice = () => {
-        console.log(this.state.slaughterTotal);
+        // console.log(this.state.slaughterTotal);
         const doc = new jsPDF({
             orientation: 'p',
             unit: 'mm',
             format: [396, 612]  //5.5in by 8.5in paper
         });
         doc.setFontSize(11);
-        // let slaughterTotal = (this.state.slaughter * this.state.beefPrices.slaughter).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // // console.log(slaughterTotal)
-        // let cutWrapTotal = (this.state.cutWrap * this.state.beefPrices.cut_wrap).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let pattiesTotal = (this.state.patties * this.state.beefPrices.patties).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let brandTotal = (this.state.brand * this.state.beefPrices.brand).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let otherTotal = (this.state.qtyOther * this.state.priceOther).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let total = this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' });
         doc.text(this.state.soldBy, 18, 39);
         doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.customer, 15, 45);

@@ -19,7 +19,7 @@ export default class SearchDisplay extends Component {
         this.setState({
             viewModal: !this.state.viewModal
         })
-        console.log(this.state.viewModal)
+        // console.log(this.state.viewModal)
     }
 
     render() {

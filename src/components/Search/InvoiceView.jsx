@@ -12,13 +12,13 @@ export default class InvoiceView extends Component {
     }
 
     async componentDidMount() {
-        console.log(this.props.id)
+        // console.log(this.props.id)
         let res = await axios.get(`/search/${this.props.searchType}ID/${this.props.id}`)
-        console.log(res.data);
+        // console.log(res.data);
         this.setState({
             invoice: res.data[0]
         })
-        console.log(this.state.invoice)
+        // console.log(this.state.invoice)
     }
 
     render() {
@@ -53,7 +53,7 @@ export default class InvoiceView extends Component {
                     </div>
                 ) : null}
                 {this.props.searchType === 'pork' ? (
-                    <div>Pork
+                    <div>
                         <div className='invoice-view-container'>
                         <div className='invoice-item invoice-header'>Quantity</div>
                         <div className='invoice-item invoice-header'>Description</div>
@@ -83,6 +83,10 @@ export default class InvoiceView extends Component {
                         <div className='invoice-item'>Fat Rendered</div>
                         <div className='invoice-item invoice-view-right'>${this.state.invoice.price_fat}</div>
                         <div className='invoice-item invoice-view-right'>${this.state.invoice.total_fat}</div>
+                        <div className='invoice-item'>{this.state.invoice.qty_other}</div>
+                        <div className='invoice-item'>{this.state.invoice.desc_other}</div>
+                        <div className='invoice-item invoice-view-right'>${this.state.invoice.price_other}</div>
+                        <div className='invoice-item invoice-view-right'>${this.state.invoice.total_other}</div>
                     </div>
                 </div>
                 ) : null}

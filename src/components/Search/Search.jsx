@@ -26,10 +26,10 @@ export default class Search extends Component {
     }
 
     async search() {
-        console.log("search")
-        console.log(this.state.searchCriteria)
-        console.log(this.state.searchType)
-        console.log(this.state.searchField)
+        // console.log("search")
+        // console.log(this.state.searchCriteria)
+        // console.log(this.state.searchType)
+        // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
             // console.log(res.data)
