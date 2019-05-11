@@ -12,7 +12,7 @@ export default (
     <Switch>
         <Route exact path='/' component={Home} />
         <Route path='/beef/:ID?' component={BeefForm}/>
-        <Route path='/pork' component={PorkForm}/>
+        <Route path='/pork/:ID?' component={PorkForm}/>
         <Route path='/sheep' component={SheepForm}/>
         <Route path='/other' component={OtherForm}/>
         <Route path='/search' component={Search}/>

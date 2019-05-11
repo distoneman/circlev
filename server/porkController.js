@@ -39,5 +39,25 @@ module.exports = {
         let response = await db.pork.deletePorkInvoice({ ID });
         res.status(200).send(response)
     },
+    updatePork: async (req, res) => {
+        console.log('pork update')
+        const {pork_id, iDate, soldBy, customer, phone,
+            cellPhone, email, baskets, row, qty_slaughter,
+            total_slaughter, qty_cut, total_cut, qty_cure,
+            total_cure, qty_link, total_link, qty_bulk,
+            qty_fat, total_fat, qty_other, desc_other,
+            price_other, total_other, total, lard, 
+            net_weight, message} = req.body;
+        const db = req.app.get('db');
+        let response = await db.pork.updatePork({pork_id, iDate, soldBy, customer, phone,
+            cellPhone, email, baskets, row, qty_slaughter,
+            total_slaughter, qty_cut, total_cut, qty_cure,
+            total_cure, qty_link, total_link, qty_bulk,
+            qty_fat, total_fat, qty_other, desc_other,
+            price_other, total_other, total, lard, 
+            net_weight, message})
+        res.status(200).send(response)
+
+    }
 
 }

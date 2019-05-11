@@ -11,10 +11,13 @@ export default class PorkForm extends Component {
         super(props);
         this.state = {
             edit: false,
+            invoiceID: 0,
             soldBy: '',
             iDate: new Date(),
             customer: '',
             phone: '',
+            cellPhone: false,
+            email: '',
             baskets: 0,
             row: '',
             slaughter: 0,
@@ -40,9 +43,55 @@ export default class PorkForm extends Component {
         };
     }
     async componentDidMount() {
-        let res = await axios.get("/pork/prices");
-        await this.setState({ porkPrices: res.data[0] });
-        console.log(this.state.porkPrices);
+        if (this.props.match.params.ID === undefined) {
+            console.log("no edit")
+            let res = await axios.get("/pork/prices");
+            await this.setState({ porkPrices: res.data[0] });
+            console.log(this.state.porkPrices);
+        } else {
+            this.setState({edit: true});
+            console.log("edit")
+            let res = await axios.get(`/search/porkID/${this.props.match.params.ID}`);
+            console.log(res.data)
+            let invoicePrices = {
+                slaughter: res.data[0].price_slaughter,
+                cut_wrap: res.data[0].price_cut,
+                cure: res.data[0].price_cure,
+                links: res.data[0].price_link,
+                fat: res.data[0].price_fat
+            }
+            await this.setState({porkPrices: invoicePrices})
+            await this.setState({
+                invoiceID: res.data[0].pork_id,
+                soldBy: res.data[0].sold_by,
+                customer: res.data[0].customer,
+                iDate: res.data[0].invoice_date,
+                phone: res.data[0].phone,
+                cellPhone: res.data[0].cell_phone,
+                email: res.data[0].email,
+                baskets: res.data[0].baskets,
+                row: res.data[0].row_num,
+                slaughter: res.data[0].qty_slaughter,
+                cutWrap: res.data[0].qty_cut,
+                cure: res.data[0].qty_cure,
+                links: res.data[0].qty_link,
+                bulk: res.data[0].qty_bulk,
+                fat: res.data[0].qty_fat,
+                qtyOther: res.data[0].qty_other,
+                descOther: res.data[0].desc_other,
+                priceOther: res.data[0].price_other,
+                lard: res.data[0].lard,
+                netWeight: res.data[0].net_weight,
+                message: res.data[0].message,
+                total: res.data[0].total,
+                slaughterTotal: res.data[0].total_slaughter,
+                cutWrapTotal: res.data[0].total_cut,
+                cureTotal: res.data[0].total_cure,
+                linkTotal: res.data[0].total_link,
+                fatTotal: res.data[0].total_fat,
+                otherTotal: res.data[0].total_other
+            })
+        }
     }
 
     save = async () => {
@@ -53,6 +102,7 @@ export default class PorkForm extends Component {
             customer: this.state.customer,
             phone: this.state.phone,
             cell_phone: this.state.cellPhone,
+            email: this.state.email,
             baskets: this.state.baskets,
             row: this.state.row,
             slaughter: this.state.slaughter,
@@ -71,6 +121,42 @@ export default class PorkForm extends Component {
         });
         await this.printInvoice();
     };
+
+    update = async () => {
+        console.log(this.state.total)
+        // let total_slaughter = this.state.slaughter * this.state.porkPrices.slaughter;
+        // let total_cut = this.state.cut * this.state.porkPrices.cut
+        await axios.put(`/pork/update`,{
+            pork_id: this.state.invoiceID,
+            iDate: moment(this.state.iDate).format('l'),
+            soldBy: this.state.soldBy,
+            customer: this.state.customer,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            email: this.state.email,
+            baskets: this.state.baskets,
+            row: this.state.row,
+            qty_slaughter: this.state.slaughter,
+            total_slaughter: this.state.total_slaughter,
+            qty_cut: this.state.cutWrap,
+            total_cut: this.state.cutWrapTotal,
+            qty_cure: this.state.cure,
+            total_cure: this.state.cureTotal,
+            qty_link: this.state.links,
+            total_link: this.state.linkTotal,
+            qty_bulk: this.state.bulk,
+            qty_fat: this.state.fat,
+            total_fat: this.state.fatTotal,
+            qty_other: this.state.qtyOther,
+            desc_other: this.state.descOther,
+            price_other: this.state.priceOther,
+            total_other: this.state.otherTotal,
+            total: this.state.total,
+            lard: this.state.lard,
+            net_weight: this.state.netWeight,
+            message: this.state.message
+        })
+    }
 
     async handleChange(key, value) {
         await this.setState({
@@ -131,28 +217,28 @@ export default class PorkForm extends Component {
             , 20, 85, { align: 'right' });
         doc.text('Pork Slaughter', 27, 85);
         doc.text(`$${this.state.porkPrices.slaughter}`, 102, 85, { align: 'right' });
-        doc.text(this.state.slaughterTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.slaughterTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' })
         // }  
         // if(this.state.cutWrap !== 0) {
         doc.text(this.state.cutWrap.toString(), 20, 95, { align: 'right' })
         doc.text('Cut & Wrap', 27, 95);
         doc.text(`$${this.state.porkPrices.cut_wrap}`, 102, 95, { align: 'right' });
-        doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 95, { align: 'right' });
         // }
         // if(this.state.patties !== 0){
         doc.text(this.state.cure.toString(), 20, 105, { align: 'right' })
         doc.text('Cure', 27, 105);
         doc.text(`$${this.state.porkPrices.cure}`, 102, 105, { align: 'right' });
-        doc.text(this.state.cureTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.cureTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 105, { align: 'right' });
         // }
         // if(this.state.brand !== 0){
         doc.text(this.state.links.toString(), 20, 115, { align: 'right' });
         doc.text('Link/Patty Sausage', 27, 115);
         doc.text(`$${this.state.porkPrices.links}`, 102, 115, { align: 'right' });
-        doc.text(this.state.linkTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.linkTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 115, { align: 'right' });
         // }
         doc.text(this.state.bulk.toString(), 20, 125, { align: 'right' });
@@ -161,20 +247,20 @@ export default class PorkForm extends Component {
         doc.text(this.state.fat.toString(), 20, 135, { align: 'right' });
         doc.text('Fat Rendered', 27, 135);
         doc.text(`$${this.state.porkPrices.fat}`, 102, 135, { align: 'right' });
-        doc.text(this.state.fatTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.fatTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 135, { align: 'right' });
 
-        if(this.state.qtyOther !== 0){
-        doc.text(this.state.qtyOther.toString(), 20, 145, { align: 'right' });
-        doc.text(this.state.descOther, 27, 145);
-        doc.text(`$${this.state.priceOther}`, 102, 145, { align: 'right' });
-        doc.text(this.state.otherTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 145, { align: 'right' });
+        if (this.state.qtyOther !== 0) {
+            doc.text(this.state.qtyOther.toString(), 20, 145, { align: 'right' });
+            doc.text(this.state.descOther, 27, 145);
+            doc.text(`$${this.state.priceOther}`, 102, 145, { align: 'right' });
+            doc.text(this.state.otherTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 145, { align: 'right' });
         }
         doc.text('Total', 100, 155);
-        doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 155, { align: 'right' });
-        doc.text(`${this.state.lard}lbs of Lard`,60, 165 )
+        doc.text(`${this.state.lard}lbs of Lard`, 60, 165)
         doc.text(this.state.message, 27, 180, { maxWidth: '90' })
         doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 210)
         doc.save('invoice.pdf')
@@ -292,15 +378,15 @@ export default class PorkForm extends Component {
                         <div></div>
                         <div></div>
                         {this.state.edit === false ? (
-                            <button className='beef-save-btn'
+                            <button className='pork-save-btn'
                                 onClick={() => this.save()}>Save</button>
                         ) : (
-                                <button className='beef-save-btn'
+                                <button className='pork-save-btn'
                                     onClick={() => this.update()}>Update</button>
                             )}
                     </div>
                 </div>
-                <iframe title="pdf" id="output" className='beef-pdf-iframe'></iframe>
+                <iframe title="pdf" id="output" className='pork-pdf-iframe'></iframe>
             </div>
         );
     }

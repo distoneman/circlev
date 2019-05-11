@@ -39,15 +39,15 @@ export default class Search extends Component {
         }
         if (this.state.searchField === "soldBy") {
             const res = await axios.get(`/search/${this.state.searchType}SoldBy/${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
         }
         if(this.state.searchField === "invoiceDate") {
-            console.log("search date")
+            // console.log("search date")
             const res = await axios.get(`/search/${this.state.searchType}InvoiceDate/?invoiceDate=${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -61,7 +61,7 @@ export default class Search extends Component {
         this.setState({
             invoice: res.data
         })
-        console.log(this.state.invoice)
+        // console.log(this.state.invoice)
 
     }
 
@@ -135,9 +135,7 @@ export default class Search extends Component {
     }
 
     printPorkInvoice = async (invoiceID) => {
-        //pork print
         console.log(this.state.invoice)
-        // console.log(this.state.invoice[0].slaughterTotal);
         await this.searchOne(invoiceID)
         const doc = new jsPDF({
             orientation: 'p',
@@ -145,13 +143,6 @@ export default class Search extends Component {
             format: [396, 612]  //5.5in by 8.5in paper
         });
         doc.setFontSize(11);
-        // let slaughterTotal = (this.state.slaughter * this.state.beefPrices.slaughter).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // // console.log(slaughterTotal)
-        // let cutWrapTotal = (this.state.cutWrap * this.state.beefPrices.cut_wrap).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let pattiesTotal = (this.state.patties * this.state.beefPrices.patties).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let brandTotal = (this.state.brand * this.state.beefPrices.brand).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let otherTotal = (this.state.qtyOther * this.state.priceOther).toLocaleString('us-US', { style: 'currency', currency: 'USD' });
-        // let total = this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' });
         doc.text(this.state.invoice[0].sold_by, 18, 39);
         doc.text(moment(this.state.invoice[0].invoice_date).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.invoice[0].customer, 15, 45);
@@ -224,9 +215,8 @@ export default class Search extends Component {
             }
             if(this.state.searchType === 'pork') {
                 var id = invoice.pork_id;
-                var editURL = 'test;'
+                var editURL = `/pork/${id}`;
                 var printInvoice = this.printPorkInvoice;
-                console.log(printInvoice)
             }
 
             return (
