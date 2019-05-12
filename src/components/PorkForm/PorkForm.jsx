@@ -97,7 +97,7 @@ export default class PorkForm extends Component {
 
     save = async () => {
         console.log("save");
-        const res = await axios.post("/pork/save", {
+        await axios.post("/pork/save", {
             soldBy: this.state.soldBy,
             iDate: moment(this.state.iDate).format('l'),
             customer: this.state.customer,
@@ -125,7 +125,7 @@ export default class PorkForm extends Component {
 
     update = async () => {
         this.calcTotal();
-        // console.log(this.state.total)
+        console.log(this.state.total)
         // let total_slaughter = this.state.slaughter * this.state.porkPrices.slaughter;
         // let total_cut = this.state.cut * this.state.porkPrices.cut
         await axios.put(`/pork/update`, {
@@ -139,7 +139,7 @@ export default class PorkForm extends Component {
             baskets: this.state.baskets,
             row: this.state.row,
             qty_slaughter: this.state.slaughter,
-            total_slaughter: this.state.total_slaughter,
+            total_slaughter: this.state.slaughterTotal,
             qty_cut: this.state.cutWrap,
             total_cut: this.state.cutWrapTotal,
             qty_cure: this.state.cure,
