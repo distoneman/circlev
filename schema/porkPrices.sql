@@ -6,7 +6,7 @@ CREATE TABLE pork_prices (
     slaughter NUMERIC(10,2),
     cut_wrap NUMERIC(10,2),
     cure NUMERIC(10,2),
-    link NUMERIC(10,2),
+    links NUMERIC(10,2),
     fat NUMERIC(12,2)
 );
 

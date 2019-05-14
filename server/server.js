@@ -4,6 +4,7 @@ const massive = require('massive');
 require('dotenv').config();
 const beefCtrl = require ('./beefController');
 const porkCtrl = require('./porkController');
+const sheepCtrl = require('./sheepController');
 const searchCtrl = require('./searchController');
 
 const { SERVER_PORT, CONNECTION_STRING} = process.env;
@@ -30,6 +31,10 @@ app.get('/pork/prices', porkCtrl.porkPrices);
 app.post('/pork/save', porkCtrl.addPork);
 app.delete('/pork/delete/:ID', porkCtrl.porkDelete);
 app.put('/pork/update', porkCtrl.updatePork)
+
+// SHEEP
+app.get('/sheep/prices', sheepCtrl.sheepPrices);
+app.post('/sheep/save', sheepCtrl.addSheep)
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);

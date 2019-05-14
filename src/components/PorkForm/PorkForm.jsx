@@ -97,6 +97,7 @@ export default class PorkForm extends Component {
 
     save = async () => {
         console.log("save");
+        this.calcTotal()
         await axios.post("/pork/save", {
             soldBy: this.state.soldBy,
             iDate: moment(this.state.iDate).format('l'),
@@ -121,6 +122,7 @@ export default class PorkForm extends Component {
             message: this.state.message
         });
         await this.printInvoice();
+        await this.resetState();
     };
 
     update = async () => {
@@ -337,11 +339,11 @@ export default class PorkForm extends Component {
                             onChange={e => this.handleChange("soldBy", e)}
                             value={this.state.soldBy} />
                         <label className='pork-label-right'>Customer:</label>
-                        <input type="text" className="beef-text-input"
+                        <input type="text" className="pork-text-input"
                             value={this.state.customer}
                             onChange={e => this.handleChange("customer", e)} />
                         <label className='pork-label-right'>E-Mail:</label>
-                        <input type="text" className="beef-text-input"
+                        <input type="text" className="pork-text-input"
                             value={this.state.email}
                             onChange={e => this.handleChange("email", e)} />
                         <label className='pork-label-right'>Phone:</label>
@@ -356,7 +358,7 @@ export default class PorkForm extends Component {
                                 onClick={e => this.toggleCell()} />
                         </div>
                         <label className='pork-label-right'>Baskets:</label>
-                        <input type="type" className="beef-text-input beef-input-short"
+                        <input type="type" className="pork-text-input pork-input-short"
                             value={this.state.baskets}
                             onChange={e => this.handleChange("baskets", e)} />
                         <label className='pork-label-right'>Row:</label>
@@ -372,7 +374,7 @@ export default class PorkForm extends Component {
                     </div>
                     <hr />
                     <div className='pork-prices-container'>
-                        <input className='beef-price-input'
+                        <input className='pork-price-input'
                             type="text" value={this.state.slaughter}
                             onChange={e => this.handleChange("slaughter", e)}
                         />
