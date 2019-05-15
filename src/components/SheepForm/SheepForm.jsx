@@ -43,25 +43,55 @@ export default class SheepForm extends Component {
 
     save = async () => {
         console.log("save");
-        // const res = await axios.post("/beef/save", {
-        //   soldBy: this.state.soldBy,
-        //   date: this.state.date,
-        //   customer: this.state.customer,
-        //   phone: this.state.phone,
-        //   baskets: this.state.baskets,
-        //   row: this.state.row,
-        //   slaughter: this.state.slaughter,
-        //   cutWrap: this.state.cutWrap,
-        //   patties: this.state.patties,
-        //   brand: this.state.brand
-        // });
+        await axios.post("/sheep/save", {
+          soldBy: this.state.soldBy,
+          iDate: moment(this.state.iDate).format('l'),
+          customer: this.state.customer,
+          email: this.state.email,
+          phone: this.state.phone,
+          cellPhone: this.state.cellPhone,
+          baskets: this.state.baskets,
+          row: this.state.row,
+          slaughter: this.state.slaughter,
+          priceSlaughter: this.state.sheepPrices.slaughter,
+          cutWrap: this.state.cutWrap,
+          priceCutWrap: this.state.sheepPrices.cut_wrap,
+          boneRoll: this.state.boneRoll,
+          priceBone: this.state.sheepPrices.bone_roll,
+          qtyOther: this.state.qtyOther,
+          descOther: this.state.descOther,
+          priceOther: this.state.priceOther,
+          otherTotal: this.state.otherTotal,
+          total: this.state.total,
+          netWeight: this.state.netWeight,
+          message: this.state.message,
+          slaughterTotal: this.state.slaughterTotal,
+          cutWrapTotal: this.state.cutWrapTotal,
+          boneTotal: this.state.boneTotal
+        });
     };
 
-    handleChange(key, value) {
+    calcTotal = async () => {
+        let slaughterTotal = this.state.slaughter * this.state.sheepPrices.slaughter;
+        let cutWrapTotal = this.state.cutWrap * this.state.sheepPrices.cut_wrap;
+        let boneTotal = this.state.boneRoll * this.state.sheepPrices.bone_roll;
+        let otherTotal = this.state.qtyOther * this.state.priceOther;
+        let total = slaughterTotal + cutWrapTotal + boneTotal + otherTotal;
         this.setState({
+            total: total,
+            slaughterTotal: slaughterTotal,
+            cutWrapTotal: cutWrapTotal,
+            boneTotal: boneTotal,
+            otherTotal: otherTotal
+        })
+    }
+
+    async handleChange(key, value) {
+        await this.setState({
             [key]: value.target.value
         });
-        console.log(`${key} is ${this.state[key]}`);
+        await this.calcTotal();
+        // console.log(this.state);
     }
 
     async toggleCell() {

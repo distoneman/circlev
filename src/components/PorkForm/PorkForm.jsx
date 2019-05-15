@@ -265,57 +265,54 @@ export default class PorkForm extends Component {
         doc.text(this.state.customer, 15, 45);
         doc.text(this.state.phone, 15, 55);
         doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
-        // if(this.state.slaughter !== 0) {
+
         doc.text(this.state.slaughter.toString()
-            , 20, 85, { align: 'right' });
-        doc.text('Pork Slaughter', 27, 85);
-        doc.text(`$${this.state.porkPrices.slaughter}`, 102, 85, { align: 'right' });
+            , 20, 77, { align: 'right' });
+        doc.text('Pork Slaughter', 27, 77);
+        doc.text(`$${this.state.porkPrices.slaughter}`, 102, 77, { align: 'right' });
         doc.text(this.state.slaughterTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 85, { align: 'right' })
-        // }  
-        // if(this.state.cutWrap !== 0) {
-        doc.text(this.state.cutWrap.toString(), 20, 95, { align: 'right' })
-        doc.text('Cut & Wrap', 27, 95);
-        doc.text(`$${this.state.porkPrices.cut_wrap}`, 102, 95, { align: 'right' });
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.cutWrap.toString(), 20, 85, { align: 'right' })
+        doc.text('Cut & Wrap', 27, 85);
+        doc.text(`$${this.state.porkPrices.cut_wrap}`, 102, 85, { align: 'right' });
         doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 95, { align: 'right' });
-        // }
-        // if(this.state.patties !== 0){
-        doc.text(this.state.cure.toString(), 20, 105, { align: 'right' })
-        doc.text('Cure', 27, 105);
-        doc.text(`$${this.state.porkPrices.cure}`, 102, 105, { align: 'right' });
+            132, 85, { align: 'right' });
+
+        doc.text(this.state.cure.toString(), 20, 93, { align: 'right' })
+        doc.text('Cure', 27, 93);
+        doc.text(`$${this.state.porkPrices.cure}`, 102, 93, { align: 'right' });
         doc.text(this.state.cureTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 105, { align: 'right' });
-        // }
-        // if(this.state.brand !== 0){
-        doc.text(this.state.links.toString(), 20, 115, { align: 'right' });
-        doc.text('Link/Patty Sausage', 27, 115);
-        doc.text(`$${this.state.porkPrices.links}`, 102, 115, { align: 'right' });
+            132, 93, { align: 'right' });
+
+        doc.text(this.state.links.toString(), 20, 101, { align: 'right' });
+        doc.text('Link/Patty Sausage', 27, 101);
+        doc.text(`$${this.state.porkPrices.links}`, 102, 101, { align: 'right' });
         doc.text(this.state.linkTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 115, { align: 'right' });
-        // }
-        doc.text(this.state.bulk.toString(), 20, 125, { align: 'right' });
-        doc.text('Bulk Sausage', 27, 125);
+            132, 101, { align: 'right' });
+
+        doc.text(this.state.bulk.toString(), 20, 108, { align: 'right' });
+        doc.text('Bulk Sausage', 27, 108);
         //
-        doc.text(this.state.fat.toString(), 20, 135, { align: 'right' });
-        doc.text('Fat Rendered', 27, 135);
-        doc.text(`$${this.state.porkPrices.fat}`, 102, 135, { align: 'right' });
+        doc.text(this.state.fat.toString(), 20, 116, { align: 'right' });
+        doc.text('Fat Rendered', 27, 116);
+        doc.text(`$${this.state.porkPrices.fat}`, 102, 116, { align: 'right' });
         doc.text(this.state.fatTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 135, { align: 'right' });
+            132, 116, { align: 'right' });
 
         if (this.state.qtyOther !== 0) {
-            doc.text(this.state.qtyOther.toString(), 20, 145, { align: 'right' });
-            doc.text(this.state.descOther, 27, 145);
-            doc.text(`$${this.state.priceOther}`, 102, 145, { align: 'right' });
+            doc.text(this.state.qtyOther.toString(), 20, 124, { align: 'right' });
+            doc.text(this.state.descOther, 27, 124);
+            doc.text(`$${this.state.priceOther}`, 102, 124, { align: 'right' });
             doc.text(this.state.otherTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-                132, 145, { align: 'right' });
+                132, 124, { align: 'right' });
         }
-        doc.text('Total', 100, 155);
+        doc.text('Total', 100, 132);
         doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 155, { align: 'right' });
-        doc.text(`${this.state.lard}lbs of Lard`, 60, 165)
-        doc.text(this.state.message, 27, 180, { maxWidth: '90' })
-        doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 210)
+            132, 132, { align: 'right' });
+        doc.text(`${this.state.lard}lbs of Lard`, 60, 140)
+        doc.text(this.state.message, 27, 155, { maxWidth: '90' })
+        doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 185)
         doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');

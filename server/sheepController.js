@@ -1,10 +1,21 @@
 module.exports = {
     addSheep: async (req, res) => {
-        const { soldBy, iDate, customer, email, phone, cell_phone,
-            baskets, row, slaughter, cutWrap, bone_roll, qty_other,
-            desc_other, price_other, total, net_weight,
-            message } = req.body;
-        console.log(req.body)
+        const { soldBy, iDate, customer, email, phone, cellPhone,
+            baskets, row, slaughter, priceSlaughter, cutWrap, 
+            priceCutWrap, boneRoll, priceBone, qtyOther,
+            descOther, priceOther, otherTotal, total, netWeight,
+            message, slaughterTotal, cutWrapTotal, boneTotal
+            } = req.body;
+        // console.log(req.body)
+        const db = req.app.get('db');
+        let response = await db.sheep.saveSheep({
+            soldBy, iDate, customer, email, phone, cellPhone,
+            baskets, row, slaughter, priceSlaughter, cutWrap, 
+            priceCutWrap, boneRoll, priceBone, qtyOther,
+            descOther, priceOther, otherTotal, total, netWeight,
+            message, slaughterTotal, cutWrapTotal, boneTotal
+        })
+        res.status(200).send(response);
     },
     sheepPrices: async (req, res) => {
         const db = req.app.get('db');

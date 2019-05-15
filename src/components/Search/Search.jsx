@@ -148,57 +148,53 @@ export default class Search extends Component {
         doc.text(this.state.invoice[0].customer, 15, 45);
         doc.text(this.state.invoice[0].phone, 15, 55);
         doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row}`, 20, 63);
-        // if(this.state.slaughter !== 0) {
         doc.text(this.state.invoice[0].qty_slaughter.toString()
-            , 20, 85, { align: 'right' });
-        doc.text('Pork Slaughter', 27, 85);
-        doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 85, { align: 'right' });
+            , 20, 77, { align: 'right' });
+        doc.text('Pork Slaughter', 27, 77);
+        doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 77, { align: 'right' });
         doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 85, { align: 'right' })
-        // }  
-        // if(this.state.cutWrap !== 0) {
-        doc.text(this.state.invoice[0].qty_cut.toString(), 20, 95, { align: 'right' })
-        doc.text('Cut & Wrap', 27, 95);
-        doc.text(`$${this.state.invoice[0].price_cut}`, 102, 95, { align: 'right' });
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
+        doc.text('Cut & Wrap', 27, 85);
+        doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
         doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 95, { align: 'right' });
-        // }
-        // if(this.state.patties !== 0){
-        doc.text(this.state.invoice[0].qty_cure.toString(), 20, 105, { align: 'right' })
-        doc.text('Cure', 27, 105);
-        doc.text(`$${this.state.invoice[0].price_cure}`, 102, 105, { align: 'right' });
+            132, 85, { align: 'right' });
+
+        doc.text(this.state.invoice[0].qty_cure.toString(), 20, 93, { align: 'right' })
+        doc.text('Cure', 27, 93);
+        doc.text(`$${this.state.invoice[0].price_cure}`, 102, 93, { align: 'right' });
         doc.text(this.state.invoice[0].total_cure.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 105, { align: 'right' });
-        // }
-        // if(this.state.brand !== 0){
-        doc.text(this.state.invoice[0].qty_link.toString(), 20, 115, { align: 'right' });
-        doc.text('Link/Patty Sausage', 27, 115);
-        doc.text(`$${this.state.invoice[0].price_link}`, 102, 115, { align: 'right' });
+            132, 93, { align: 'right' });
+
+        doc.text(this.state.invoice[0].qty_link.toString(), 20, 101, { align: 'right' });
+        doc.text('Link/Patty Sausage', 27, 101);
+        doc.text(`$${this.state.invoice[0].price_link}`, 102, 101, { align: 'right' });
         doc.text(this.state.invoice[0].total_link.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 115, { align: 'right' });
-        // }
-        doc.text(this.state.invoice[0].qty_bulk.toString(), 20, 125, { align: 'right' });
-        doc.text('Bulk Sausage', 27, 125);
+            132, 101, { align: 'right' });
+
+        doc.text(this.state.invoice[0].qty_bulk.toString(), 20, 108, { align: 'right' });
+        doc.text('Bulk Sausage', 27, 108);
         //
-        doc.text(this.state.invoice[0].qty_fat.toString(), 20, 135, { align: 'right' });
-        doc.text('Fat Rendered', 27, 135);
-        doc.text(`$${this.state.invoice[0].price_fat}`, 102, 135, { align: 'right' });
+        doc.text(this.state.invoice[0].qty_fat.toString(), 20, 116, { align: 'right' });
+        doc.text('Fat Rendered', 27, 116);
+        doc.text(`$${this.state.invoice[0].price_fat}`, 102, 116, { align: 'right' });
         doc.text(this.state.invoice[0].total_fat.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 135, { align: 'right' });
+            132, 116, { align: 'right' });
 
         if(this.state.invoice[0].qtyOther !== 0){
-        doc.text(this.state.invoice[0].qty_other.toString(), 20, 145, { align: 'right' });
-        doc.text(this.state.invoice[0].desc_other, 27, 145);
-        doc.text(`$${this.state.invoice[0].price_other}`, 102, 145, { align: 'right' });
+        doc.text(this.state.invoice[0].qty_other.toString(), 20, 124, { align: 'right' });
+        doc.text(this.state.invoice[0].desc_other, 27, 124);
+        doc.text(`$${this.state.invoice[0].price_other}`, 102, 124, { align: 'right' });
         doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 145, { align: 'right' });
+            132, 124, { align: 'right' });
         }
-        doc.text('Total', 100, 155);
+        doc.text('Total', 100, 132);
         doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 155, { align: 'right' });
-        doc.text(`${this.state.invoice[0].lard}lbs of Lard`,60, 165 )
-        doc.text(this.state.invoice[0].message, 27, 180, { maxWidth: '90' })
-        doc.text(`${this.state.invoice[0].netWeight} Net Weight Misc. Pork Cuts`, 60, 210)
+            132, 132, { align: 'right' });
+        doc.text(`${this.state.invoice[0].lard}lbs of Lard`,60, 140 )
+        doc.text(this.state.invoice[0].message, 27, 155, { maxWidth: '90' })
+        doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Pork Cuts`, 60, 185)
         doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
