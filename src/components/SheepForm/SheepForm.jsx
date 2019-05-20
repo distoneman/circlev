@@ -32,7 +32,8 @@ export default class SheepForm extends Component {
             sheepPrices: {},
             slaughterTotal: 0,
             cutWrapTotal: 0,
-            boneTotal: 0
+            boneTotal: 0,
+            message: ''
         };
     }
     async componentDidMount() {
@@ -69,6 +70,8 @@ export default class SheepForm extends Component {
           cutWrapTotal: this.state.cutWrapTotal,
           boneTotal: this.state.boneTotal
         });
+        await this.printInvoice();
+        await this.resetState();
     };
 
     calcTotal = async () => {
@@ -86,6 +89,35 @@ export default class SheepForm extends Component {
         })
     }
 
+    resetState = async () => {
+        let res = await axios.get("/sheep/prices");
+        await this.setState ({
+            edit: false,
+            invoiceID: 0,
+            soldBy: '',
+            iDate: new Date(),
+            customer: '',
+            phone: '',
+            cellPhone: false,
+            email: '',
+            baskets: 0,
+            row: '',
+            slaughter: 0,
+            cutWrap: 0,
+            boneRoll: 0,
+            qtyOther: 0,
+            descOther: '',
+            priceOther: 0,
+            netWeight: 0,
+            total: 0,
+            sheepPrices: res.data[0],
+            slaughterTotal: 0,
+            cutWrapTotal: 0,
+            boneTotal: 0,
+            message: ''
+        })
+    }
+
     async handleChange(key, value) {
         await this.setState({
             [key]: value.target.value
@@ -99,6 +131,57 @@ export default class SheepForm extends Component {
             cellPhone: !this.state.cellPhone
         })
         // console.log(this.state.cellPhone)
+    }
+
+    printInvoice = () => {
+        // console.log(this.state.slaughterTotal);
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [396, 612]  //5.5in by 8.5in paper
+        });
+        doc.setFontSize(11);
+        doc.text(this.state.soldBy, 18, 39);
+        doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
+        doc.text(this.state.customer, 15, 45);
+        doc.text(this.state.phone, 15, 55);
+        doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
+
+        doc.text(this.state.slaughter.toString()
+            , 20, 77, { align: 'right' });
+        doc.text('Sheep Slaughter', 27, 77);
+        doc.text(`$${this.state.sheepPrices.slaughter}`, 102, 77, { align: 'right' });
+        doc.text(this.state.slaughterTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.cutWrap.toString(), 20, 85, { align: 'right' })
+        doc.text('Cut & Wrap', 27, 85);
+        doc.text(`$${this.state.sheepPrices.cut_wrap}`, 102, 85, { align: 'right' });
+        doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 85, { align: 'right' });
+
+        doc.text(this.state.boneRoll.toString(), 20, 93, { align: 'right' })
+        doc.text('Bone & Roll', 27, 93);
+        doc.text(`$${this.state.sheepPrices.bone_roll}`, 102, 93, { align: 'right' });
+        doc.text(this.state.boneTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 93, { align: 'right' });
+
+        if (this.state.qtyOther !== 0) {
+            doc.text(this.state.qtyOther.toString(), 20, 101, { align: 'right' });
+            doc.text(this.state.descOther, 27, 101);
+            doc.text(`$${this.state.priceOther}`, 102, 101, { align: 'right' });
+            doc.text(this.state.otherTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 101, { align: 'right' });
+        }
+        doc.text('Total', 100, 109);
+        doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 109, { align: 'right' });
+        doc.text(this.state.message, 27, 120, { maxWidth: '90' })
+        doc.text(`${this.state.netWeight} Net Weight Misc. Sheep Cuts`, 60, 150)
+        doc.save('invoice.pdf')
+        doc.autoPrint({});
+        var iframe = document.getElementById('output');
+        iframe.src = doc.output('dataurlstring');
     }
 
 
@@ -144,8 +227,8 @@ export default class SheepForm extends Component {
                         <input type="text" className='sheep-text-input sheep-input-short' 
                             value={this.state.row}
                             onChange={e => this.handleChange('row', e)} />
-                        <label className='pork-label-right'>Net Weight:</label>
-                        <input type="text" className='pork-text-input pork-input-short'
+                        <label className='sheep-label-right'>Net Weight:</label>
+                        <input type="text" className='sheep-text-input sheep-input-short'
                             value={this.state.netWeight}
                             onChange={e => this.handleChange('netWeight', e)} />
                     </div>
@@ -198,6 +281,7 @@ export default class SheepForm extends Component {
 
                     </div>
                 </div>
+                <iframe title="pdf" id="output" className='pork-pdf-iframe'></iframe>
             </div>
         );
     }
