@@ -1,3 +1,5 @@
+drop table prices;
+
 create table prices (
     price_id serial primary key,
     animal_type varchar(25),
@@ -8,4 +10,4 @@ create table prices (
 );
 
 INSERT INTO prices (animal_type, slaughter, cut_wrap, patties, brand)
-VALUES ('BEEF', 1.50, .30, .25, 1.75);
+VALUES ('BEEF', 45.00, .50, .35, 5.00);

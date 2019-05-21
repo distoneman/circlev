@@ -32,7 +32,7 @@ export default class Search extends Component {
         // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            // console.log(res.data)
+            console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -201,6 +201,10 @@ export default class Search extends Component {
         iframe.src = doc.output('dataurlstring');
     }
 
+    printSheepInvoice = async (invoiceID) => {
+        console.log('print sheep invoice')
+    }
+
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
             let iDate = moment(invoice.invoice_date).format('MM/DD/YYYY')
@@ -213,6 +217,11 @@ export default class Search extends Component {
                 var id = invoice.pork_id;
                 var editURL = `/pork/${id}`;
                 var printInvoice = this.printPorkInvoice;
+            }
+            if(this.state.searchType === 'sheep') {
+                var id = invoice.sheep_id;
+                var editURL = `/sheep/${id}`;
+                var printInvoice = this.printSheepInvoice;
             }
 
             return (

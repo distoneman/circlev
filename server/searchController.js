@@ -54,5 +54,13 @@ module.exports = {
         const db = req.app.get('db');
         let response = await db.pork.searchPorkID({ID});
         res.status(200).send(response);
+    },
+    sheepCustomer: async (req, res) => {
+        let customer = `%${req.params.customer}%`;
+        const db = req.app.get('db');
+        let response = await db.sheep.searchSheepCust({
+            customer
+        });
+        res.status(200).send(response)
     }
 }

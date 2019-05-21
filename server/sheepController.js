@@ -21,5 +21,11 @@ module.exports = {
         const db = req.app.get('db');
         let prices = await db.sheep.getPrices();
         res.status(200).send(prices);
+    },
+    sheepDelete: async (req, res) => {
+        let ID = req.params.ID;
+        const db = req.app.get('db');
+        let response = await db.sheep.deleteSheepInvoice({ID});
+        res.status(200).send(response)
     }
 }
