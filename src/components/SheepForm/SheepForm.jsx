@@ -215,7 +215,7 @@ export default class SheepForm extends Component {
             132, 109, { align: 'right' });
         doc.text(this.state.message, 27, 120, { maxWidth: '90' })
         doc.text(`${this.state.netWeight} Net Weight Misc. Sheep Cuts`, 60, 150)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');

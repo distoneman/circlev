@@ -195,7 +195,7 @@ export default class Search extends Component {
         doc.text(`${this.state.invoice[0].lard} lbs of Lard`, 60, 140)
         doc.text(this.state.invoice[0].message, 27, 155, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Pork Cuts`, 60, 185)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
@@ -247,7 +247,7 @@ export default class Search extends Component {
             132, 109, { align: 'right' });
         doc.text(this.state.invoice[0].message, 27, 120, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Sheep Cuts`, 60, 150)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');

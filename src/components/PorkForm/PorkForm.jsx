@@ -316,7 +316,7 @@ export default class PorkForm extends Component {
         doc.text(`${this.state.lard} lbs of Lard`, 60, 140)
         doc.text(this.state.message, 27, 155, { maxWidth: '90' })
         doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 185)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
