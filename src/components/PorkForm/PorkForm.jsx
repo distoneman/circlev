@@ -241,6 +241,8 @@ export default class PorkForm extends Component {
         let fatTotal = this.state.fat * this.state.porkPrices.fat;
         let otherTotal = this.state.qtyOther * this.state.priceOther;
         let total = slaughterTotal + cutWrapTotal + cureTotal + linkTotal + fatTotal + otherTotal;
+        let lard =  2 * Math.round((Number(this.state.fat) * .66) / 2)
+        console.log(lard)
         this.setState({
             total: total,
             slaughterTotal: slaughterTotal,
@@ -248,7 +250,8 @@ export default class PorkForm extends Component {
             cureTotal: cureTotal,
             linkTotal: linkTotal,
             fatTotal: fatTotal,
-            otherTotal: otherTotal
+            otherTotal: otherTotal,
+            lard: lard
         });
     }
 
@@ -300,7 +303,7 @@ export default class PorkForm extends Component {
         doc.text(this.state.fatTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 116, { align: 'right' });
 
-        if (this.state.qtyOther !== 0) {
+        if (Number(this.state.qtyOther) !== 0) {
             doc.text(this.state.qtyOther.toString(), 20, 124, { align: 'right' });
             doc.text(this.state.descOther, 27, 124);
             doc.text(`$${this.state.priceOther}`, 102, 124, { align: 'right' });
@@ -310,7 +313,7 @@ export default class PorkForm extends Component {
         doc.text('Total', 100, 132);
         doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 132, { align: 'right' });
-        doc.text(`${this.state.lard}lbs of Lard`, 60, 140)
+        doc.text(`${this.state.lard} lbs of Lard`, 60, 140)
         doc.text(this.state.message, 27, 155, { maxWidth: '90' })
         doc.text(`${this.state.netWeight} Net Weight Misc. Pork Cuts`, 60, 185)
         doc.save('invoice.pdf')
@@ -367,7 +370,7 @@ export default class PorkForm extends Component {
                             value={this.state.netWeight}
                             onChange={e => this.handleChange("netWeight", e)} />
                         <label className='pork-label-right'>Lard:</label>
-                        <span>{this.state.lard}</span>
+                        <span>{this.state.lard} lbs</span>
                     </div>
                     <hr />
                     <div className='pork-prices-container'>

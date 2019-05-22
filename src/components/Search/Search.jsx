@@ -192,7 +192,7 @@ export default class Search extends Component {
         doc.text('Total', 100, 132);
         doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 132, { align: 'right' });
-        doc.text(`${this.state.invoice[0].lard}lbs of Lard`, 60, 140)
+        doc.text(`${this.state.invoice[0].lard} lbs of Lard`, 60, 140)
         doc.text(this.state.invoice[0].message, 27, 155, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Pork Cuts`, 60, 185)
         doc.save('invoice.pdf')
