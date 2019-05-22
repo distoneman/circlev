@@ -147,7 +147,7 @@ export default class Search extends Component {
         doc.text(moment(this.state.invoice[0].invoice_date).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.invoice[0].customer, 15, 45);
         doc.text(this.state.invoice[0].phone, 15, 55);
-        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row}`, 20, 63);
+        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row_num}`, 20, 63);
         doc.text(this.state.invoice[0].qty_slaughter.toString()
             , 20, 77, { align: 'right' });
         doc.text('Pork Slaughter', 27, 77);
@@ -214,7 +214,7 @@ export default class Search extends Component {
         doc.text(moment(this.state.invoice[0].iDate).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.invoice[0].customer, 15, 45);
         doc.text(this.state.invoice[0].phone, 15, 55);
-        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row}`, 20, 63);
+        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row_num}`, 20, 63);
 
         doc.text(this.state.invoice[0].qty_slaughter.toString()
             , 20, 77, { align: 'right' });
