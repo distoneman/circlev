@@ -6,10 +6,11 @@ import './Nav.css';
 import imgBeef from './../../images/beef.png';
 import imgPork from './../../images/pork.png';
 import imgSheep from './../../images/sheep.png';
-import imgOther from './../../images/other.png';
+import imgCircleV from './../../images/iconCircleV.png';
 // import imgV from './../../images/v.png';
-import imgSearch from './../../images/search2.png';
-import imgSettings from './../../images/settings.png';
+import imgGenInvoice from './../../images/iconBacon.png';
+import imgSearch from './../../images/iconSearch.png';
+import imgSettings from './../../images/iconSettings.png';
 
 export default class Nav extends Component {
 
@@ -34,16 +35,23 @@ export default class Nav extends Component {
                 </div>
                 <div className="other-icon-container">
                     <Link to="/other">
-                        <img src={imgOther} alt="Other Icon" className="nav-icon" />
+                        <img src={imgCircleV} alt="Other Icon" className="search-icon" />
+                    </Link>
+                </div>
+                <div className="gen-invoice-icon-container">
+                    <Link to="/other">
+                        <img src={imgGenInvoice} alt="General Invoice Icon" className="search-icon" />
                     </Link>
                 </div>
                 <div className="search-icon-container">
                     <Link to="/search">
-                        <img src={imgSearch} alt="Search Icon" className="search-icon"/>
+                        <img src={imgSearch} alt="Search Icon" className="search-icon" />
                     </Link>
                 </div>
                 <div className="settings-icon-container">
-                    <img src={imgSettings} alt="" className="settings-icon"/>
+                    <Link to="/other">
+                        <img src={imgSettings} alt="" className="search-icon" />
+                    </Link>
                 </div>
             </div>
         )
