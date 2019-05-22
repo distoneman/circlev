@@ -62,5 +62,25 @@ module.exports = {
             customer
         });
         res.status(200).send(response)
+    },
+    sheepSoldBy: async (req, res) => {
+        const soldBy = `%${req.params.soldBy}%`;
+        const db = req.app.get('db');
+        let response = await db.sheep.searchSheepSoldBy({
+            soldBy
+        });
+        res.status(200).send(response)
+    },
+    sheepInvoiceDate: async (req, res) => {
+        let invoiceDate = req.query.invoiceDate;
+        const db = req.app.get('db');
+        let response = await db.sheep.searchSheepDate({invoiceDate});
+        res.status(200).send(response);
+    },
+    sheepID: async (req, res) => {
+        let ID = req.params.ID
+        const db = req.app.get('db');
+        let response = await db.sheep.searchSheepID({ID});
+        res.status(200).send(response);
     }
 }

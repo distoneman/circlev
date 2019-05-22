@@ -27,6 +27,7 @@ export default class SheepForm extends Component {
             qtyOther: 0,
             descOther: '',
             priceOther: 0,
+            otherTotal: 0,
             netWeight: 0,
             total: 0,
             sheepPrices: {},
@@ -36,39 +37,75 @@ export default class SheepForm extends Component {
             message: ''
         };
     }
+
     async componentDidMount() {
-        let res = await axios.get("/sheep/prices");
-        await this.setState({ sheepPrices: res.data[0] });
-        console.log(this.state.sheepPrices);
+        if (this.props.match.params.ID === undefined) {
+            let res = await axios.get("/sheep/prices");
+            await this.setState({ sheepPrices: res.data[0] });
+            console.log(this.state.sheepPrices);
+        } else {
+            this.setState({ edit: true });
+            let res = await axios.get(`/search/sheepID/${this.props.match.params.ID}`);
+            console.log(res.data)
+            let invoicePrices = {
+                slaughter: res.data[0].price_slaughter,
+                cut_wrap: res.data[0].price_cut,
+                bone_roll: res.data[0].price_bone
+            }
+            await this.setState({ sheepPrices: invoicePrices })
+            await this.setState({
+                invoiceID: res.data[0].sheep_id,
+                soldBy: res.data[0].sold_by,
+                iDate: res.data[0].invoice_date,
+                customer: res.data[0].customer,
+                phone: res.data[0].phone,
+                cellPhone: res.data[0].cell_phone,
+                email: res.data[0].email,
+                baskets: res.data[0].baskets,
+                row: res.data[0].row_num,
+                slaughter: res.data[0].qty_slaughter,
+                cutWrap: res.data[0].qty_cut,
+                boneRoll: res.data[0].qty_bone,
+                qtyOther: res.data[0].qty_other,
+                descOther: res.data[0].desc_other,
+                priceOther: res.data[0].price_other,
+                netWeight: res.data[0].net_weight,
+                total: res.data[0].total,
+                slaughterTotal: res.data[0].total_slaughter,
+                cutWrapTotal: res.data[0].total_cut,
+                boneTotal: res.data[0].total_bone,
+                message: res.data[0].message
+            })
+        }
     }
 
     save = async () => {
         console.log("save");
         await axios.post("/sheep/save", {
-          soldBy: this.state.soldBy,
-          iDate: moment(this.state.iDate).format('l'),
-          customer: this.state.customer,
-          email: this.state.email,
-          phone: this.state.phone,
-          cellPhone: this.state.cellPhone,
-          baskets: this.state.baskets,
-          row: this.state.row,
-          slaughter: this.state.slaughter,
-          priceSlaughter: this.state.sheepPrices.slaughter,
-          cutWrap: this.state.cutWrap,
-          priceCutWrap: this.state.sheepPrices.cut_wrap,
-          boneRoll: this.state.boneRoll,
-          priceBone: this.state.sheepPrices.bone_roll,
-          qtyOther: this.state.qtyOther,
-          descOther: this.state.descOther,
-          priceOther: this.state.priceOther,
-          otherTotal: this.state.otherTotal,
-          total: this.state.total,
-          netWeight: this.state.netWeight,
-          message: this.state.message,
-          slaughterTotal: this.state.slaughterTotal,
-          cutWrapTotal: this.state.cutWrapTotal,
-          boneTotal: this.state.boneTotal
+            soldBy: this.state.soldBy,
+            iDate: moment(this.state.iDate).format('l'),
+            customer: this.state.customer,
+            email: this.state.email,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            baskets: this.state.baskets,
+            row: this.state.row,
+            slaughter: this.state.slaughter,
+            priceSlaughter: this.state.sheepPrices.slaughter,
+            cutWrap: this.state.cutWrap,
+            priceCutWrap: this.state.sheepPrices.cut_wrap,
+            boneRoll: this.state.boneRoll,
+            priceBone: this.state.sheepPrices.bone_roll,
+            qtyOther: this.state.qtyOther,
+            descOther: this.state.descOther,
+            priceOther: this.state.priceOther,
+            otherTotal: this.state.otherTotal,
+            total: this.state.total,
+            netWeight: this.state.netWeight,
+            message: this.state.message,
+            slaughterTotal: this.state.slaughterTotal,
+            cutWrapTotal: this.state.cutWrapTotal,
+            boneTotal: this.state.boneTotal
         });
         await this.printInvoice();
         await this.resetState();
@@ -91,7 +128,7 @@ export default class SheepForm extends Component {
 
     resetState = async () => {
         let res = await axios.get("/sheep/prices");
-        await this.setState ({
+        await this.setState({
             edit: false,
             invoiceID: 0,
             soldBy: '',
@@ -166,7 +203,7 @@ export default class SheepForm extends Component {
         doc.text(this.state.boneTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 93, { align: 'right' });
 
-        if (this.state.qtyOther !== 0) {
+        if (Number(this.state.qtyOther) !== 0) {
             doc.text(this.state.qtyOther.toString(), 20, 101, { align: 'right' });
             doc.text(this.state.descOther, 27, 101);
             doc.text(`$${this.state.priceOther}`, 102, 101, { align: 'right' });
@@ -184,6 +221,52 @@ export default class SheepForm extends Component {
         iframe.src = doc.output('dataurlstring');
     }
 
+    update = async () => {
+        console.log('update')
+        this.calcTotal();
+        await axios.put(`/sheep/update`, {
+            sheep_id: this.state.invoiceID,
+            iDate: moment(this.state.iDate).format('l'),
+            soldBy: this.state.soldBy,
+            customer: this.state.customer,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            email: this.state.email,
+            baskets: this.state.baskets,
+            row: this.state.row,
+            qty_slaughter: this.state.slaughter,
+            total_slaughter: this.state.slaughterTotal,
+            qty_cut: this.state.cutWrap,
+            total_cut: this.state.cutWrapTotal,
+            qty_bone: this.state.boneRoll,
+            total_bone: this.state.boneRoll,
+            qty_other: this.state.qtyOther,
+            desc_other: this.state.descOther,
+            price_other: this.state.priceOther,
+            total_other: this.state.otherTotal,
+            total: this.state.total,
+            net_weight: this.state.netWeight,
+            message: this.state.message
+        })
+        Swal.fire({
+            title: 'Invoice Updated',
+            // text: "You won't be able to revert this!",
+            // type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Print Invoice'
+        }).then((result) => {
+            if (result.value) {
+                this.printInvoice();
+                // this.resetState();
+                // Swal.fire(
+                //   'Invoice Printed'
+                // )
+            }
+            this.resetState()
+        })
+    }
 
     render() {
         return (
@@ -199,6 +282,7 @@ export default class SheepForm extends Component {
                             value={moment(this.state.iDate).format('MM/DD/YYYY')} />
                         <label className='sheep-label-right'>Sold By:</label>
                         <input type="text" className='sheep-text-input'
+                            value={this.state.soldBy}
                             onChange={e => this.handleChange('soldBy', e)} />
                         <label className='sheep-label-right'>Customer:</label>
                         <input type="text" className='sheep-text-input'
@@ -224,7 +308,7 @@ export default class SheepForm extends Component {
                             value={this.state.baskets}
                             onChange={e => this.handleChange('baskets', e)} />
                         <label className='sheep-label-right'>Row:</label>
-                        <input type="text" className='sheep-text-input sheep-input-short' 
+                        <input type="text" className='sheep-text-input sheep-input-short'
                             value={this.state.row}
                             onChange={e => this.handleChange('row', e)} />
                         <label className='sheep-label-right'>Net Weight:</label>
@@ -232,14 +316,14 @@ export default class SheepForm extends Component {
                             value={this.state.netWeight}
                             onChange={e => this.handleChange('netWeight', e)} />
                     </div>
-                    <hr/>
+                    <hr />
                     <div className='sheep-prices-container'>
-                        <input type="text" className='sheep-price-input' 
+                        <input type="text" className='sheep-price-input'
                             value={this.state.slaughter}
                             onChange={e => this.handleChange('slaughter', e)} />
                         <label>Sheep Slaughter</label>
                         <span>${this.state.sheepPrices.slaughter}</span>
-                        <span>{(this.state.slaughter * this.state.sheepPrices.slaughter).toLocaleString('us-US', {style: 'currency', currency: 'USD'})}</span>
+                        <span>{(this.state.slaughter * this.state.sheepPrices.slaughter).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
                         <input type="text" className='sheep-price-input'
                             value={this.state.cutWrap}
                             onChange={e => this.handleChange('cutWrap', e)} />

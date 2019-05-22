@@ -90,6 +90,10 @@ export default class InvoiceView extends Component {
                     </div>
                 </div>
                 ) : null}
+                {this.props.searchType === 'sheep' ? (
+                    <div>sheep
+                    </div>
+                ) : null }
             </div>
         )
     }

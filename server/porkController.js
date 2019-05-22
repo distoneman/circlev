@@ -48,7 +48,8 @@ module.exports = {
             price_other, total_other, total, lard, 
             net_weight, message} = req.body;
         const db = req.app.get('db');
-        let response = await db.pork.updatePork({pork_id, iDate, soldBy, customer, phone,
+        let response = await db.pork.updatePork({pork_id, 
+            iDate, soldBy, customer, phone,
             cellPhone, email, baskets, row, qty_slaughter,
             total_slaughter, qty_cut, total_cut, qty_cure,
             total_cure, qty_link, total_link, qty_bulk,

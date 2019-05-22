@@ -44,7 +44,7 @@ export default class Search extends Component {
                 searchResults: res.data
             })
         }
-        if(this.state.searchField === "invoiceDate") {
+        if (this.state.searchField === "invoiceDate") {
             // console.log("search date")
             const res = await axios.get(`/search/${this.state.searchType}InvoiceDate/?invoiceDate=${this.state.searchCriteria}`)
             // console.log(res.data)
@@ -65,7 +65,7 @@ export default class Search extends Component {
 
     }
 
-    deleteInvoice = async(invoiceID) => {
+    deleteInvoice = async (invoiceID) => {
         await axios.delete(`/${this.state.searchType}/delete/${invoiceID}`)
         this.search();
     }
@@ -152,25 +152,25 @@ export default class Search extends Component {
             , 20, 77, { align: 'right' });
         doc.text('Pork Slaughter', 27, 77);
         doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 77, { align: 'right' });
-        doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
         doc.text('Cut & Wrap', 27, 85);
         doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
-        doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_cure.toString(), 20, 93, { align: 'right' })
         doc.text('Cure', 27, 93);
         doc.text(`$${this.state.invoice[0].price_cure}`, 102, 93, { align: 'right' });
-        doc.text(this.state.invoice[0].total_cure.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total_cure.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 93, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_link.toString(), 20, 101, { align: 'right' });
         doc.text('Link/Patty Sausage', 27, 101);
         doc.text(`$${this.state.invoice[0].price_link}`, 102, 101, { align: 'right' });
-        doc.text(this.state.invoice[0].total_link.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total_link.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 101, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_bulk.toString(), 20, 108, { align: 'right' });
@@ -179,20 +179,20 @@ export default class Search extends Component {
         doc.text(this.state.invoice[0].qty_fat.toString(), 20, 116, { align: 'right' });
         doc.text('Fat Rendered', 27, 116);
         doc.text(`$${this.state.invoice[0].price_fat}`, 102, 116, { align: 'right' });
-        doc.text(this.state.invoice[0].total_fat.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total_fat.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 116, { align: 'right' });
 
-        if(this.state.invoice[0].qtyOther !== 0){
-        doc.text(this.state.invoice[0].qty_other.toString(), 20, 124, { align: 'right' });
-        doc.text(this.state.invoice[0].desc_other, 27, 124);
-        doc.text(`$${this.state.invoice[0].price_other}`, 102, 124, { align: 'right' });
-        doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
-            132, 124, { align: 'right' });
+        if (Number(this.state.invoice[0].qtyOther) !== 0) {
+            doc.text(this.state.invoice[0].qty_other.toString(), 20, 124, { align: 'right' });
+            doc.text(this.state.invoice[0].desc_other, 27, 124);
+            doc.text(`$${this.state.invoice[0].price_other}`, 102, 124, { align: 'right' });
+            doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 124, { align: 'right' });
         }
         doc.text('Total', 100, 132);
-        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }), 
+        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 132, { align: 'right' });
-        doc.text(`${this.state.invoice[0].lard}lbs of Lard`,60, 140 )
+        doc.text(`${this.state.invoice[0].lard}lbs of Lard`, 60, 140)
         doc.text(this.state.invoice[0].message, 27, 155, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Pork Cuts`, 60, 185)
         doc.save('invoice.pdf')
@@ -203,22 +203,71 @@ export default class Search extends Component {
 
     printSheepInvoice = async (invoiceID) => {
         console.log('print sheep invoice')
+        await this.searchOne(invoiceID)
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [396, 612]  //5.5in by 8.5in paper
+        });
+        doc.setFontSize(11);
+        doc.text(this.state.invoice[0].sold_by, 18, 39);
+        doc.text(moment(this.state.invoice[0].iDate).format('MM/DD/YYYY'), 112, 39);
+        doc.text(this.state.invoice[0].customer, 15, 45);
+        doc.text(this.state.invoice[0].phone, 15, 55);
+        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.invoice[0].row}`, 20, 63);
+
+        doc.text(this.state.invoice[0].qty_slaughter.toString()
+            , 20, 77, { align: 'right' });
+        doc.text('Sheep Slaughter', 27, 77);
+        doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 77, { align: 'right' });
+        doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
+        doc.text('Cut & Wrap', 27, 85);
+        doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
+        doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 85, { align: 'right' });
+
+        doc.text(this.state.invoice[0].qty_bone.toString(), 20, 93, { align: 'right' })
+        doc.text('Bone & Roll', 27, 93);
+        doc.text(`$${this.state.invoice[0].price_bone}`, 102, 93, { align: 'right' });
+        doc.text(this.state.invoice[0].total_bone.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 93, { align: 'right' });
+        
+        if (Number(this.state.invoice[0].qty_other) !== 0) {
+            doc.text(this.state.invoice[0].qty_other.toString(), 20, 101, { align: 'right' });
+            doc.text(this.state.invoice[0].desc_other, 27, 101);
+            doc.text(`$${this.state.invoice[0].price_other}`, 102, 101, { align: 'right' });
+            doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 101, { align: 'right' });
+        }
+        doc.text('Total', 100, 109);
+        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 109, { align: 'right' });
+        doc.text(this.state.invoice[0].message, 27, 120, { maxWidth: '90' })
+        doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Sheep Cuts`, 60, 150)
+        doc.save('invoice.pdf')
+        doc.autoPrint({});
+        var iframe = document.getElementById('output');
+        iframe.src = doc.output('dataurlstring');
     }
+
 
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
             let iDate = moment(invoice.invoice_date).format('MM/DD/YYYY')
-            if(this.state.searchType === 'beef') {
+            if (this.state.searchType === 'beef') {
                 var id = invoice.beef_id
                 var editURL = `/beef/${id}`;
                 var printInvoice = this.printBeefInvoice
             }
-            if(this.state.searchType === 'pork') {
+            if (this.state.searchType === 'pork') {
                 var id = invoice.pork_id;
                 var editURL = `/pork/${id}`;
                 var printInvoice = this.printPorkInvoice;
             }
-            if(this.state.searchType === 'sheep') {
+            if (this.state.searchType === 'sheep') {
                 var id = invoice.sheep_id;
                 var editURL = `/sheep/${id}`;
                 var printInvoice = this.printSheepInvoice;
@@ -282,8 +331,8 @@ export default class Search extends Component {
                     <div className='search-results-item-title'>Weight</div>
                     <div className='search-results-item-title'></div>
                 </div>
-                    {searchResults}
-                    <iframe title="pdf" id="output" className='beef-pdf-iframe'></iframe>
+                {searchResults}
+                <iframe title="pdf" id="output" className='beef-pdf-iframe'></iframe>
             </div>
         )
     }

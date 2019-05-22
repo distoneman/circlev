@@ -36,6 +36,7 @@ app.put('/pork/update', porkCtrl.updatePork)
 app.get('/sheep/prices', sheepCtrl.sheepPrices);
 app.post('/sheep/save', sheepCtrl.addSheep)
 app.delete('/sheep/delete/:ID', sheepCtrl.sheepDelete);
+app.put('/sheep/update', sheepCtrl.updateSheep);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
@@ -47,3 +48,7 @@ app.get(`/search/porkSoldBy/:soldBy`, searchCtrl.porkSoldBy);
 app.get('/search/porkID/:ID', searchCtrl.porkID);
 app.get('/search/porkInvoiceDate/', searchCtrl.porkInvoiceDate);
 app.get('/search/sheepCustomer/:customer', searchCtrl.sheepCustomer);
+app.get('/search/sheepSoldBy/:soldBy', searchCtrl.sheepSoldBy);
+app.get('/search/sheepID/:ID', searchCtrl.sheepID);
+app.get('/search/sheepInvoiceDate/', searchCtrl.sheepInvoiceDate);
+

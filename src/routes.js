@@ -13,7 +13,7 @@ export default (
         <Route exact path='/' component={Home} />
         <Route path='/beef/:ID?' component={BeefForm}/>
         <Route path='/pork/:ID?' component={PorkForm}/>
-        <Route path='/sheep' component={SheepForm}/>
+        <Route path='/sheep/:ID?' component={SheepForm}/>
         <Route path='/other' component={OtherForm}/>
         <Route path='/search' component={Search}/>
         {/* <Route path='/beef-invoice/:beef-id' component={BeefInvoice}/> */}
