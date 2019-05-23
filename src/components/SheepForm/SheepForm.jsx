@@ -273,7 +273,7 @@ export default class SheepForm extends Component {
         return (
             <div className='sheep-container'>
                 <div className="sheep-form">
-                    <span className='sheep-title'>Sheep Form</span>
+                    <span className='sheep-title'>Sheep</span>
                     <hr />
                     <div className='sheep-header-container'>
                         <label className='sheep-label-right'>Date:</label>
@@ -366,7 +366,7 @@ export default class SheepForm extends Component {
 
                     </div>
                 </div>
-                <iframe title="pdf" id="output" className='pork-pdf-iframe'></iframe>
+                <iframe title="pdf" id="output" className='sheep-pdf-iframe'></iframe>
             </div>
         );
     }

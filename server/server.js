@@ -5,6 +5,7 @@ require('dotenv').config();
 const beefCtrl = require ('./beefController');
 const porkCtrl = require('./porkController');
 const sheepCtrl = require('./sheepController');
+const circleVCtrl = require('./circleVController');
 const searchCtrl = require('./searchController');
 
 const { SERVER_PORT, CONNECTION_STRING} = process.env;
@@ -37,6 +38,9 @@ app.get('/sheep/prices', sheepCtrl.sheepPrices);
 app.post('/sheep/save', sheepCtrl.addSheep)
 app.delete('/sheep/delete/:ID', sheepCtrl.sheepDelete);
 app.put('/sheep/update', sheepCtrl.updateSheep);
+
+// CIRCLEV
+app.post('/circlev/save', circleVCtrl.addCircleV)
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
