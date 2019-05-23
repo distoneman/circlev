@@ -9,6 +9,8 @@
     background-color: #b6a59b ;
     box-shadow: -2px 0px 5px 0px rgb(105, 102, 102);
     z-index: 1;
+    overflow: auto;
+    white-space: nowrap;
   }
 
 .pork-icon-container {
