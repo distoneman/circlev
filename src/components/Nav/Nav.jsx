@@ -34,12 +34,12 @@ export default class Nav extends Component {
                     </Link>
                 </div>
                 <div className="other-icon-container">
-                    <Link to="/other">
+                    <Link to="/circlev">
                         <img src={imgCircleV} alt="Other Icon" className="search-icon" />
                     </Link>
                 </div>
                 <div className="gen-invoice-icon-container">
-                    <Link to="/other">
+                    <Link to="/invoice">
                         <img src={imgGenInvoice} alt="General Invoice Icon" className="search-icon" />
                     </Link>
                 </div>

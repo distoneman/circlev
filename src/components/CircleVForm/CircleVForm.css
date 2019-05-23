@@ -1,9 +1,9 @@
-.other-container {
+.circleV-container {
     display: flex;
     justify-content: center;
   }
 
-.main-other-form {
+.main-circleV-form {
     width: 75%;
     border: solid;
     justify-content: center;

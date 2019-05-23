@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-import './OtherForm.css'
+import './InvoiceForm.css'
 
-export default class OtherForm extends Component {
+export default class InvoiceForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -17,7 +17,6 @@ export default class OtherForm extends Component {
             cutWrap: 0,
             patties: 0,
             brand: 0,
-            otherPrices: {}
         };
     }
     async componentDidMount() {
@@ -51,9 +50,9 @@ export default class OtherForm extends Component {
 
     render() {
         return (
-            <div className='other-container'>
-                <div className="main-other-form">
-                    <div>Other Form</div>
+            <div className='invoice-container'>
+                <div className="main-invoice-form">
+                    <div>Invoice Form</div>
                 </div>
             </div>
         );
