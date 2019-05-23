@@ -5,5 +5,8 @@
         "porkform",
         "swal",
         "sweetalert"
+    ],
+    "cSpell.ignoreWords": [
+        "circlev"
     ]
 }
