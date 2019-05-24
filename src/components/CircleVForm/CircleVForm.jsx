@@ -141,8 +141,6 @@ export default class CircleVForm extends Component {
     }
 
     printInvoice = () => {
-        // console.log(this.state.slaughterTotal);
-        // console.log(this.state.row)
         const doc = new jsPDF({
             orientation: 'p',
             unit: 'mm',
@@ -198,7 +196,6 @@ export default class CircleVForm extends Component {
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
     }
-
 
     render() {
         return (

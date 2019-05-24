@@ -15,5 +15,11 @@ module.exports = {
             amtPaid, balance, netWeight, message
         })
         res.status(200).send(response)
-    }
+    },
+    circleVDelete: async (req, res) => {
+        let ID = req.params.ID;
+        const db = req.app.get('db');
+        let response = await db.circleV.deleteCircleVInvoice({ ID });
+        res.status(200).send(response)
+    },
 }

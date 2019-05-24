@@ -45,9 +45,9 @@ export default class Search extends Component {
             })
         }
         if (this.state.searchField === "invoiceDate") {
-            // console.log("search date")
+            console.log("search date")
             const res = await axios.get(`/search/${this.state.searchType}InvoiceDate/?invoiceDate=${this.state.searchCriteria}`)
-            // console.log(res.data)
+            console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -253,6 +253,10 @@ export default class Search extends Component {
         iframe.src = doc.output('dataurlstring');
     }
 
+    printCircleVInvoice = async(invoiceID) => {
+        console.log('circlev invoice')
+    }
+
 
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
@@ -271,6 +275,11 @@ export default class Search extends Component {
                 var id = invoice.sheep_id;
                 var editURL = `/sheep/${id}`;
                 var printInvoice = this.printSheepInvoice;
+            }
+            if (this.state.searchType === 'circleV') {
+                id = invoice.circlev_id;
+                editURL = `/circlev/${id}`;
+                printInvoice = this.printCircleVInvoice;
             }
 
             return (
@@ -304,7 +313,7 @@ export default class Search extends Component {
                             <option value="beef">Beef</option>
                             <option value="pork">Pork</option>
                             <option value="sheep">Sheep</option>
-                            <option value="other">Other</option>
+                            <option value="circleV">Circle V</option>
                         </select>
                         <label className='search-label'>Search Field:</label>
                         <select name="search-field" id="search-field"

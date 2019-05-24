@@ -41,6 +41,7 @@ app.put('/sheep/update', sheepCtrl.updateSheep);
 
 // CIRCLEV
 app.post('/circlev/save', circleVCtrl.addCircleV)
+app.delete('/circlev/delete/:ID', circleVCtrl.circleVDelete)
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);
@@ -55,4 +56,7 @@ app.get('/search/sheepCustomer/:customer', searchCtrl.sheepCustomer);
 app.get('/search/sheepSoldBy/:soldBy', searchCtrl.sheepSoldBy);
 app.get('/search/sheepID/:ID', searchCtrl.sheepID);
 app.get('/search/sheepInvoiceDate/', searchCtrl.sheepInvoiceDate);
-
+app.get('/search/circlevCustomer/:customer', searchCtrl.circleVCustomer)
+app.get('/search/circlevSoldBy/:soldBy', searchCtrl.circleVSoldBy);
+app.get('/search/circlevID/:ID', searchCtrl.circleVID);
+app.get('/search/circleVInvoiceDate/', searchCtrl.circleVInvoiceDate);

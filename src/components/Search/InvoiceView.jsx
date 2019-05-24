@@ -12,13 +12,12 @@ export default class InvoiceView extends Component {
     }
 
     async componentDidMount() {
-        // console.log(this.props.id)
+        console.log(this.props.searchType)
         let res = await axios.get(`/search/${this.props.searchType}ID/${this.props.id}`)
-        // console.log(res.data);
         this.setState({
             invoice: res.data[0]
         })
-        // console.log(this.state.invoice)
+        console.log(this.state)
     }
 
     render() {
@@ -113,6 +112,24 @@ export default class InvoiceView extends Component {
                             <div className='invoice-item'>{this.state.invoice.desc_other}</div>
                             <div className='invoice-item invoice-view-right'>${this.state.invoice.price_other}</div>
                             <div className='invoice-item invoice-view-right'>${this.state.invoice.total_other}</div>
+                        </div>
+                    </div>
+                ) : null}
+                {this.props.searchType === 'circleV' ? (
+                    <div>
+                        <div className='invoice-view-container'>
+                            <div className='invoice-item invoice-header'>Quantity</div>
+                            <div className='invoice-item invoice-header'>Description</div>
+                            <div className='invoice-item invoice-header'>Price</div>
+                            <div className='invoice-item invoice-header'>Amount</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line1}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line1}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line1}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line1}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line2}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line2}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line2}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line2}</div>
                         </div>
                     </div>
                 ) : null}

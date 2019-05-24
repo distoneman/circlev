@@ -82,5 +82,33 @@ module.exports = {
         const db = req.app.get('db');
         let response = await db.sheep.searchSheepID({ID});
         res.status(200).send(response);
+    },
+    circleVCustomer: async (req, res) => {
+        let customer = `%${req.params.customer}%`;
+        const db = req.app.get('db');
+        let response = await db.circleV.searchCircleVCust({
+            customer
+        });
+        res.status(200).send(response)
+    },
+    circleVSoldBy: async (req, res) => {
+        const soldBy = `%${req.params.soldBy}%`;
+        const db = req.app.get('db');
+        let response = await db.circleV.searchCircleVSoldBy({
+            soldBy
+        });
+        res.status(200).send(response)
+    },
+    circleVID: async (req, res) => {
+        let ID = req.params.ID
+        const db = req.app.get('db');
+        let response = await db.circleV.searchCircleVID({ID});
+        res.status(200).send(response);
+    },
+    circleVInvoiceDate: async (req, res) => {
+        let invoiceDate = req.query.invoiceDate;
+        const db = req.app.get('db');
+        let response = await db.circleV.searchCircleVDate({invoiceDate});
+        res.status(200).send(response);
     }
 }
