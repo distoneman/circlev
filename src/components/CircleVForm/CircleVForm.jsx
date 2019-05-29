@@ -76,7 +76,7 @@ export default class CircleVForm extends Component {
 
     save = async () => {
         console.log("save");
-        const res = await axios.post("/circlev/save", {
+        await axios.post("/circlev/save", {
             soldBy: this.state.soldBy,
             iDate: moment(this.state.iDate).format('l'),
             customer: this.state.customer,
@@ -342,6 +342,10 @@ export default class CircleVForm extends Component {
                         <div></div>
                         <span>Sub Total</span>
                         <span>{this.state.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
+                        <div></div>
+                        <div></div>
+                        <span>Tax</span>
+                        <span>{this.state.taxAmt.toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
                         <div></div>
                         <div></div>
                         <span>TOTAL</span>
