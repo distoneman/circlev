@@ -307,7 +307,7 @@ export default class Search extends Component {
 
         doc.text(this.state.invoice[0].message, 27, 135, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Cuts`, 60, 165)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
