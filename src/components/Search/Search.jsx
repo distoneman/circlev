@@ -255,6 +255,63 @@ export default class Search extends Component {
 
     printCircleVInvoice = async(invoiceID) => {
         console.log('circlev invoice')
+        await this.searchOne(invoiceID)
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [396, 612]  //5.5in by 8.5in paper
+        });
+        console.log(this.state.invoice[0])
+        doc.setFontSize(11);
+        doc.text(this.state.invoice[0].sold_by, 18, 39);
+        doc.text(moment(this.state.invoice[0].invoice_date).format('MM/DD/YYYY'), 112, 39);
+        doc.text(this.state.invoice[0].customer, 15, 45);
+        doc.text(this.state.invoice[0].phone, 15, 55);
+        doc.text(`${this.state.invoice[0].baskets} Basket - Row ${this.state.row}`, 20, 63);
+
+        doc.text(this.state.invoice[0].qty_line1.toString()
+            , 20, 77, { align: 'right' });
+        doc.text(this.state.invoice[0].desc_line1, 27, 77);
+        doc.text(`$${this.state.invoice[0].price_line1}`, 102, 77, { align: 'right' });
+        doc.text(this.state.invoice[0].total_line1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.invoice[0].qty_line2.toString()
+            , 20, 85, { align: 'right' });
+        doc.text(this.state.invoice[0].desc_line2, 27, 85);
+        doc.text(`$${this.state.invoice[0].price_line2}`, 102, 85, { align: 'right' });
+        doc.text(this.state.invoice[0].total_line2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 85, { align: 'right' })
+
+        doc.text('Sub Total', 100, 93, { align: 'right' });
+        doc.text(this.state.invoice[0].sub_total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 93, { align: 'right' })
+
+        doc.text('Tax', 100, 101, { align: 'right' });
+        doc.text(this.state.invoice[0].tax_amt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 101, { align: 'right' })
+
+        doc.text('Total', 100, 109, { align: 'right' });
+        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 109, { align: 'right' });
+
+        if (Number(this.state.invoice[0].amt_paid) !== 0) {
+            doc.text('Pre-Paid', 100, 117, { align: 'right' });
+            doc.text('$' + this.state.invoice[0].amt_paid.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 117, { align: 'right' });
+
+            doc.text('Balance', 100, 125, { align: 'right' });
+            doc.text(this.state.invoice[0].balance.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 125, { align: 'right' });
+        }
+
+        doc.text(this.state.invoice[0].message, 27, 135, { maxWidth: '90' })
+        doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Cuts`, 60, 165)
+        doc.save('invoice.pdf')
+        doc.autoPrint({});
+        var iframe = document.getElementById('output');
+        iframe.src = doc.output('dataurlstring');
+
     }
 
 

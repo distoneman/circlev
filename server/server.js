@@ -40,8 +40,9 @@ app.delete('/sheep/delete/:ID', sheepCtrl.sheepDelete);
 app.put('/sheep/update', sheepCtrl.updateSheep);
 
 // CIRCLEV
-app.post('/circlev/save', circleVCtrl.addCircleV)
-app.delete('/circlev/delete/:ID', circleVCtrl.circleVDelete)
+app.post('/circlev/save', circleVCtrl.addCircleV);
+app.delete('/circlev/delete/:ID', circleVCtrl.circleVDelete);
+app.put(`/circlev/update`, circleVCtrl.updateCircleV)
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);

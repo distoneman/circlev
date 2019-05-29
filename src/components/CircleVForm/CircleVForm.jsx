@@ -14,7 +14,7 @@ export default class CircleVForm extends Component {
             edit: false,
             invoiceID: 0,
             soldBy: 'Circle V Meat',
-            date: new Date(),
+            iDate: new Date(),
             customer: '',
             phone: '',
             cellPhone: false,
@@ -40,9 +40,38 @@ export default class CircleVForm extends Component {
         };
     }
     async componentDidMount() {
-        // let res = await axios.get("/beef/prices");
-        // await this.setState({ beefPrices: res.data[0] });
-        // console.log(this.state.beefPrices);
+        if(this.props.match.params.ID !== undefined) {
+            console.log('edit')
+            this.setState({edit: true});
+            let res = await axios.get(`/search/circleVID/${this.props.match.params.ID}`)
+            console.log(res.data)
+            await this.setState({
+                invoiceID: res.data[0].circlev_id,
+                soldBy: res.data[0].sold_by,
+                iDate: res.data[0].invoice_date,
+                customer: res.data[0].customer,
+                phone: res.data[0].phone,
+                cellPhone: res.data[0].cell_phone,
+                email: res.data[0].email,
+                baskets: res.data[0].baskets,
+                row: res.data[0].row_num,
+                qtyLine1: res.data[0].qty_line1,
+                descLine1: res.data[0].desc_line1,
+                priceLine1: res.data[0].price_line1,
+                totalLine1: res.data[0].total_line1,
+                qtyLine2: res.data[0].qty_line2,
+                descLine2: res.data[0].desc_line2,
+                priceLine2: res.data[0].price_line2,
+                totalLine2: res.data[0].total_line2,
+                subTotal: res.data[0].sub_total,
+                taxAmt: res.data[0].tax_amt,
+                total: res.data[0].total,
+                amtPaid: res.data[0].amt_paid,
+                balance: res.data[0].balance,
+                netWeight: res.data[0].net_weight,
+                message: res.data[0].message
+            })
+        }
     }
 
     save = async () => {
@@ -195,6 +224,47 @@ export default class CircleVForm extends Component {
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
+    }
+
+    update = async () => {
+        await axios.put(`/circlev/update`, {
+            circleVId: this.state.invoiceID,
+            soldBy: this.state.soldBy,
+            iDate: moment(this.state.iDate).format('l'),
+            customer: this.state.customer,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            email: this.state.email,
+            baskets: this.state.baskets,
+            row: this.state.row,
+            qtyLine1: this.state.qtyLine1,
+            descLine1: this.state.descLine1,
+            priceLine1: this.state.priceLine1,
+            totalLine1: this.state.totalLine1,
+            qtyLine2: this.state.qtyLine2,
+            descLine2: this.state.descLine2,
+            priceLine2: this.state.priceLine2,
+            totalLine2: this.state.totalLine2,
+            subTotal: this.state.subTotal,
+            taxAmt: this.state.taxAmt,
+            total: this.state.total,
+            amtPaid: this.state.amtPaid,
+            balance: this.state.balance,
+            netWeight: this.state.netWeight,
+            message: this.state.message
+        })
+        Swal.fire({
+            title: 'Invoice Updated',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Print Invoice'
+        }).then((result) => {
+            if (result.value) {
+                this.printInvoice();
+            }
+            this.resetState()
+        })
     }
 
     render() {
