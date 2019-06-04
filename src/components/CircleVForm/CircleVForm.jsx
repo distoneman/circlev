@@ -158,7 +158,7 @@ export default class CircleVForm extends Component {
         await this.setState({
             [key]: value.target.value
         });
-        // console.log(`${key} is ${this.state[key]}`);
+        console.log(`${key} is ${this.state[key]}`);
         await this.calcTotal();
     }
 

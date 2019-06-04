@@ -229,7 +229,7 @@ export default class InvoiceForm extends Component {
                             value={this.state.descLine3} />
                         <input type="text" className='invoice-price-input'
                             onChange={e => this.handleChange("priceLine3", e)}
-                            value={this.state.priceLine2} />
+                            value={this.state.priceLine3} />
                         <span>{(this.state.qtyLine3 * this.state.priceLine3).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
 
                         <input type="text" className='invoice-price-input'
