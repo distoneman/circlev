@@ -246,12 +246,16 @@ export default class BeefForm extends Component {
 
   async handleChange(key, value) {
     // console.log(`${key} is ${this.state[key]}`);
-
     await this.setState({
       [key]: value.target.value
     });
+    if(key === 'slaughter'){
+      await this.setState({
+        brand: this.state.slaughter
+      })
+    }
     await this.calcTotal();
-    // console.log(`${key} is ${this.state[key]}`);
+    console.log(`${key} is ${this.state[key]}`);
   }
 
   async toggleCell() {
