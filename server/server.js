@@ -47,6 +47,7 @@ app.put(`/circlev/update`, circleVCtrl.updateCircleV);
 
 // INVOICE
 app.post('/invoice/save', invoiceCtrl.addInvoice);
+app.delete('/invoice/delete/:ID', invoiceCtrl.invoiceDelete);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);

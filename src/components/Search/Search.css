@@ -90,7 +90,7 @@
     position: absolute;
     left: 15rem;
     z-index: 1;
-    height: 18rem;
+    /* height: 18rem; */
     width: 40rem;
     border-radius: 10px;
     border: solid 2px #744a29;

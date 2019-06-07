@@ -3,7 +3,6 @@ import routes from './routes';
 import Nav from './components/Nav/Nav';
 
 // import "./App.css";
-import jsPDF from "jspdf";
 
 class App extends Component {
   render() {

@@ -31,5 +31,11 @@ module.exports = {
             totalLine10, subTotal, taxAmt, total
         });
         res.status(200).send(response)
+    },
+    invoiceDelete: async (req, res) => {
+        let ID = req.params.ID;
+        const db = req.app.get('db');
+        let response = await db.invoice.deleteInvoiceInvoice({ ID });
+        res.status(200).send(response)
     }
 }

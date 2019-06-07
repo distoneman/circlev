@@ -133,6 +133,57 @@ export default class InvoiceView extends Component {
                         </div>
                     </div>
                 ) : null}
+                                {this.props.searchType === 'invoice' ? (
+                    <div>
+                        <div className='invoice-view-container'>
+                            <div className='invoice-item invoice-header'>Quantity</div>
+                            <div className='invoice-item invoice-header'>Description</div>
+                            <div className='invoice-item invoice-header'>Price</div>
+                            <div className='invoice-item invoice-header'>Amount</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line1}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line1}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line1}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line1}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line2}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line2}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line2}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line2}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line3}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line3}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line3}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line3}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line4}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line4}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line4}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line4}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line5}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line5}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line5}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line5}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line6}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line6}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line6}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line6}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line7}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line7}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line7}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line7}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line8}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line8}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line8}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line8}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line9}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line9}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line9}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line9}</div>
+                            <div className='invoice-item'>{this.state.invoice.qty_line10}</div>
+                            <div className='invoice-item'>{this.state.invoice.desc_line10}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.price_line10}</div>
+                            <div className='invoice-item invoice-view-right'>${this.state.invoice.total_line10}</div>
+                        </div>
+                    </div>
+                ) : null}
+
             </div>
         )
     }
