@@ -314,6 +314,10 @@ export default class Search extends Component {
 
     }
 
+    printInvoice = async(invoiceID) => {
+        console.log('print invoice')
+    }
+
 
     render() {
         let searchResults = this.state.searchResults.map(invoice => {
@@ -337,6 +341,11 @@ export default class Search extends Component {
                 id = invoice.circlev_id;
                 editURL = `/circlev/${id}`;
                 printInvoice = this.printCircleVInvoice;
+            }
+            if (this.state.searchType === 'invoice') {
+                id = invoice.invoice_id;
+                editURL = `/invoice/${id}`;
+                printInvoice = this.printInvoice;
             }
 
             return (
@@ -371,6 +380,7 @@ export default class Search extends Component {
                             <option value="pork">Pork</option>
                             <option value="sheep">Sheep</option>
                             <option value="circleV">Circle V</option>
+                            <option value="invoice">General Invoice</option>
                         </select>
                         <label className='search-label'>Search Field:</label>
                         <select name="search-field" id="search-field"

@@ -7,6 +7,7 @@ const porkCtrl = require('./porkController');
 const sheepCtrl = require('./sheepController');
 const circleVCtrl = require('./circleVController');
 const searchCtrl = require('./searchController');
+const invoiceCtrl = require('./invoiceController');
 
 const { SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -42,7 +43,10 @@ app.put('/sheep/update', sheepCtrl.updateSheep);
 // CIRCLEV
 app.post('/circlev/save', circleVCtrl.addCircleV);
 app.delete('/circlev/delete/:ID', circleVCtrl.circleVDelete);
-app.put(`/circlev/update`, circleVCtrl.updateCircleV)
+app.put(`/circlev/update`, circleVCtrl.updateCircleV);
+
+// INVOICE
+app.post('/invoice/save', invoiceCtrl.addInvoice);
 
 // SEARCH
 app.get('/search/beefCustomer/:customer', searchCtrl.beefCustomer);

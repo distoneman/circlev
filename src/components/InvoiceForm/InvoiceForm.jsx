@@ -59,30 +59,206 @@ export default class InvoiceForm extends Component {
             subTotal: 0,
             taxAmt: 0,
             taxRate: .03,
-            total: 0,
+            total: 0
         };
     }
     async componentDidMount() {
-        // let res = await axios.get("/beef/prices");
-        // await this.setState({ beefPrices: res.data[0] });
-        // console.log(this.state.beefPrices);
     }
 
     save = async () => {
-        console.log("save");
-        // const res = await axios.post("/beef/save", {
-        //   soldBy: this.state.soldBy,
-        //   date: this.state.date,
-        //   customer: this.state.customer,
-        //   phone: this.state.phone,
-        //   baskets: this.state.baskets,
-        //   row: this.state.row,
-        //   slaughter: this.state.slaughter,
-        //   cutWrap: this.state.cutWrap,
-        //   patties: this.state.patties,
-        //   brand: this.state.brand
-        // });
+        // console.log("save");
+        await axios.post("/invoice/save", {
+            iDate: this.state.iDate,
+            soldBy: this.state.soldBy,
+            customer: this.state.customer,
+            memo: this.state.memo,
+            taxExempt: this.state.taxExempt,
+            taxIdNum: this.state.taxIdNum,
+            poNum: this.state.poNum,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            email: this.state.email,
+            location: this.state.location,
+            qtyLine1: this.state.qtyLine1,
+            descLine1: this.state.descLine1,
+            priceLine1: this.state.priceLine1,
+            totalLine1: this.state.totalLine1,
+            qtyLine2: this.state.qtyLine2,
+            descLine2: this.state.descLine2,
+            priceLine2: this.state.priceLine2,
+            totalLine2: this.state.totalLine2,
+            qtyLine3: this.state.qtyLine3,
+            descLine3: this.state.descLine3,
+            priceLine3: this.state.priceLine3,
+            totalLine3: this.state.totalLine3,
+            qtyLine4: this.state.qtyLine4,
+            descLine4: this.state.descLine4,
+            priceLine4: this.state.priceLine4,
+            totalLine4: this.state.totalLine4,
+            qtyLine5: this.state.qtyLine5,
+            descLine5: this.state.descLine5,
+            priceLine5: this.state.priceLine5,
+            totalLine5: this.state.totalLine5,
+            qtyLine6: this.state.qtyLine6,
+            descLine6: this.state.descLine6,
+            priceLine6: this.state.priceLine6,
+            totalLine6: this.state.totalLine6,
+            qtyLine7: this.state.qtyLine7,
+            descLine7: this.state.descLine7,
+            priceLine7: this.state.priceLine7,
+            totalLine7: this.state.totalLine7,
+            qtyLine8: this.state.qtyLine8,
+            descLine8: this.state.descLine8,
+            priceLine8: this.state.priceLine8,
+            totalLine8: this.state.totalLine8,
+            subTotal: this.state.subTotal,
+            taxAmt: this.state.taxAmt,
+            total: this.state.total
+        });
+        await this.printInvoice();
+        await this.resetState();
     };
+
+    printInvoice = () => {
+        const doc = new jsPDF({
+            orientation: 'p',
+            unit: 'mm',
+            format: [396, 612]  //5.5in by 8.5in paper
+        });
+        doc.setFontSize(11);
+        doc.text(this.state.soldBy, 18, 39);
+        doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
+        doc.text(this.state.customer, 15, 45);
+        doc.text(this.state.phone, 15, 55);
+        doc.text(`${this.state.location}`, 20, 63);
+
+        doc.text(this.state.qtyLine1.toString()
+            , 20, 77, { align: 'right' });
+        doc.text(this.state.descLine1, 27, 77);
+        doc.text(`$${this.state.priceLine1}`, 102, 77, { align: 'right' });
+        doc.text(this.state.totalLine1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 77, { align: 'right' })
+
+        doc.text(this.state.qtyLine2.toString()
+            , 20, 85, { align: 'right' });
+        doc.text(this.state.descLine2, 27, 85);
+        doc.text(`$${this.state.priceLine2}`, 102, 85, { align: 'right' });
+        doc.text(this.state.totalLine2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 85, { align: 'right' })
+
+        doc.text(this.state.qtyLine3.toString()
+            , 20, 93, { align: 'right' });
+        doc.text(this.state.descLine3, 27, 93);
+        doc.text(`$${this.state.priceLine3}`, 102, 93, { align: 'right' });
+        doc.text(this.state.totalLine3.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 93, { align: 'right' })
+
+        doc.text(this.state.qtyLine4.toString()
+            , 20, 101, { align: 'right' });
+        doc.text(this.state.descLine4, 27, 101);
+        doc.text(`$${this.state.priceLine4}`, 102, 101, { align: 'right' });
+        doc.text(this.state.totalLine4.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 101, { align: 'right' })
+
+        doc.text(this.state.qtyLine5.toString()
+            , 20, 108, { align: 'right' });
+        doc.text(this.state.descLine5, 27, 108);
+        doc.text(`$${this.state.priceLine5}`, 102, 108, { align: 'right' });
+        doc.text(this.state.totalLine5.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 108, { align: 'right' })
+
+        doc.text(this.state.qtyLine6.toString()
+            , 20, 116, { align: 'right' });
+        doc.text(this.state.descLine6, 27, 116);
+        doc.text(`$${this.state.priceLine6}`, 102, 116, { align: 'right' });
+        doc.text(this.state.totalLine6.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 116, { align: 'right' })
+
+        doc.text(this.state.qtyLine7.toString()
+            , 20, 124, { align: 'right' });
+        doc.text(this.state.descLine7, 27, 124);
+        doc.text(`$${this.state.priceLine7}`, 102, 124, { align: 'right' });
+        doc.text(this.state.totalLine7.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 124, { align: 'right' })
+
+        doc.text(this.state.qtyLine8.toString()
+            , 20, 132, { align: 'right' });
+        doc.text(this.state.descLine8, 27, 132);
+        doc.text(`$${this.state.priceLine8}`, 102, 132, { align: 'right' });
+        doc.text(this.state.totalLine8.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 132, { align: 'right' })
+
+        doc.text('Sub Total', 100, 140, { align: 'right' });
+        doc.text(this.state.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 140, { align: 'right' })
+
+        doc.text('Tax', 100, 148, { align: 'right' });
+        doc.text(this.state.taxAmt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 148, { align: 'right' })
+
+        doc.text('Total', 100, 156, { align: 'right' });
+        doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 156, { align: 'right' });
+
+        doc.save('invoice.pdf')
+        doc.autoPrint({});
+        var iframe = document.getElementById('output');
+        iframe.src = doc.output('dataurlstring');
+    }
+
+    resetState = async () => {
+        await this.setState({
+            edit: false,
+            invoiceID: 0,
+            soldBy: 'Circle V Meat',
+            iDate: new Date(),
+            customer: '',
+            memo: '',
+            phone: '',
+            cellPhone: false,
+            taxExempt: false,
+            taxIdNum: '',
+            poNum: '',
+            baskets: 0,
+            row: '',
+            qtyLine1: 0,
+            descLine1: '',
+            priceLine1: 0,
+            totalLine1: 0,
+            qtyLine2: 0,
+            descLine2: '',
+            priceLine2: 0,
+            totalLine2: 0,
+            qtyLine3: 0,
+            descLine3: '',
+            priceLine3: 0,
+            totalLine3: 0,
+            qtyLine4: 0,
+            descLine4: '',
+            priceLine4: 0,
+            totalLine4: 0,
+            qtyLine5: 0,
+            descLine5: '',
+            priceLine5: 0,
+            totalLine5: 0,
+            qtyLine6: 0,
+            descLine6: '',
+            priceLine6: 0,
+            totalLine6: 0,
+            qtyLine7: 0,
+            descLine7: '',
+            priceLine7: 0,
+            totalLine7: 0,
+            qtyLine8: 0,
+            descLine8: '',
+            priceLine8: 0,
+            totalLine8: 0,
+            subTotal: 0,
+            taxAmt: 0,
+            taxRate: .03,
+            total: 0
+        })
+    }
 
     calcTotal = async () => {
         let totalLine1 = this.state.qtyLine1 * this.state.priceLine1;
@@ -94,11 +270,15 @@ export default class InvoiceForm extends Component {
         let totalLine7 = this.state.qtyLine7 * this.state.priceLine7;
         let totalLine8 = this.state.qtyLine8 * this.state.priceLine8;
 
-        let subTotal = totalLine1 + totalLine2 + totalLine3 + totalLine4 + 
+        let subTotal = totalLine1 + totalLine2 + totalLine3 + totalLine4 +
             totalLine5 + totalLine6 + totalLine7 + totalLine8;
-        let taxAmt = subTotal * this.state.taxRate;
+        if (this.state.taxExempt === false) {
+            var taxAmt = subTotal * this.state.taxRate;
+        } else {
+            var taxAmt = 0;
+        }
         let total = subTotal + taxAmt;
-        console.log(subTotal)
+        // console.log(subTotal)
         this.setState({
             totalLine1: totalLine1,
             totalLine2: totalLine2,
@@ -114,12 +294,11 @@ export default class InvoiceForm extends Component {
         });
     }
 
-
     async handleChange(key, value) {
         await this.setState({
             [key]: value.target.value
         });
-        console.log(`${key} is ${this.state[key]}`);
+        // console.log(`${key} is ${this.state[key]}`);
         await this.calcTotal();
     }
 
@@ -134,8 +313,8 @@ export default class InvoiceForm extends Component {
         await this.setState({
             taxExempt: !this.state.taxExempt
         })
+        this.calcTotal();
     }
-
 
     render() {
         return (
@@ -188,14 +367,10 @@ export default class InvoiceForm extends Component {
                         <input type="text" className='invoice-text-input invoice-input-short'
                             value={this.state.poNum}
                             onChange={e => this.handleChange('poNum', e)} />
-                        <label className='invoice-label-right'>Baskets:</label>
-                        <input type="text" className='invoice-text-input invoice-input-short'
-                            value={this.state.baskets}
-                            onChange={e => this.handleChange('baskets', e)} />
-                        <label className='invoice-label-right'>Row:</label>
-                        <input type="text" className='invoice-text-input invoice-input-short'
-                            value={this.state.row}
-                            onChange={e => this.handleChange('row', e)} />
+                        <label className='invoice-label-right'>Location:</label>
+                        <input type="text" className='invoice-text-input'
+                            value={this.state.location}
+                            onChange={e => this.handleChange('location', e)} />
                     </div>
                     <hr />
                     <div className='invoice-prices-container'>
