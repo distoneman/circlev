@@ -22,8 +22,7 @@ export default class InvoiceForm extends Component {
             taxExempt: false,
             taxIdNum: '',
             poNum: '',
-            baskets: 0,
-            row: '',
+            location: '',
             qtyLine1: 0,
             descLine1: '',
             priceLine1: 0,
@@ -56,6 +55,14 @@ export default class InvoiceForm extends Component {
             descLine8: '',
             priceLine8: 0,
             totalLine8: 0,
+            qtyLine9: 0,
+            descLine9: '',
+            priceLine9: 0,
+            totalLine9: 0,
+            qtyLine10: 0,
+            descLine10: '',
+            priceLine10: 0,
+            totalLine10: 0,
             subTotal: 0,
             taxAmt: 0,
             taxRate: .03,
@@ -111,6 +118,14 @@ export default class InvoiceForm extends Component {
             descLine8: this.state.descLine8,
             priceLine8: this.state.priceLine8,
             totalLine8: this.state.totalLine8,
+            qtyLine9: this.state.qtyLine9,
+            descLine9: this.state.descLine9,
+            priceLine9: this.state.priceLine9,
+            totalLine9: this.state.totalLine9,
+            qtyLine10: this.state.qtyLine10,
+            descLine10: this.state.descLine10,
+            priceLine10: this.state.priceLine10,
+            totalLine10: this.state.totalLine10,
             subTotal: this.state.subTotal,
             taxAmt: this.state.taxAmt,
             total: this.state.total
@@ -129,8 +144,11 @@ export default class InvoiceForm extends Component {
         doc.text(this.state.soldBy, 18, 39);
         doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.customer, 15, 45);
+        doc.text(this.state.memo, 85, 45)
         doc.text(this.state.phone, 15, 55);
-        doc.text(`${this.state.location}`, 20, 63);
+        doc.text(`Tax ID: ${this.state.taxIdNum}`, 85, 55); // position, row
+        doc.text(this.state.location, 20, 63);
+        doc.text(`PO #: ${this.state.poNum}`, 85, 63);
 
         doc.text(this.state.qtyLine1.toString()
             , 20, 77, { align: 'right' });
@@ -188,17 +206,31 @@ export default class InvoiceForm extends Component {
         doc.text(this.state.totalLine8.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 132, { align: 'right' })
 
-        doc.text('Sub Total', 100, 140, { align: 'right' });
-        doc.text(this.state.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(this.state.qtyLine9.toString()
+            , 20, 140, { align: 'right' });
+        doc.text(this.state.descLine9, 27, 140);
+        doc.text(`$${this.state.priceLine9}`, 102, 140, { align: 'right' });
+        doc.text(this.state.totalLine9.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 140, { align: 'right' })
 
-        doc.text('Tax', 100, 148, { align: 'right' });
-        doc.text(this.state.taxAmt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(this.state.qtyLine10.toString()
+            , 20, 148, { align: 'right' });
+        doc.text(this.state.descLine10, 27, 148);
+        doc.text(`$${this.state.priceLine10}`, 102, 148, { align: 'right' });
+        doc.text(this.state.totalLine10.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 148, { align: 'right' })
 
-        doc.text('Total', 100, 156, { align: 'right' });
+        doc.text('Sub Total', 100, 156, { align: 'right' });
+        doc.text(this.state.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 156, { align: 'right' })
+
+        doc.text('Tax', 100, 164, { align: 'right' });
+        doc.text(this.state.taxAmt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            132, 164, { align: 'right' })
+
+        doc.text('Total', 100, 172, { align: 'right' });
         doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 156, { align: 'right' });
+            132, 172, { align: 'right' });
 
         doc.save('invoice.pdf')
         doc.autoPrint({});
@@ -219,8 +251,7 @@ export default class InvoiceForm extends Component {
             taxExempt: false,
             taxIdNum: '',
             poNum: '',
-            baskets: 0,
-            row: '',
+            location: '',
             qtyLine1: 0,
             descLine1: '',
             priceLine1: 0,
@@ -253,6 +284,14 @@ export default class InvoiceForm extends Component {
             descLine8: '',
             priceLine8: 0,
             totalLine8: 0,
+            qtyLine9: 0,
+            descLine9: '',
+            priceLine9: 0,
+            totalLine9: 0,
+            qtyLine10: 0,
+            descLine10: '',
+            priceLine10: 0,
+            totalLine10: 0,
             subTotal: 0,
             taxAmt: 0,
             taxRate: .03,
@@ -269,9 +308,12 @@ export default class InvoiceForm extends Component {
         let totalLine6 = this.state.qtyLine6 * this.state.priceLine6;
         let totalLine7 = this.state.qtyLine7 * this.state.priceLine7;
         let totalLine8 = this.state.qtyLine8 * this.state.priceLine8;
+        let totalLine9 = this.state.qtyLine9 * this.state.priceLine9;
+        let totalLine10 = this.state.qtyLine10 * this.state.priceLine10;
 
         let subTotal = totalLine1 + totalLine2 + totalLine3 + totalLine4 +
-            totalLine5 + totalLine6 + totalLine7 + totalLine8;
+            totalLine5 + totalLine6 + totalLine7 + totalLine8 +
+            totalLine9 + totalLine10;
         if (this.state.taxExempt === false) {
             var taxAmt = subTotal * this.state.taxRate;
         } else {
@@ -288,6 +330,8 @@ export default class InvoiceForm extends Component {
             totalLine6: totalLine6,
             totalLine7: totalLine7,
             totalLine8: totalLine8,
+            totalLine9: totalLine9,
+            totalLine10: totalLine10,
             subTotal: subTotal,
             taxAmt: taxAmt,
             total: total,
@@ -461,6 +505,28 @@ export default class InvoiceForm extends Component {
                             onChange={e => this.handleChange("priceLine8", e)}
                             value={this.state.priceLine8} />
                         <span>{(this.state.qtyLine8 * this.state.priceLine8).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
+
+                        <input type="text" className='invoice-price-input'
+                            onChange={e => this.handleChange("qtyLine9", e)}
+                            value={this.state.qtyLine9} />
+                        <input type="text" className='invoice-desc-other'
+                            onChange={e => this.handleChange("descLine9", e)}
+                            value={this.state.descLine9} />
+                        <input type="text" className='invoice-price-input'
+                            onChange={e => this.handleChange("priceLine9", e)}
+                            value={this.state.priceLine9} />
+                        <span>{(this.state.qtyLine9 * this.state.priceLine9).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
+
+                        <input type="text" className='invoice-price-input'
+                            onChange={e => this.handleChange("qtyLine10", e)}
+                            value={this.state.qtyLine10} />
+                        <input type="text" className='invoice-desc-other'
+                            onChange={e => this.handleChange("descLine10", e)}
+                            value={this.state.descLine10} />
+                        <input type="text" className='invoice-price-input'
+                            onChange={e => this.handleChange("priceLine10", e)}
+                            value={this.state.priceLine10} />
+                        <span>{(this.state.qtyLine10 * this.state.priceLine10).toLocaleString('us-US', { style: 'currency', currency: 'USD' })}</span>
 
                         <div></div>
                         <div></div>

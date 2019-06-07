@@ -10,7 +10,9 @@ module.exports = {
             totalLine5, qtyLine6, descLine6, priceLine6,
             totalLine6, qtyLine7, descLine7, priceLine7,
             totalLine7, qtyLine8, descLine8, priceLine8,
-            totalLine8, subTotal, taxAmt, total
+            totalLine8, qtyLine9, descLine9, priceLine9,
+            totalLine9, qtyLine10, descLine10, priceLine10,
+            totalLine10, subTotal, taxAmt, total
         } = req.body
         const db = req.app.get('db');
         let response = await db.invoice.saveInvoice({
@@ -24,7 +26,9 @@ module.exports = {
             totalLine5, qtyLine6, descLine6, priceLine6,
             totalLine6, qtyLine7, descLine7, priceLine7,
             totalLine7, qtyLine8, descLine8, priceLine8,
-            totalLine8, subTotal, taxAmt, total
+            totalLine8, qtyLine9, descLine9, priceLine9,
+            totalLine9, qtyLine10, descLine10, priceLine10,
+            totalLine10, subTotal, taxAmt, total
         });
         res.status(200).send(response)
     }

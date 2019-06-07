@@ -110,5 +110,33 @@ module.exports = {
         const db = req.app.get('db');
         let response = await db.circleV.searchCircleVDate({invoiceDate});
         res.status(200).send(response);
+    },
+    invoiceCustomer: async (req, res) => {
+        let customer = `%${req.params.customer}%`;
+        const db = req.app.get('db');
+        let response = await db.invoice.searchInvoiceCust({
+            customer
+        });
+        res.status(200).send(response)
+    },
+    invoiceSoldBy: async (req, res) => {
+        const soldBy = `%${req.params.soldBy}%`;
+        const db = req.app.get('db');
+        let response = await db.invoice.searchInvoiceSoldBy({
+            soldBy
+        });
+        res.status(200).send(response)
+    },
+    invoiceInvoiceDate: async (req, res) => {
+        let invoiceDate = req.query.invoiceDate;
+        const db = req.app.get('db');
+        let response = await db.invoice.searchInvoiceDate({invoiceDate});
+        res.status(200).send(response);
+    },
+    invoiceID: async (req, res) => {
+        let ID = req.params.ID
+        const db = req.app.get('db');
+        let response = await db.invoice.searchInvoiceID({ID});
+        res.status(200).send(response);
     }
 }

@@ -1,3 +1,5 @@
+DROP TABLE invoice;
+
 CREATE TABLE invoice(
     invoice_id serial PRIMARY KEY,
     invoice_date DATE,
@@ -43,6 +45,14 @@ CREATE TABLE invoice(
     desc_line8 VARCHAR(150),
     price_line8 NUMERIC(10,2),
     total_line8 NUMERIC(10,2),
+    qty_line9 NUMERIC(10,2),
+    desc_line9 VARCHAR(150),
+    price_line9 NUMERIC(10,2),
+    total_line9 NUMERIC(10,2),
+    qty_line10 NUMERIC(10,2),
+    desc_line10 VARCHAR(150),
+    price_line10 NUMERIC(10,2),
+    total_line10 NUMERIC(10,2),
     sub_total NUMERIC(10,2),
     tax_amt NUMERIC(10,2),
     total NUMERIC(12,2)

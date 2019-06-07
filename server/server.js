@@ -65,3 +65,7 @@ app.get('/search/circlevCustomer/:customer', searchCtrl.circleVCustomer)
 app.get('/search/circlevSoldBy/:soldBy', searchCtrl.circleVSoldBy);
 app.get('/search/circlevID/:ID', searchCtrl.circleVID);
 app.get('/search/circleVInvoiceDate/', searchCtrl.circleVInvoiceDate);
+app.get('/search/invoiceCustomer/:customer', searchCtrl.invoiceCustomer)
+app.get('/search/invoiceSoldBy/:soldBy', searchCtrl.invoiceSoldBy);
+app.get('/search/invoiceInvoiceDate/', searchCtrl.invoiceInvoiceDate);
+app.get('/search/invoiceID/:ID', searchCtrl.invoiceID);
