@@ -39,12 +39,13 @@ export default class CircleVForm extends Component {
             message: ''
         };
     }
+    
     async componentDidMount() {
         if(this.props.match.params.ID !== undefined) {
-            console.log('edit')
+            // console.log('edit')
             this.setState({edit: true});
             let res = await axios.get(`/search/circleVID/${this.props.match.params.ID}`)
-            console.log(res.data)
+            // console.log(res.data)
             await this.setState({
                 invoiceID: res.data[0].circlev_id,
                 soldBy: res.data[0].sold_by,
@@ -75,7 +76,7 @@ export default class CircleVForm extends Component {
     }
 
     save = async () => {
-        console.log("save");
+        // console.log("save");
         await axios.post("/circlev/save", {
             soldBy: this.state.soldBy,
             iDate: moment(this.state.iDate).format('l'),
@@ -158,7 +159,7 @@ export default class CircleVForm extends Component {
         await this.setState({
             [key]: value.target.value
         });
-        console.log(`${key} is ${this.state[key]}`);
+        // console.log(`${key} is ${this.state[key]}`);
         await this.calcTotal();
     }
 

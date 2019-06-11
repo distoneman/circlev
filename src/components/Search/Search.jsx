@@ -32,7 +32,7 @@ export default class Search extends Component {
         // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -340,7 +340,7 @@ export default class Search extends Component {
         doc.text(this.state.invoice[0].total_line1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
-        if (this.state.invoice[0].qty_line2 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line2) !== 0) {
             doc.text(this.state.invoice[0].qty_line2.toString()
                 , 20, 85, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line2, 27, 85);
@@ -349,7 +349,7 @@ export default class Search extends Component {
                 132, 85, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line3 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line3) !== 0) {
             doc.text(this.state.invoice[0].qty_line3.toString()
                 , 20, 93, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line3, 27, 93);
@@ -358,7 +358,7 @@ export default class Search extends Component {
                 132, 93, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line4 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line4) !== 0) {
             doc.text(this.state.invoice[0].qty_line4.toString()
                 , 20, 101, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line4, 27, 101);
@@ -367,7 +367,7 @@ export default class Search extends Component {
                 132, 101, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line5 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line5) !== 0) {
             doc.text(this.state.invoice[0].qty_line5.toString()
                 , 20, 108, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line5, 27, 108);
@@ -376,7 +376,7 @@ export default class Search extends Component {
                 132, 108, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line6 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line6) !== 0) {
             doc.text(this.state.invoice[0].qty_line6.toString()
                 , 20, 116, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line6, 27, 116);
@@ -385,7 +385,7 @@ export default class Search extends Component {
                 132, 116, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line7 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line7) !== 0) {
             doc.text(this.state.invoice[0].qty_line7.toString()
                 , 20, 124, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line7, 27, 124);
@@ -394,7 +394,7 @@ export default class Search extends Component {
                 132, 124, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line8 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line8) !== 0) {
             doc.text(this.state.invoice[0].qty_line8.toString()
                 , 20, 132, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line8, 27, 132);
@@ -403,7 +403,7 @@ export default class Search extends Component {
                 132, 132, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line9 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line9) !== 0) {
             doc.text(this.state.invoice[0].qty_line9.toString()
                 , 20, 140, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line9, 27, 140);
@@ -412,7 +412,7 @@ export default class Search extends Component {
                 132, 140, { align: 'right' })
         }
 
-        if (this.state.invoice[0].qty_line10 !== '0.00') {
+        if (Number(this.state.invoice[0].qty_line10) !== 0) {
             doc.text(this.state.invoice[0].qty_line10.toString()
                 , 20, 148, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line10, 27, 148);
@@ -448,14 +448,14 @@ export default class Search extends Component {
                 var printInvoice = this.printBeefInvoice
             }
             if (this.state.searchType === 'pork') {
-                var id = invoice.pork_id;
-                var editURL = `/pork/${id}`;
-                var printInvoice = this.printPorkInvoice;
+                id = invoice.pork_id;
+                editURL = `/pork/${id}`;
+                printInvoice = this.printPorkInvoice;
             }
             if (this.state.searchType === 'sheep') {
-                var id = invoice.sheep_id;
-                var editURL = `/sheep/${id}`;
-                var printInvoice = this.printSheepInvoice;
+                id = invoice.sheep_id;
+                editURL = `/sheep/${id}`;
+                printInvoice = this.printSheepInvoice;
             }
             if (this.state.searchType === 'circleV') {
                 id = invoice.circlev_id;

@@ -133,7 +133,7 @@ export default class InvoiceView extends Component {
                         </div>
                     </div>
                 ) : null}
-                                {this.props.searchType === 'invoice' ? (
+                {this.props.searchType === 'invoice' ? (
                     <div>
                         <div className='invoice-view-container'>
                             <div className='invoice-item invoice-header'>Quantity</div>

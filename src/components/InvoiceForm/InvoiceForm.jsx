@@ -17,6 +17,7 @@ export default class InvoiceForm extends Component {
             iDate: new Date(),
             customer: '',
             memo: '',
+            email: '',
             phone: '',
             cellPhone: false,
             taxExempt: false,
@@ -70,12 +71,76 @@ export default class InvoiceForm extends Component {
         };
     }
     async componentDidMount() {
+        if (this.props.match.params.ID !== undefined) {
+            console.log('edit');
+            this.setState({ edit: true });
+            let res = await axios.get(`/search/invoiceID/${this.props.match.params.ID}`);
+            console.log(res.data)
+            await this.setState({
+                invoiceID: res.data[0].invoice_id,
+                soldBy: res.data[0].sold_by,
+                iDate: res.data[0].invoice_date,
+                customer: res.data[0].customer,
+                memo: res.data[0].memo,
+                email: res.data[0].email,
+                phone: res.data[0].phone,
+                cellPhone: res.data[0].cell_phone,
+                taxExempt: res.data[0].tax_exempt,
+                taxIdNum: res.data[0].tax_id_num,
+                poNum: res.data[0].po_num,
+                location: res.data[0].location,
+                qtyLine1: res.data[0].qty_line1,
+                descLine1: res.data[0].desc_line1,
+                priceLine1: res.data[0].price_line1,
+                totalLine1: res.data[0].total_line1,
+                qtyLine2: res.data[0].qty_line2,
+                descLine2: res.data[0].desc_line2,
+                priceLine2: res.data[0].price_line2,
+                totalLine2: res.data[0].total_line2,
+                qtyLine3: res.data[0].qty_line3,
+                descLine3: res.data[0].desc_line3,
+                priceLine3: res.data[0].price_line3,
+                totalLine3: res.data[0].total_line3,
+                qtyLine4: res.data[0].qty_line4,
+                descLine4: res.data[0].desc_line4,
+                priceLine4: res.data[0].price_line4,
+                totalLine4: res.data[0].total_line4,
+                qtyLine5: res.data[0].qty_line5,
+                descLine5: res.data[0].desc_line5,
+                priceLine5: res.data[0].price_line5,
+                totalLine5: res.data[0].total_line5,
+                qtyLine6: res.data[0].qty_line6,
+                descLine6: res.data[0].desc_line6,
+                priceLine6: res.data[0].price_line6,
+                totalLine6: res.data[0].total_line6,
+                qtyLine7: res.data[0].qty_line7,
+                descLine7: res.data[0].desc_line7,
+                priceLine7: res.data[0].price_line7,
+                totalLine7: res.data[0].total_line7,
+                qtyLine8: res.data[0].qty_line8,
+                descLine8: res.data[0].desc_line8,
+                priceLine8: res.data[0].price_line8,
+                totalLine8: res.data[0].total_line8,
+                qtyLine9: res.data[0].qty_line9,
+                descLine9: res.data[0].desc_line9,
+                priceLine9: res.data[0].price_line9,
+                totalLine9: res.data[0].total_line9,
+                qtyLine10: res.data[0].qty_line10,
+                descLine10: res.data[0].desc_line10,
+                priceLine10: res.data[0].price_line10,
+                totalLine10: res.data[0].total_line10,
+                subTotal: res.data[0].sub_total,
+                taxAmt: res.data[0].tax_amt,
+                taxRate: .03,
+                total: res.data[0].total
+            })
+        }
     }
 
     save = async () => {
         // console.log("save");
         await axios.post("/invoice/save", {
-            iDate: this.state.iDate,
+            iDate: moment(this.state.iDate).format('l'),
             soldBy: this.state.soldBy,
             customer: this.state.customer,
             memo: this.state.memo,
@@ -256,6 +321,79 @@ export default class InvoiceForm extends Component {
         iframe.src = doc.output('dataurlstring');
     }
 
+    update = async () => {
+        await axios.put(`/invoice/update`, {
+            invoiceId: this.state.invoiceID,
+            iDate: moment(this.state.iDate).format('l'),
+            soldBy: this.state.soldBy,
+            customer: this.state.customer,
+            memo: this.state.memo,
+            taxExempt: this.state.taxExempt,
+            taxIdNum: this.state.taxIdNum,
+            poNum: this.state.poNum,
+            phone: this.state.phone,
+            cellPhone: this.state.cellPhone,
+            email: this.state.email,
+            location: this.state.location,
+            qtyLine1: this.state.qtyLine1,
+            descLine1: this.state.descLine1,
+            priceLine1: this.state.priceLine1,
+            totalLine1: this.state.totalLine1,
+            qtyLine2: this.state.qtyLine2,
+            descLine2: this.state.descLine2,
+            priceLine2: this.state.priceLine2,
+            totalLine2: this.state.totalLine2,
+            qtyLine3: this.state.qtyLine3,
+            descLine3: this.state.descLine3,
+            priceLine3: this.state.priceLine3,
+            totalLine3: this.state.totalLine3,
+            qtyLine4: this.state.qtyLine4,
+            descLine4: this.state.descLine4,
+            priceLine4: this.state.priceLine4,
+            totalLine4: this.state.totalLine4,
+            qtyLine5: this.state.qtyLine5,
+            descLine5: this.state.descLine5,
+            priceLine5: this.state.priceLine5,
+            totalLine5: this.state.totalLine5,
+            qtyLine6: this.state.qtyLine6,
+            descLine6: this.state.descLine6,
+            priceLine6: this.state.priceLine6,
+            totalLine6: this.state.totalLine6,
+            qtyLine7: this.state.qtyLine7,
+            descLine7: this.state.descLine7,
+            priceLine7: this.state.priceLine7,
+            totalLine7: this.state.totalLine7,
+            qtyLine8: this.state.qtyLine8,
+            descLine8: this.state.descLine8,
+            priceLine8: this.state.priceLine8,
+            totalLine8: this.state.totalLine8,
+            qtyLine9: this.state.qtyLine9,
+            descLine9: this.state.descLine9,
+            priceLine9: this.state.priceLine9,
+            totalLine9: this.state.totalLine9,
+            qtyLine10: this.state.qtyLine10,
+            descLine10: this.state.descLine10,
+            priceLine10: this.state.priceLine10,
+            totalLine10: this.state.totalLine10,
+            subTotal: this.state.subTotal,
+            taxAmt: this.state.taxAmt,
+            total: this.state.total
+        })
+        Swal.fire({
+            title: 'Invoice Updated',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Print Invoice'
+        }).then((result) => {
+            if (result.value) {
+                this.printInvoice();
+            }
+            this.resetState()
+        })
+
+    }
+
     resetState = async () => {
         await this.setState({
             edit: false,
@@ -335,7 +473,7 @@ export default class InvoiceForm extends Component {
         if (this.state.taxExempt === false) {
             var taxAmt = subTotal * this.state.taxRate;
         } else {
-            var taxAmt = 0;
+            taxAmt = 0;
         }
         let total = subTotal + taxAmt;
         // console.log(subTotal)
