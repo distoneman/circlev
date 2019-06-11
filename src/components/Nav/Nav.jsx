@@ -10,6 +10,7 @@ import imgCircleV from './../../images/iconCircleV.png';
 // import imgV from './../../images/v.png';
 import imgGenInvoice from './../../images/iconBacon.png';
 import imgSearch from './../../images/iconSearch.png';
+import imgReports from './../../images/iconReports.png';
 import imgSettings from './../../images/iconSettings.png';
 
 export default class Nav extends Component {
@@ -48,9 +49,15 @@ export default class Nav extends Component {
                         <img src={imgSearch} alt="Search Icon" className="search-icon" />
                     </Link>
                 </div>
+                <div className="search-icon-container">
+                    <Link to="/reports">
+                        <img src={imgReports} alt="Reports Icon" className="search-icon" />
+                    </Link>
+                </div>
+
                 <div className="settings-icon-container">
-                    <Link to="/other">
-                        <img src={imgSettings} alt="" className="search-icon" />
+                    <Link to="/settings">
+                        <img src={imgSettings} alt="Settings Icon" className="search-icon" />
                     </Link>
                 </div>
             </div>
