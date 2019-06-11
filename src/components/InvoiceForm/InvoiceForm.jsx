@@ -157,68 +157,86 @@ export default class InvoiceForm extends Component {
         doc.text(this.state.totalLine1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
-        doc.text(this.state.qtyLine2.toString()
-            , 20, 85, { align: 'right' });
-        doc.text(this.state.descLine2, 27, 85);
-        doc.text(`$${this.state.priceLine2}`, 102, 85, { align: 'right' });
-        doc.text(this.state.totalLine2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 85, { align: 'right' })
+        if (this.state.qtyLine2 !== 0) {
+            doc.text(this.state.qtyLine2.toString()
+                , 20, 85, { align: 'right' });
+            doc.text(this.state.descLine2, 27, 85);
+            doc.text(`$${this.state.priceLine2}`, 102, 85, { align: 'right' });
+            doc.text(this.state.totalLine2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 85, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine3.toString()
-            , 20, 93, { align: 'right' });
-        doc.text(this.state.descLine3, 27, 93);
-        doc.text(`$${this.state.priceLine3}`, 102, 93, { align: 'right' });
-        doc.text(this.state.totalLine3.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 93, { align: 'right' })
+        if (this.state.qtyLine3 !== 0) {
+            doc.text(this.state.qtyLine3.toString()
+                , 20, 93, { align: 'right' });
+            doc.text(this.state.descLine3, 27, 93);
+            doc.text(`$${this.state.priceLine3}`, 102, 93, { align: 'right' });
+            doc.text(this.state.totalLine3.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 93, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine4.toString()
-            , 20, 101, { align: 'right' });
-        doc.text(this.state.descLine4, 27, 101);
-        doc.text(`$${this.state.priceLine4}`, 102, 101, { align: 'right' });
-        doc.text(this.state.totalLine4.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 101, { align: 'right' })
+        if (this.state.qtyLine4 !== 0) {
+            doc.text(this.state.qtyLine4.toString()
+                , 20, 101, { align: 'right' });
+            doc.text(this.state.descLine4, 27, 101);
+            doc.text(`$${this.state.priceLine4}`, 102, 101, { align: 'right' });
+            doc.text(this.state.totalLine4.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 101, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine5.toString()
-            , 20, 108, { align: 'right' });
-        doc.text(this.state.descLine5, 27, 108);
-        doc.text(`$${this.state.priceLine5}`, 102, 108, { align: 'right' });
-        doc.text(this.state.totalLine5.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 108, { align: 'right' })
+        if (this.state.qtyLine5 !== 0) {
+            doc.text(this.state.qtyLine5.toString()
+                , 20, 108, { align: 'right' });
+            doc.text(this.state.descLine5, 27, 108);
+            doc.text(`$${this.state.priceLine5}`, 102, 108, { align: 'right' });
+            doc.text(this.state.totalLine5.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 108, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine6.toString()
-            , 20, 116, { align: 'right' });
-        doc.text(this.state.descLine6, 27, 116);
-        doc.text(`$${this.state.priceLine6}`, 102, 116, { align: 'right' });
-        doc.text(this.state.totalLine6.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 116, { align: 'right' })
+        if (this.state.qtyLine6 !== 0) {
+            doc.text(this.state.qtyLine6.toString()
+                , 20, 116, { align: 'right' });
+            doc.text(this.state.descLine6, 27, 116);
+            doc.text(`$${this.state.priceLine6}`, 102, 116, { align: 'right' });
+            doc.text(this.state.totalLine6.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 116, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine7.toString()
-            , 20, 124, { align: 'right' });
-        doc.text(this.state.descLine7, 27, 124);
-        doc.text(`$${this.state.priceLine7}`, 102, 124, { align: 'right' });
-        doc.text(this.state.totalLine7.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 124, { align: 'right' })
+        if (this.state.qtyLine7 !== 0) {
+            doc.text(this.state.qtyLine7.toString()
+                , 20, 124, { align: 'right' });
+            doc.text(this.state.descLine7, 27, 124);
+            doc.text(`$${this.state.priceLine7}`, 102, 124, { align: 'right' });
+            doc.text(this.state.totalLine7.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 124, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine8.toString()
-            , 20, 132, { align: 'right' });
-        doc.text(this.state.descLine8, 27, 132);
-        doc.text(`$${this.state.priceLine8}`, 102, 132, { align: 'right' });
-        doc.text(this.state.totalLine8.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 132, { align: 'right' })
+        if (this.state.qtyLine8 !== 0) {
+            doc.text(this.state.qtyLine8.toString()
+                , 20, 132, { align: 'right' });
+            doc.text(this.state.descLine8, 27, 132);
+            doc.text(`$${this.state.priceLine8}`, 102, 132, { align: 'right' });
+            doc.text(this.state.totalLine8.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 132, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine9.toString()
-            , 20, 140, { align: 'right' });
-        doc.text(this.state.descLine9, 27, 140);
-        doc.text(`$${this.state.priceLine9}`, 102, 140, { align: 'right' });
-        doc.text(this.state.totalLine9.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 140, { align: 'right' })
+        if (this.state.qtyLine9 !== 0) {
+            doc.text(this.state.qtyLine9.toString()
+                , 20, 140, { align: 'right' });
+            doc.text(this.state.descLine9, 27, 140);
+            doc.text(`$${this.state.priceLine9}`, 102, 140, { align: 'right' });
+            doc.text(this.state.totalLine9.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 140, { align: 'right' })
+        }
 
-        doc.text(this.state.qtyLine10.toString()
-            , 20, 148, { align: 'right' });
-        doc.text(this.state.descLine10, 27, 148);
-        doc.text(`$${this.state.priceLine10}`, 102, 148, { align: 'right' });
-        doc.text(this.state.totalLine10.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
-            132, 148, { align: 'right' })
+        if (this.state.qtyLine10 !== 0) {
+            doc.text(this.state.qtyLine10.toString()
+                , 20, 148, { align: 'right' });
+            doc.text(this.state.descLine10, 27, 148);
+            doc.text(`$${this.state.priceLine10}`, 102, 148, { align: 'right' });
+            doc.text(this.state.totalLine10.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+                132, 148, { align: 'right' })
+        }
 
         doc.text('Sub Total', 100, 156, { align: 'right' });
         doc.text(this.state.subTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
