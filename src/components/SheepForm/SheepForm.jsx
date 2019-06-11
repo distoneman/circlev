@@ -42,11 +42,11 @@ export default class SheepForm extends Component {
         if (this.props.match.params.ID === undefined) {
             let res = await axios.get("/sheep/prices");
             await this.setState({ sheepPrices: res.data[0] });
-            console.log(this.state.sheepPrices);
+            // console.log(this.state.sheepPrices);
         } else {
             this.setState({ edit: true });
             let res = await axios.get(`/search/sheepID/${this.props.match.params.ID}`);
-            console.log(res.data)
+            // console.log(res.data)
             let invoicePrices = {
                 slaughter: res.data[0].price_slaughter,
                 cut_wrap: res.data[0].price_cut,
@@ -80,7 +80,7 @@ export default class SheepForm extends Component {
     }
 
     save = async () => {
-        console.log("save");
+        // console.log("save");
         await axios.post("/sheep/save", {
             soldBy: this.state.soldBy,
             iDate: moment(this.state.iDate).format('l'),
@@ -223,7 +223,7 @@ export default class SheepForm extends Component {
     }
 
     update = async () => {
-        console.log('update')
+        // console.log('update')
         this.calcTotal();
         await axios.put(`/sheep/update`, {
             sheep_id: this.state.invoiceID,

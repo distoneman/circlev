@@ -45,15 +45,15 @@ export default class PorkForm extends Component {
     }
     async componentDidMount() {
         if (this.props.match.params.ID === undefined) {
-            console.log("no edit")
+            // console.log("no edit")
             let res = await axios.get("/pork/prices");
             await this.setState({ porkPrices: res.data[0] });
-            console.log(this.state.porkPrices);
+            // console.log(this.state.porkPrices);
         } else {
             this.setState({ edit: true });
-            console.log("edit")
+            // console.log("edit")
             let res = await axios.get(`/search/porkID/${this.props.match.params.ID}`);
-            console.log(res.data)
+            // console.log(res.data)
             let invoicePrices = {
                 slaughter: res.data[0].price_slaughter,
                 cut_wrap: res.data[0].price_cut,
@@ -96,7 +96,7 @@ export default class PorkForm extends Component {
     }
 
     save = async () => {
-        console.log("save");
+        // console.log("save");
         this.calcTotal()
         await axios.post("/pork/save", {
             soldBy: this.state.soldBy,
@@ -127,7 +127,7 @@ export default class PorkForm extends Component {
 
     update = async () => {
         this.calcTotal();
-        console.log(this.state.total)
+        // console.log(this.state.total)
         // let total_slaughter = this.state.slaughter * this.state.porkPrices.slaughter;
         // let total_cut = this.state.cut * this.state.porkPrices.cut
         await axios.put(`/pork/update`, {
@@ -242,7 +242,7 @@ export default class PorkForm extends Component {
         let otherTotal = this.state.qtyOther * this.state.priceOther;
         let total = slaughterTotal + cutWrapTotal + cureTotal + linkTotal + fatTotal + otherTotal;
         let lard =  2 * Math.round((Number(this.state.fat) * .66) / 2)
-        console.log(lard)
+        // console.log(lard)
         this.setState({
             total: total,
             slaughterTotal: slaughterTotal,

@@ -37,15 +37,15 @@ export default class BeefForm extends Component {
 
   async componentDidMount() {
     if(this.props.match.params.ID === undefined){
-      console.log("null")
+      // console.log("null")
       let res = await axios.get("/beef/prices");
       await this.setState({ beefPrices: res.data[0] });
-      console.log(this.state.beefPrices)
+      // console.log(this.state.beefPrices)
     } else {
       this.setState({edit: true})
-      console.log('parameter')
+      // console.log('parameter')
       let res = await axios.get(`/search/beefID/${this.props.match.params.ID}`);
-      console.log(res.data)
+      // console.log(res.data)
       let invoicePrices = {
         slaughter: res.data[0].price_slaughter,
         cut_wrap: res.data[0].price_cut,
@@ -79,7 +79,7 @@ export default class BeefForm extends Component {
   }
 
   save = async () => {
-    console.log("save")
+    // console.log("save")
     await axios.post("/beef/save", {
       soldBy: this.state.soldBy,
       iDate: moment(this.state.iDate).format('l'),
@@ -158,7 +158,7 @@ export default class BeefForm extends Component {
   }
 
   resetState = async () => {
-    console.log('reset state')
+    // console.log('reset state')
     let res = await axios.get("/beef/prices");
     await this.setState({
       beefPrices: res.data[0],
@@ -255,7 +255,7 @@ export default class BeefForm extends Component {
       })
     }
     await this.calcTotal();
-    console.log(`${key} is ${this.state[key]}`);
+    // console.log(`${key} is ${this.state[key]}`);
   }
 
   async toggleCell() {
