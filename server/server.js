@@ -8,6 +8,7 @@ const sheepCtrl = require('./sheepController');
 const circleVCtrl = require('./circleVController');
 const searchCtrl = require('./searchController');
 const invoiceCtrl = require('./invoiceController');
+const reportsCtrl = require('./reportsController');
 
 const { SERVER_PORT, CONNECTION_STRING} = process.env;
 
@@ -71,3 +72,6 @@ app.get('/search/invoiceCustomer/:customer', searchCtrl.invoiceCustomer)
 app.get('/search/invoiceSoldBy/:soldBy', searchCtrl.invoiceSoldBy);
 app.get('/search/invoiceInvoiceDate/', searchCtrl.invoiceInvoiceDate);
 app.get('/search/invoiceID/:ID', searchCtrl.invoiceID);
+
+// Reports
+app.get('/reports/grinding/', reportsCtrl.getGrindingData);

@@ -9,6 +9,7 @@ import Search from './components/Search/Search';
 import CircleVForm from './components/CircleVForm/CircleVForm';
 import Reports from './components/Reports/Reports';
 import Settings from './components/Settings/Setting';
+import GrindingLog from './components/Reports/GrindingLog';
 
 export default (
     <Switch>
@@ -19,7 +20,8 @@ export default (
         <Route path='/circlev/:ID?' component={CircleVForm} />
         <Route path='/invoice/:ID?' component={InvoiceForm} />
         <Route path='/search' component={Search} />
-        <Route path='/reports' component={Reports} />
+        <Route exact path='/reports' component={Reports} />
+        <Route path='/reports/grinding_log' component={GrindingLog} />
         <Route path='/settings' component={Settings} />
         {/* <Route path='/beef-invoice/:beef-id' component={BeefInvoice}/> */}
     </Switch>
