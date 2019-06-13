@@ -22,13 +22,7 @@ export default class Reports extends Component {
 
     }
 
-    async getGrindingData() {
-        console.log(this.state.startDate)
-        const res = await axios.get(`/search/grinding/?startDate=${this.state.startDate}&endDate=${this.state.endDate}`)
-        console.log(res.data)
-    }
-
-    testTable = async () => {
+    grindingReport = async () => {
         // this.getGrindingData();
         const res = await axios.get(`/reports/grinding/?startDate=${this.state.startDate}&endDate=${this.state.endDate}`)
         var rows = [];
@@ -54,7 +48,6 @@ export default class Reports extends Component {
         // doc.output('dataurlnewwindow');
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
-
     }
 
     async handleChange(key, value) {
@@ -63,7 +56,6 @@ export default class Reports extends Component {
         });
         // console.log(`${key} is ${this.state[key]}`);
     }
-
 
     render() {
         return (
@@ -116,7 +108,7 @@ export default class Reports extends Component {
                         <InputMask mask="99/99/9999" maskChar={null}
                             className='reports-text-input'
                             onChange={(e) => this.handleChange("endDate", e)} />
-                        <button onClick={this.testTable} className='run-button'>Run</button>
+                        <button onClick={this.grindingReport} className='run-button'>Run</button>
                     </div>
                 ) : (null)}
                 <iframe title="pdf" id="output" className='circleV-pdf-iframe'

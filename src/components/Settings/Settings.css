@@ -3,5 +3,45 @@
     font-size: 14pt;
     justify-content: center;
     margin-left: 8em;
+    padding: 1em;
+    padding-top: 2em;
   }
-  
+
+.settings-title {
+   font-size: 24pt;
+}
+
+.settings-label-right {
+    padding: 4px 7px;
+    margin: 4px 4px;
+    text-align: right;
+}
+
+.settings-select {
+    padding: 4px 7px;
+    margin: 18px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 20em;
+    align-content: baseline;
+    font-size: 12pt;
+}
+
+.settings-select-short {
+    padding: 4px 7px;
+    margin: 18px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 10em;
+    align-content: baseline;
+    font-size: 12pt;
+}
+
+.settings-text-input {
+    font-size: 12pt;
+    padding: 4px 7px;
+    margin: 4px 4px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    width: 9em;
+}

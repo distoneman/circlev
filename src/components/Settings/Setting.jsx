@@ -16,7 +16,24 @@ export default class Settings extends Component {
 
     render() {
         return (
-            <div className='settings-container'>Settings</div>
+            <div className='settings-container'>
+                <div className='settings-title'>
+                    Settings
+                </div>
+                <hr/>
+                <div className='settings-selection'>
+                    <label className='settings-label-right'>Select Setting:</label>
+                    <select name="settings-select" id="settings-select"
+                        className='settings-select'
+                        onChange={(e) => this.handleChange("settings", e)} >
+                        <option value=""></option>
+                        <option value="beefPrices">Beef Prices</option>
+                        <option value="porkPrices">Pork Prices</option>
+                        <option value="sheepPrices">Sheep Prices</option>
+                    </select>
+                </div>
+                <hr/>
+            </div>
         )
     }
 }
