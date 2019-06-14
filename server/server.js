@@ -75,3 +75,4 @@ app.get('/search/invoiceID/:ID', searchCtrl.invoiceID);
 
 // Reports
 app.get('/reports/grinding/', reportsCtrl.getGrindingData);
+

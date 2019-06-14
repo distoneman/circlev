@@ -26,11 +26,11 @@ export default class Reports extends Component {
         // this.getGrindingData();
         const res = await axios.get(`/reports/grinding/?startDate=${this.state.startDate}&endDate=${this.state.endDate}`)
         var rows = [];
-        res.data.forEach(e => {      
+        res.data.forEach(e => {
             var temp = [e.date_fmt, e.customer, e.qty_patties,
-                e.net_weight, Number(e.gr_beef).toFixed(2)];
+            e.net_weight, Number(e.gr_beef).toFixed(2)];
             rows.push(temp);
-        });  
+        });
 
         const doc = new jsPDF({
             orientation: 'p',
@@ -50,7 +50,7 @@ export default class Reports extends Component {
         iframe.src = doc.output('dataurlstring');
     }
 
-    async handleChange(key, value) {
+    handleChange = async (key, value) => {
         await this.setState({
             [key]: value.target.value
         });
@@ -100,14 +100,16 @@ export default class Reports extends Component {
                 ) : (null)}
                 {this.state.report === 'grinding' ? (
                     <div>
-                        <label className='reports-label-right'>Start Date:</label>
-                        <InputMask mask="99/99/9999" maskChar={null}
-                            className='reports-text-input'
-                            onChange={(e) => this.handleChange("startDate", e)} />
-                        <label className='reports-label-right'>End Date:</label>
-                        <InputMask mask="99/99/9999" maskChar={null}
-                            className='reports-text-input'
-                            onChange={(e) => this.handleChange("endDate", e)} />
+                        <label className='reports-label-right'>Start Date:
+                            <InputMask mask="99/99/9999" maskChar={null}
+                                className='reports-text-input'
+                                onChange={(e) => this.handleChange("startDate", e)} />
+                        </label>
+                        <label className='reports-label-right'>End Date:
+                            <InputMask mask="99/99/9999" maskChar={null}
+                                className='reports-text-input'
+                                onChange={(e) => this.handleChange("endDate", e)} />
+                        </label>
                         <button onClick={this.grindingReport} className='run-button'>Run</button>
                     </div>
                 ) : (null)}
