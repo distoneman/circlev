@@ -43,5 +43,13 @@ module.exports = {
             net_weight, message
         })
         res.status(200).send(response)
+    },
+    updatePrices: async (req, res) => {
+        const {slaughter, cutWrap, boneRoll,
+            } = req.body;
+        const db = req.app.get('db');
+        let response = await db.sheep.updatePrices({
+            slaughter, cutWrap, boneRoll})
+        res.status(200).send(response)
     }
 }

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+
+import BeefPrices from './BeefPrices';
+import PorkPrices from './PorkPrices';
+import SheepPrices from './SheepPrices';
 
 import './Settings.css'
-import Axios from 'axios';
 
 export default class Settings extends Component {
     constructor(props) {
@@ -18,7 +22,7 @@ export default class Settings extends Component {
 
     }
 
-    getPrices = async(key, value) => {
+    getPrices = async (key, value) => {
         await this.setState({
             [key]: value.target.value
         });
@@ -74,18 +78,16 @@ export default class Settings extends Component {
                     </select>
                 </div>
                 <hr />
-                {/* <div className='settings-update-form'>
-                    <label className='settings-label-right'>Beef Slaughter:
-                        <input type="text" className='settings-text-input'
-                            // value={this.state.beefPrices.slaughter} 
-                            onChange={(e) => this.handleChange('slaughter', e)}/>
-                    </label>
-                    <label className='settings-label-right'>Cut & Wrap:
-                        <input type="text" className='settings-text-input'
-                            value={this.state.beefPrices.cut_wrap}
-                            onChange={(e) => this.handleChange('cut_wrap', e)}/>
-                    </label>
-                </div> */}
+                {this.state.setting === 'beefPrices' ? (
+                    <BeefPrices />
+                ) : (null)}
+                {this.state.setting === 'porkPrices' ? (
+                    <PorkPrices />
+                ) : (null)}
+                {this.state.setting === 'sheepPrices' ? (
+                    <SheepPrices />
+                ) : (null)}
+
             </div>
         )
     }

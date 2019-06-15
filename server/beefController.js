@@ -56,5 +56,12 @@ module.exports = {
             total_patties, brand, total_brand, qty_other, desc_other, 
             price_other, total_other, total, net_weight, message})
         res.status(200).send(response)
+    },
+    updatePrices: async (req, res) => {
+        const {slaughter, cutWrap, patties, brand} = req.body;
+        const db = req.app.get('db');
+        let response = await db.beef.updatePrices({slaughter, cutWrap,
+            patties, brand})
+        res.status(200).send(response)
     }
 }

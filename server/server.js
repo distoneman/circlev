@@ -28,18 +28,21 @@ app.post('/beef/save', beefCtrl.addBeef);
 app.get('/beef/prices', beefCtrl.beefPrices);
 app.delete('/beef/delete/:ID', beefCtrl.beefDelete);
 app.put('/beef/update', beefCtrl.beefUpdate);
+app.put('/beef/update_prices', beefCtrl.updatePrices);
 
 // PORK
 app.get('/pork/prices', porkCtrl.porkPrices);
 app.post('/pork/save', porkCtrl.addPork);
 app.delete('/pork/delete/:ID', porkCtrl.porkDelete);
-app.put('/pork/update', porkCtrl.updatePork)
+app.put('/pork/update', porkCtrl.updatePork);
+app.put('/pork/update_prices', porkCtrl.updatePrices);
 
 // SHEEP
 app.get('/sheep/prices', sheepCtrl.sheepPrices);
 app.post('/sheep/save', sheepCtrl.addSheep)
 app.delete('/sheep/delete/:ID', sheepCtrl.sheepDelete);
 app.put('/sheep/update', sheepCtrl.updateSheep);
+app.put('/sheep/update_prices', sheepCtrl.updatePrices);
 
 // CIRCLEV
 app.post('/circlev/save', circleVCtrl.addCircleV);

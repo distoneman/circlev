@@ -57,7 +57,14 @@ module.exports = {
             price_other, total_other, total, lard, 
             net_weight, message})
         res.status(200).send(response)
-
+    },
+    updatePrices: async (req, res) => {
+        const {slaughter, cutWrap, cure, links, fat
+            } = req.body;
+        const db = req.app.get('db');
+        let response = await db.pork.updatePrices({
+            slaughter, cutWrap, cure,
+            links, fat})
+        res.status(200).send(response)
     }
-
 }
