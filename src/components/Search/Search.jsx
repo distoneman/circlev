@@ -127,7 +127,7 @@ export default class Search extends Component {
         if (this.state.invoice[0].message != null) {
             doc.text(this.state.invoice[0].message, 27, 150, { maxWidth: '90' })
         }
-        doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Beef Cuts`, 27, 200)
+        doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Beef Cuts`, 27, 180)
         // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
@@ -321,8 +321,6 @@ export default class Search extends Component {
             unit: 'mm',
             format: [396, 612]  //5.5in by 8.5in paper
         });
-
-        console.log(this.state.invoice[0])
         doc.setFontSize(11);
         doc.text(this.state.invoice[0].sold_by, 18, 39);
         doc.text(moment(this.state.invoice[0].invoice_date).format('MM/DD/YYYY'), 112, 39);

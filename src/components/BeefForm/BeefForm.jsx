@@ -237,7 +237,7 @@ export default class BeefForm extends Component {
     doc.text('Total', 100, 135);
     doc.text(total, 132, 135, {align: 'right'});
     doc.text(this.state.message, 27, 150, {maxWidth: '90'})
-    doc.text(`${this.state.netWeight} Net Weight Misc. Beef Cuts`, 60, 200)
+    doc.text(`${this.state.netWeight} Net Weight Misc. Beef Cuts`, 60, 180)
     // doc.save('invoice.pdf')
     doc.autoPrint({});
     var iframe = document.getElementById('output');
