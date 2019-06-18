@@ -315,7 +315,7 @@ export default class InvoiceForm extends Component {
         doc.text(this.state.total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 172, { align: 'right' });
 
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
