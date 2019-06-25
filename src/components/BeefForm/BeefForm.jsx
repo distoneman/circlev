@@ -212,7 +212,7 @@ export default class BeefForm extends Component {
     // }  
     // if(this.state.cutWrap !== 0) {
       doc.text(this.state.cutWrap.toString(), 20, 95, {align: 'right'})
-      doc.text('Cut & Wrap', 27, 95);
+      doc.text('Cut & Wrap (Carcass Weight)', 27, 95);
       doc.text(`$${this.state.beefPrices.cut_wrap}`, 102, 95, {align: 'right'});
       doc.text(cutWrapTotal, 132, 95, {align: 'right'});
     // }

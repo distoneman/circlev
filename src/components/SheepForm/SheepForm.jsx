@@ -193,7 +193,7 @@ export default class SheepForm extends Component {
             132, 77, { align: 'right' })
 
         doc.text(this.state.cutWrap.toString(), 20, 85, { align: 'right' })
-        doc.text('Cut & Wrap', 27, 85);
+        doc.text('Cut & Wrap (Carcass Weight)', 27, 85);
         doc.text(`$${this.state.sheepPrices.cut_wrap}`, 102, 85, { align: 'right' });
         doc.text(this.state.cutWrapTotal.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });

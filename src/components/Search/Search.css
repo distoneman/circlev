@@ -61,7 +61,8 @@
 .search-results-container,  .search-results-title{
     width: 90%;
     display: grid;
-    grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr .6fr 1.1fr;
+    /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
+    grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr .6fr;
 }
 
 .search-item {

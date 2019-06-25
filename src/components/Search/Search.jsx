@@ -100,7 +100,7 @@ export default class Search extends Component {
         }
         if (this.state.invoice[0].qtyCut !== 0) {
             doc.text(this.state.invoice[0].qty_cut, 20, 95, { align: 'right' })
-            doc.text('Cut & Wrap', 27, 95);
+            doc.text('Cut & Wrap (Carcass Weight)', 27, 95);
             doc.text(`$${this.state.invoice[0].price_cut}`, 102, 95, { align: 'right' });
             doc.text(cutWrapTotal, 132, 95, { align: 'right' });
         }
@@ -156,7 +156,7 @@ export default class Search extends Component {
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
-        doc.text('Cut & Wrap', 27, 85);
+        doc.text('Cut & Wrap (Carcass Weight)', 27, 85);
         doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
         doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });
@@ -224,7 +224,7 @@ export default class Search extends Component {
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
-        doc.text('Cut & Wrap', 27, 85);
+        doc.text('Cut & Wrap (Carcass Weight)', 27, 85);
         doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
         doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });
@@ -522,7 +522,7 @@ export default class Search extends Component {
                     <div className='search-results-item-title'>Sold By</div>
                     <div className='search-results-item-title'>Phone</div>
                     <div className='search-results-item-title'>Total</div>
-                    <div className='search-results-item-title'>Weight</div>
+                    {/* <div className='search-results-item-title'>Weight</div> */}
                     <div className='search-results-item-title'></div>
                 </div>
                 {searchResults}

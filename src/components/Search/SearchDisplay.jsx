@@ -43,7 +43,7 @@ export default class SearchDisplay extends Component {
                     <div className='search-item'>{this.props.soldBy}</div>
                     <div className='search-item'>{this.props.phone}</div>
                     <div className='search-item'>${this.props.total}</div>
-                    <div className='search-item'>{this.props.weight}</div>
+                    {/* <div className='search-item'>{this.props.weight}</div> */}
                     <div className='search-item'>
                         <FaPrint className='fa-icon'
                             onClick={() => this.props.printInvoice(this.props.id)} />
