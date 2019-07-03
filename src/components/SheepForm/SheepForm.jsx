@@ -183,7 +183,7 @@ export default class SheepForm extends Component {
         doc.text(moment(this.state.iDate).format('MM/DD/YYYY'), 112, 39);
         doc.text(this.state.customer, 15, 45);
         doc.text(this.state.phone, 15, 55);
-        doc.text(`${this.state.baskets} Basket - Row ${this.state.rows}`, 20, 63);
+        doc.text(`${this.state.baskets} Basket - Row ${this.state.row}`, 20, 63);
 
         doc.text(this.state.slaughter.toString()
             , 20, 77, { align: 'right' });

@@ -202,7 +202,7 @@ export default class Search extends Component {
     }
 
     printSheepInvoice = async (invoiceID) => {
-        console.log('print sheep invoice')
+        // console.log('print sheep invoice')
         await this.searchOne(invoiceID)
         const doc = new jsPDF({
             orientation: 'p',
