@@ -221,7 +221,7 @@ export default class CircleVForm extends Component {
 
         doc.text(this.state.message, 27, 135, { maxWidth: '90' })
         doc.text(`${this.state.netWeight} Net Weight Misc. Cuts`, 60, 165)
-        doc.save('invoice.pdf')
+        // doc.save('invoice.pdf')
         doc.autoPrint({});
         var iframe = document.getElementById('output');
         iframe.src = doc.output('dataurlstring');
