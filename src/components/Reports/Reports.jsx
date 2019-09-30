@@ -64,15 +64,15 @@ export default class Reports extends Component {
         // console.log('state: ' + this.state.nonTaxSales)
         //Pork Sales Non-Tax
         const resPork = await axios.get(`/reports/qtrPorkSales/?taxYear=${this.state.taxYear}&taxQtr=${this.state.taxQtr}`)
-        // console.log(resPork.data[0].sum)
+        console.log(resPork.data[0].sum)
         let porkSales = resPork.data[0].sum
         this.setState({
             nonTaxSales: Number(this.state.nonTaxSales) + Number(porkSales)
         })
-        // console.log('state: ' + this.state.nonTaxSales)
+        console.log('state: ' + this.state.nonTaxSales)
         //Sheep Sales Non-Tax
         const resSheep = await axios.get(`/reports/qtrSheepSales/?taxYear=${this.state.taxYear}&taxQtr=${this.state.taxQtr}`)
-        // console.log(resSheep.data[0].sum)
+        console.log(resSheep.data[0].sum)
         let sheepSales = resSheep.data[0].sum
         this.setState({
             nonTaxSales: Number(this.state.nonTaxSales) + Number(sheepSales)
