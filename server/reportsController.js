@@ -8,6 +8,7 @@ module.exports = {
         })
         res.status(200).send(response)
     },
+    
     getQtrBeefSales: async(req, res) => {
         let taxYear = req.query.taxYear;
         let taxQtr = req.query.taxQtr;
