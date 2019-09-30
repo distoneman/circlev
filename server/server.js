@@ -78,4 +78,10 @@ app.get('/search/invoiceID/:ID', searchCtrl.invoiceID);
 
 // Reports
 app.get('/reports/grinding/', reportsCtrl.getGrindingData);
-
+app.get('/reports/qtrBeefSales/', reportsCtrl.getQtrBeefSales);
+app.get('/reports/qtrPorkSales/', reportsCtrl.getQtrPorkSales);
+app.get('/reports/qtrSheepSales/', reportsCtrl.getQtrSheepSales);
+app.get('/reports/qtrCircleVSales/', reportsCtrl.getQtrCircleVSales);
+app.get('/reports/qtrCircleVTax/', reportsCtrl.getQtrCircleVTax);
+app.get('/reports/qtrInvoiceSubTotal', reportsCtrl.getQtrInvoiceSubTotal);
+app.get('/reports/qtrInvoiceTax', reportsCtrl.getQtrInvoiceTax);
