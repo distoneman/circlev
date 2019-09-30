@@ -76,7 +76,7 @@ app.get('/search/invoiceSoldBy/:soldBy', searchCtrl.invoiceSoldBy);
 app.get('/search/invoiceInvoiceDate/', searchCtrl.invoiceInvoiceDate);
 app.get('/search/invoiceID/:ID', searchCtrl.invoiceID);
 
-// Reports
+/// Reports
 app.get('/reports/grinding/', reportsCtrl.getGrindingData);
 app.get('/reports/qtrBeefSales/', reportsCtrl.getQtrBeefSales);
 app.get('/reports/qtrPorkSales/', reportsCtrl.getQtrPorkSales);
