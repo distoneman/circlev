@@ -348,7 +348,8 @@ export default class PorkForm extends Component {
                             onChange={e => this.handleChange("email", e)} />
                         <label className='pork-label-right'>Phone:</label>
                         <div>
-                            <InputMask mask="999-999-9999" maskChar={null}
+                            <InputMask 
+                                //mask="999-999-9999" maskChar={null}
                                 className="pork-text-input pork-input-short"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange("phone", e)} />
