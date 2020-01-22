@@ -294,8 +294,10 @@ export default class CircleVForm extends Component {
                             onChange={e => this.handleChange('email', e)} />
                         <label className='circleV-label-right'>Phone:</label>
                         <div>
-                            <InputMask mask='999-999-9999' maskChar={null}
+                            <InputMask 
+                                // mask='999-999-9999' maskChar={null}
                                 className='circleV-text-input circleV-input-short'
+                                maxlength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange('phone', e)} />
                             <label>Cell:</label>

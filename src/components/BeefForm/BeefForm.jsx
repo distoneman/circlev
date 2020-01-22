@@ -305,8 +305,10 @@ export default class BeefForm extends Component {
               onChange={e => this.handleChange("email", e)} />
             <label className='beef-label-right'>Phone:</label>
             <div>
-              <InputMask mask="999-999-9999" maskChar={null}
+              <InputMask 
+                // mask="999-999-9999" maskChar={null}
                 className="beef-text-input beef-input-short"
+                maxlength="45"
                 value={this.state.phone}
                 onChange={e => this.handleChange("phone", e)} />
               <label>Cell:</label>
