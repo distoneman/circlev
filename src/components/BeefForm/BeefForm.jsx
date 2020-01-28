@@ -262,7 +262,6 @@ export default class BeefForm extends Component {
     await this.setState({
       cellPhone: !this.state.cellPhone
     })
-    // console.log(this.state.cellPhone)
   }
 
   calcTotal = () => {
@@ -278,7 +277,6 @@ export default class BeefForm extends Component {
   }
 
   render() {
-    // let currentDay = 
     return (
       <div className='beef-container'>
         <div className='beef-form'>

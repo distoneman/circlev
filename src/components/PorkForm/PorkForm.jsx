@@ -296,7 +296,7 @@ export default class PorkForm extends Component {
 
         doc.text(this.state.bulk.toString(), 20, 108, { align: 'right' });
         doc.text('Bulk Sausage', 27, 108);
-        //
+        
         doc.text(this.state.fat.toString(), 20, 116, { align: 'right' });
         doc.text('Fat Rendered', 27, 116);
         doc.text(`$${this.state.porkPrices.fat}`, 102, 116, { align: 'right' });
