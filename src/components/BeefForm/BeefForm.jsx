@@ -262,7 +262,6 @@ export default class BeefForm extends Component {
     await this.setState({
       cellPhone: !this.state.cellPhone
     })
-    // console.log(this.state.cellPhone)
   }
 
   calcTotal = () => {
@@ -278,7 +277,6 @@ export default class BeefForm extends Component {
   }
 
   render() {
-    // let currentDay = 
     return (
       <div className='beef-container'>
         <div className='beef-form'>
@@ -305,8 +303,10 @@ export default class BeefForm extends Component {
               onChange={e => this.handleChange("email", e)} />
             <label className='beef-label-right'>Phone:</label>
             <div>
-              <InputMask mask="999-999-9999" maskChar={null}
+              <InputMask 
+                // mask="999-999-9999" maskChar={null}
                 className="beef-text-input beef-input-short"
+                maxlength="45"
                 value={this.state.phone}
                 onChange={e => this.handleChange("phone", e)} />
               <label>Cell:</label>

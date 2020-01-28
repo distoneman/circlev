@@ -293,8 +293,10 @@ export default class SheepForm extends Component {
                             onChange={e => this.handleChange('email', e)} />
                         <label className='sheep-label-right'>Phone:</label>
                         <div>
-                            <InputMask mask='999-999-9999' maskChar={null}
+                            <InputMask 
+                                // mask='999-999-9999' maskChar={null}
                                 className='sheep-text-input sheep-input-short'
+                                maxlength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange('phone', e)} />
                             <label>Cell:</label>

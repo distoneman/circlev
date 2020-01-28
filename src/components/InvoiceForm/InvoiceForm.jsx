@@ -546,8 +546,10 @@ export default class InvoiceForm extends Component {
                             onChange={e => this.handleChange('email', e)} />
                         <label className='invoice-label-right'>Phone:</label>
                         <div>
-                            <InputMask mask='999-999-9999' maskChar={null}
+                            <InputMask 
+                                // mask='999-999-9999' maskChar={null}
                                 className='invoice-text-input invoice-input-short'
+                                maxlength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange('phone', e)} />
                             <label>Cell:</label>
