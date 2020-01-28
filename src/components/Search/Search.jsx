@@ -32,7 +32,7 @@ export default class Search extends Component {
         // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            // console.log(res.data)
+            console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -477,6 +477,7 @@ export default class Search extends Component {
                     soldBy={invoice.sold_by}
                     phone={invoice.phone}
                     total={invoice.total}
+                    qty_cut={invoice.qty_cut}
                     weight={invoice.net_weight}
                     printInvoice={printInvoice}
                     deleteInvoice={this.deleteInvoice}
@@ -523,7 +524,7 @@ export default class Search extends Component {
                     <div className='search-results-item-title'>Sold By</div>
                     <div className='search-results-item-title'>Phone</div>
                     <div className='search-results-item-title'>Total</div>
-                    {/* <div className='search-results-item-title'>Weight</div> */}
+                    <div className='search-results-item-title'>Cut wt</div>
                     <div className='search-results-item-title'></div>
                 </div>
                 {searchResults}
