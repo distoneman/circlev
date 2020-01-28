@@ -43,7 +43,7 @@ export default class SearchDisplay extends Component {
                     <div className='search-item'>{this.props.soldBy}</div>
                     <div className='search-item'>{this.props.phone}</div>
                     <div className='search-item'>${this.props.total}</div>
-                    {/* <div className='search-item'>{this.props.weight}</div> */}
+                    <div className='search-item'>{this.props.qty_cut}</div>
                     <div className='search-item'>
                         <FaPrint className='fa-icon'
                             onClick={() => this.props.printInvoice(this.props.id)} />
@@ -54,7 +54,7 @@ export default class SearchDisplay extends Component {
                         <FaTrashAlt className='fa-icon'
                             onClick={() => this.props.deleteInvoice(this.props.id)} />
                         <FaEnvelope className='fa-icon' />
-                        <FaComment className='fa-icon' />
+                        {/* <FaComment className='fa-icon' /> */}
                     </div>
                 </div>
             </div>
