@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Search.css';
 import InvoiceView from './InvoiceView';
-import { FaPrint, FaTrashAlt, FaEdit, FaSearch, FaEnvelope, FaComment } from 'react-icons/fa';
+import { FaPrint, FaTrashAlt, FaEdit, FaSearch, FaEnvelope } from 'react-icons/fa';
 import {Link} from "react-router-dom";
 // import { IoIosMail, IoIosText } from "react-icons/io";
 
@@ -10,7 +10,8 @@ export default class SearchDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            viewModal: false
+            viewModal: false,
+            emailModal: false
         }
 
     }
@@ -20,6 +21,13 @@ export default class SearchDisplay extends Component {
             viewModal: !this.state.viewModal
         })
         // console.log(this.state.viewModal)
+    }
+
+    toggleEmailModal = () => {
+        this.setState({
+            emailModal: !this.state.emailModal
+        })
+        console.log(this.state.emailModal)
     }
 
     render() {
@@ -44,6 +52,7 @@ export default class SearchDisplay extends Component {
                     <div className='search-item'>{this.props.phone}</div>
                     <div className='search-item'>${this.props.total}</div>
                     <div className='search-item'>{this.props.qty_cut}</div>
+                    <div className='search-item'>{this.props.weight}</div>
                     <div className='search-item'>
                         <FaPrint className='fa-icon'
                             onClick={() => this.props.printInvoice(this.props.id)} />
@@ -53,7 +62,8 @@ export default class SearchDisplay extends Component {
                         </Link>
                         <FaTrashAlt className='fa-icon'
                             onClick={() => this.props.deleteInvoice(this.props.id)} />
-                        <FaEnvelope className='fa-icon' />
+                        <FaEnvelope className='fa-icon' 
+                            onClick={this.toggleEmailModal} />
                         {/* <FaComment className='fa-icon' /> */}
                     </div>
                 </div>

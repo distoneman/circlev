@@ -62,12 +62,12 @@
     width: 90%;
     display: grid;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
-    grid-template-columns: .65fr 1.4fr 1.4fr .9fr .6fr .5fr .95fr;
+    grid-template-columns: .65fr 1.4fr 1.4fr .9fr .6fr .5fr .5fr .95fr;
 }
 
 .search-item {
     border: solid 1px #474545;
-    padding: .5em;
+    padding: .4em;
     font-size: 11pt;
 }
 
