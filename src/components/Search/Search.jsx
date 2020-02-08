@@ -524,7 +524,8 @@ export default class Search extends Component {
                     <div className='search-results-item-title'>Sold By</div>
                     <div className='search-results-item-title'>Phone</div>
                     <div className='search-results-item-title'>Total</div>
-                    <div className='search-results-item-title'>Cut wt</div>
+                    <div className='search-results-item-title'>Cut Wt</div>
+                    <div className='search-results-item-title'>Net Wt</div>
                     <div className='search-results-item-title'></div>
                 </div>
                 {searchResults}
