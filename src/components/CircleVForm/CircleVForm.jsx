@@ -297,7 +297,7 @@ export default class CircleVForm extends Component {
                             <InputMask 
                                 // mask='999-999-9999' maskChar={null}
                                 className='circleV-text-input circleV-input-short'
-                                maxlength="45"
+                                maxLength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange('phone', e)} />
                             <label>Cell:</label>

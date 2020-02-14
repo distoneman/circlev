@@ -549,7 +549,7 @@ export default class InvoiceForm extends Component {
                             <InputMask 
                                 // mask='999-999-9999' maskChar={null}
                                 className='invoice-text-input invoice-input-short'
-                                maxlength="45"
+                                maxLength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange('phone', e)} />
                             <label>Cell:</label>
@@ -560,7 +560,7 @@ export default class InvoiceForm extends Component {
                         <label className='invoice-label-right'>Tax Exempt:</label>
                         <input type="checkbox" className='invoice-checkbox'
                             checked={this.state.taxExempt}
-                            onClick={e => this.toggleTaxExempt()} />
+                            onChange={e => this.toggleTaxExempt()} />
                         <label className='invoice-label-right'>Tax ID Number:</label>
                         <input type="text" className='invoice-text-input invoice-input-short'
                             value={this.state.taxIdNum}

@@ -351,7 +351,7 @@ export default class PorkForm extends Component {
                             <InputMask 
                                 //mask="999-999-9999" maskChar={null}
                                 className="pork-text-input pork-input-short"
-                                maxlength="45"
+                                maxLength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange("phone", e)} />
                             <label>Cell:</label>
