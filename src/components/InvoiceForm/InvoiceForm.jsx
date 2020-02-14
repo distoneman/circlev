@@ -555,7 +555,7 @@ export default class InvoiceForm extends Component {
                             <label>Cell:</label>
                             <input type="checkbox" className='invoice-checkbox'
                                 checked={this.state.cellPhone}
-                                onClick={e => this.toggleCell()} />
+                                onChange={e => this.toggleCell()} />
                         </div>
                         <label className='invoice-label-right'>Tax Exempt:</label>
                         <input type="checkbox" className='invoice-checkbox'

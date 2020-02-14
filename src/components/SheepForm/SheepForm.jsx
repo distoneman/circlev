@@ -302,7 +302,7 @@ export default class SheepForm extends Component {
                             <label>Cell:</label>
                             <input type="checkbox"
                                 checked={this.state.cellPhone}
-                                onClick={e => this.toggleCell()} />
+                                onChange={e => this.toggleCell()} />
                         </div>
                         <label className='sheep-label-right'>Baskets:</label>
                         <input type="text" className='sheep-text-input sheep-input-short'

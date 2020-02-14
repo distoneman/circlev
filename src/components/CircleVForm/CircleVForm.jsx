@@ -303,7 +303,7 @@ export default class CircleVForm extends Component {
                             <label>Cell:</label>
                             <input type="checkbox"
                                 checked={this.state.cellPhone}
-                                onClick={e => this.toggleCell()} />
+                                onChange={e => this.toggleCell()} />
                         </div>
                         <label className='circleV-label-right'>Baskets:</label>
                         <input type="text" className='circleV-text-input circleV-input-short'
