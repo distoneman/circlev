@@ -11,7 +11,6 @@ export default class Search extends Component {
         super(props);
         this.state = {
             searchType: "beef",
-            // customer: "",
             searchField: "customer",
             searchCriteria: "",
             searchResults: [],
@@ -32,7 +31,7 @@ export default class Search extends Component {
         // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })

@@ -9,8 +9,9 @@ const circleVCtrl = require('./circleVController');
 const searchCtrl = require('./searchController');
 const invoiceCtrl = require('./invoiceController');
 const reportsCtrl = require('./reportsController');
+const mailCtrl = require('./mailController.js');
 
-const { SERVER_PORT, CONNECTION_STRING} = process.env;
+const { SERVER_PORT, CONNECTION_STRING } = process.env;
 
 const app = express();
 
@@ -85,3 +86,6 @@ app.get('/reports/qtrCircleVSales/', reportsCtrl.getQtrCircleVSales);
 app.get('/reports/qtrCircleVTax/', reportsCtrl.getQtrCircleVTax);
 app.get('/reports/qtrInvoiceSubTotal', reportsCtrl.getQtrInvoiceSubTotal);
 app.get('/reports/qtrInvoiceTax', reportsCtrl.getQtrInvoiceTax);
+
+// email 
+app.post('/mail/send', mailCtrl.sendMail);

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './Search.css';
 import InvoiceView from './InvoiceView';
+import EmailForm from '../EmailForm/EmailForm';
 import { FaPrint, FaTrashAlt, FaEdit, FaSearch, FaEnvelope } from 'react-icons/fa';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 // import { IoIosMail, IoIosText } from "react-icons/io";
 
 
@@ -45,6 +46,18 @@ export default class SearchDisplay extends Component {
                 ) : (
                         null
                     )}
+                {this.state.emailModal ? (
+                    <div className='email-modal'>
+                        <button className='close-email-modal' onClick={this.toggleEmailModal}>X</button>
+                        <EmailForm
+                            searchType={this.props.searchType}
+                            id={this.props.id}
+                            toggleEmailModal = {this.toggleEmailModal}
+                        />
+                    </div>
+                ) : (
+                        null
+                    )}
                 <div className='search-results-container'>
                     <div className='search-item'>{this.props.iDate}</div>
                     <div className='search-item'>{this.props.customer}</div>
@@ -62,7 +75,7 @@ export default class SearchDisplay extends Component {
                         </Link>
                         <FaTrashAlt className='fa-icon'
                             onClick={() => this.props.deleteInvoice(this.props.id)} />
-                        <FaEnvelope className='fa-icon' 
+                        <FaEnvelope className='fa-icon'
                             onClick={this.toggleEmailModal} />
                         {/* <FaComment className='fa-icon' /> */}
                     </div>
