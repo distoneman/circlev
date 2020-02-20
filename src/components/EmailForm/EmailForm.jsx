@@ -10,7 +10,9 @@ export default class EmailForm extends Component {
             invoice: [],
             mail: null,
             subject: null,
-            message: null
+            message: null,
+            email: null,
+            invoiceFooter: null
         }
 
     }
@@ -35,81 +37,177 @@ export default class EmailForm extends Component {
         // console.log(this.state)
     }
 
-    beefInvoice = () => {
-        // console.log('beef invoice')
-        const invoiceMessage = 
-            `<div>
-                ${this.state.message}
-            </div>
-            <hr>
-            <div> 
-                <b>Invoice Date:  </b> ${moment(this.state.invoice.invoice_date).format('MM/DD/YYYY')} 
-            </div>
-            <div>
-                <b>Sold By:  </b> ${this.state.invoice.sold_by}
-            </div>
-            <div>
-                <b>Customer Name:  </b> ${this.state.invoice.customer}
-            </div>
-            <div>
-                <b>Net Weight:  </b> ${this.state.invoice.net_weight}
-            </div>
-            <div>
-                <table border='1px' cellpadding='3px'>
-                    <tr>
-                        <td width='75px'>Quantity</td>
-                        <td width='300px'>Description</td>
-                        <td width='75px'>Price</td>
-                        <td width='150px'>Amount</td>
-                    </tr>
-                    <tr>
-                        <td>${this.state.invoice.slaughter}</td>
-                        <td>Beef Slaughter</td>
-                        <td>$${this.state.invoice.price_slaughter}</td>
-                        <td>$${this.state.invoice.total_slaughter}</td>
-                    </tr>
-                    <tr>
-                        <td>${this.state.invoice.qty_cut}</td>
-                        <td>Cut & Wrap</td>
-                        <td>$${this.state.invoice.price_cut}</td>
-                        <td>$${this.state.invoice.total_cut}</td>
-                    </tr>
-                    <tr>
-                        <td>${this.state.invoice.qty_patties}</td>
-                        <td>Patties</td>
-                        <td>$${this.state.invoice.price_patties}</td>
-                        <td>$${this.state.invoice.total_patties}</td>
-                    </tr>
-                    <tr>
-                        <td>${this.state.invoice.qty_brand}</td>
-                        <td>Brand Inspection</td>
-                        <td>$${this.state.invoice.price_brand}</td>
-                        <td>$${this.state.invoice.total_brand}</td>
-                    </tr>
-                    <tr>
-                        <td>${this.state.invoice.qty_other}</td>
-                        <td>${this.state.invoice.desc_other}</td>
-                        <td>$${this.state.invoice.price_other}</td>
-                        <td>$${this.state.invoice.total_other}</td>
-                    </tr>
-                    <tr>
-                        <td colspan='3' align='right'><b>TOTAL</b></td>
-                        <td>$${this.state.invoice.total}</td>
-                    </tr>
+    invoiceHeader = () =>{
+        let invoiceHeader = 
+        `<div>
+            ${this.state.message}
+        </div>
+        <hr>
+        <br/><br/>
+        <div> 
+            <b>Invoice Date:  </b> ${moment(this.state.invoice.invoice_date).format('MM/DD/YYYY')} 
+        </div>
+        <br/>
+        <div>
+            <b>Sold By:  </b> ${this.state.invoice.sold_by}
+        </div>
+        <br/>
+        <div>
+            <b>Customer Name:  </b> ${this.state.invoice.customer}
+        </div>
+        <br/>
+        <div>
+            <b>Net Weight:  </b> ${this.state.invoice.net_weight}
+        </div>
+        <br/>
+        <div>
+            <table border='1px' cellpadding='3px'>
+                <tr>
+                    <th width='75px'>Quantity</th>
+                    <th width='300px'>Description</th>
+                    <th width='75px'>Price</th>
+                    <th width='150px'>Amount</th>
+                </tr>`
+        this.setState({
+            message: invoiceHeader
+        })
+    }
 
-                </table>
+    invoiceFooter = async () => {
+        console.log(this.state.total)
+        let invoiceFooter = 
+            `<tr>
+                <td colspan='3' align='right'><b>TOTAL</b></td>
+                <td>$${this.state.invoice.total}</td>
+            </tr>
+
+            </table>
             </div>`
+        await this.setState({
+            invoiceFooter: invoiceFooter 
+        })
+    }
+
+    beefInvoice = async () => {
+        await this.invoiceHeader();
+        let invoiceMessage = this.state.message +
+            `<tr>
+                <td>${this.state.invoice.slaughter}</td>
+                <td>Beef Slaughter</td>
+                <td>$${this.state.invoice.price_slaughter}</td>
+                <td>$${this.state.invoice.total_slaughter}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_cut}</td>
+                <td>Cut & Wrap</td>
+                <td>$${this.state.invoice.price_cut}</td>
+                <td>$${this.state.invoice.total_cut}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_patties}</td>
+                <td>Patties</td>
+                <td>$${this.state.invoice.price_patties}</td>
+                <td>$${this.state.invoice.total_patties}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_brand}</td>
+                <td>Brand Inspection</td>
+                <td>$${this.state.invoice.price_brand}</td>
+                <td>$${this.state.invoice.total_brand}</td>
+            </tr>`
+
+        if(this.state.invoice.qty_other != null &
+            this.state.invoice.qty_other === 0.00) {
+            invoiceMessage = invoiceMessage +                
+                `<tr>
+                    <td>${this.state.invoice.qty_other}</td>
+                    <td>${this.state.invoice.desc_other}</td>
+                    <td>$${this.state.invoice.price_other}</td>
+                    <td>$${this.state.invoice.total_other}</td>
+                </tr>`
+        }
+
+        await this.invoiceFooter()
+        invoiceMessage = invoiceMessage + this.state.invoiceFooter
+
         this.setState({
             message: invoiceMessage
         })
-        // console.log(this.state.message)
+    }
+
+    porkInvoice = async () => {
+        await this.invoiceHeader()
+        let invoiceMessage = this.state.message +
+            `<tr>
+                <td>${this.state.invoice.qty_slaughter}</td>
+                <td>Pork Slaughter</td>
+                <td>$${this.state.invoice.price_slaughter}</td>
+                <td>$${this.state.invoice.total_slaughter}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_cut}</td>
+                <td>Cut & Wrap</td>
+                <td>$${this.state.invoice.price_cut}</td>
+                <td>$${this.state.invoice.total_cut}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_cure}</td>
+                <td>Cure</td>
+                <td>$${this.state.invoice.price_cure}</td>
+                <td>$${this.state.invoice.total_cure}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_link}</td>
+                <td>Links/Patties</td>
+                <td>$${this.state.invoice.price_link}</td>
+                <td>$${this.state.invoice.total_link}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_bulk}</td>
+                <td>Bulk Sausage</td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_fat}</td>
+                <td>Fat Rendered</td>
+                <td>$${this.state.invoice.price_fat}</td>
+                <td>$${this.state.invoice.total_fat}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.lard} lbs</td>
+                <td>Lard</td>
+                <td></td>
+                <td></td>
+            </tr>`
+
+        if(this.state.invoice.qty_other != null &
+            this.state.invoice.qty_other === 0.00) {
+            invoiceMessage = invoiceMessage +                
+                `<tr>
+                    <td>${this.state.invoice.qty_other}</td>
+                    <td>${this.state.invoice.desc_other}</td>
+                    <td>$${this.state.invoice.price_other}</td>
+                    <td>$${this.state.invoice.total_other}</td>
+                </tr>`
+        }
+    
+        await this.invoiceFooter()
+        invoiceMessage = invoiceMessage + this.state.invoiceFooter
+
+        this.setState({
+            message: invoiceMessage
+        })
     }
 
     async sendMail() {
-        // console.log('send mail')
-        await this.beefInvoice();
-        // console.log(this.state.message)
-        // console.log(this.state.invoice.invoice_date)
+        if (this.props.searchType === 'beef') {
+            await this.beefInvoice();
+        }
+        else if (this.props.searchType === 'pork'){
+            console.log('pork')
+            await this.porkInvoice();
+        }
         axios.post('/mail/send', {
             email: this.state.email,
             subject: this.state.subject,

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const nodemailer = require('nodemailer');
 
-const { EMAIL_ADDRESS, EMAIL_PASSWORD } = process.env;
+const { EMAIL_ADDRESS, EMAIL_PASSWORD, REPLY_TO_EMAIL_ADDRESS } = process.env;
 
 module.exports = {
     sendMail: (req, res) => {
@@ -22,7 +22,6 @@ module.exports = {
             subject: `${req.body.subject}`,
             // text: `${req.body.message}`,
             html: `${req.body.html_message}`,
-            replyTo: EMAIL_ADDRESS
         }
         transporter.sendMail(mailOptions, function (err, res) {
             if (err) {
