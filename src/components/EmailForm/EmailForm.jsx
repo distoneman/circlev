@@ -241,6 +241,38 @@ export default class EmailForm extends Component {
         })
     }
 
+    circleVInvoice = async () => {
+        await this.invoiceHeader()
+        let invoiceMessage = this.state.message +
+            `<tr>
+                <td>${this.state.invoice.qty_line1}</td>
+                <td>${this.state.invoice.desc_line1}</td>
+                <td>$${this.state.invoice.price_line1}</td>
+                <td>$${this.state.invoice.total_line1}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_line2}</td>
+                <td>${this.state.invoice.desc_line2}</td>
+                <td>$${this.state.invoice.price_line2}</td>
+                <td>$${this.state.invoice.total_line2}</td>
+            </tr>
+            <tr>
+                <td colspan='3' align='right'>Sub Total</td>
+                <td>$${this.state.invoice.sub_total}</td>
+            </tr>
+            <tr>
+                <td colspan='3' align='right'>Tax</td>
+                <td>$${this.state.invoice.tax_amt}</td>
+          </tr>`
+    
+        await this.invoiceFooter()
+        invoiceMessage = invoiceMessage + this.state.invoiceFooter
+
+        this.setState({
+            message: invoiceMessage
+        })
+    }
+
     async sendMail() {
         if (this.props.searchType === 'beef') {
             await this.beefInvoice();
@@ -251,6 +283,9 @@ export default class EmailForm extends Component {
         }
         else if (this.props.searchType === 'sheep'){
             await this.sheepInvoice();
+        }
+        else if(this.props.searchType === 'circleV'){
+            await this.circleVInvoice();
         }
         axios.post('/mail/send', {
             email: this.state.email,
