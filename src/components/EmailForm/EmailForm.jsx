@@ -200,6 +200,47 @@ export default class EmailForm extends Component {
         })
     }
 
+    sheepInvoice = async () => {
+        await this.invoiceHeader()
+        let invoiceMessage = this.state.message +
+            `<tr>
+                <td>${this.state.invoice.qty_slaughter}</td>
+                <td>Sheep Slaughter</td>
+                <td>$${this.state.invoice.price_slaughter}</td>
+                <td>$${this.state.invoice.total_slaughter}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_cut}</td>
+                <td>Cut & Wrap</td>
+                <td>$${this.state.invoice.price_cut}</td>
+                <td>$${this.state.invoice.total_cut}</td>
+            </tr>
+            <tr>
+                <td>${this.state.invoice.qty_bone}</td>
+                <td>Bone & Roll</td>
+                <td>$${this.state.invoice.price_bone}</td>
+                <td>$${this.state.invoice.total_bone}</td>
+            </tr>`
+
+            if(this.state.invoice.qty_other != null &
+                this.state.invoice.qty_other === 0.00) {
+                invoiceMessage = invoiceMessage +                
+                `<tr>
+                    <td>${this.state.invoice.qty_other}</td>
+                    <td>${this.state.invoice.desc_other}</td>
+                    <td>$${this.state.invoice.price_other}</td>
+                    <td>$${this.state.invoice.total_other}</td>
+                </tr>`
+        }
+    
+        await this.invoiceFooter()
+        invoiceMessage = invoiceMessage + this.state.invoiceFooter
+
+        this.setState({
+            message: invoiceMessage
+        })
+    }
+
     async sendMail() {
         if (this.props.searchType === 'beef') {
             await this.beefInvoice();
@@ -207,6 +248,9 @@ export default class EmailForm extends Component {
         else if (this.props.searchType === 'pork'){
             console.log('pork')
             await this.porkInvoice();
+        }
+        else if (this.props.searchType === 'sheep'){
+            await this.sheepInvoice();
         }
         axios.post('/mail/send', {
             email: this.state.email,
