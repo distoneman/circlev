@@ -61,6 +61,7 @@
 .search-results-container,  .search-results-title{
     width: 90%;
     display: grid;
+    z-index: 1;
     /* grid-template-columns: .7fr 1.6fr 1.5fr .9fr .6fr 1.1fr; */
     grid-template-columns: .65fr 1.4fr 1.4fr .9fr .6fr .5fr .5fr .95fr;
 }
@@ -99,7 +100,7 @@
     padding: 1.5em;
 }
 
-.close-invoice-view-modal {
+.close-invoice-view-modal, .close-email-modal{
     cursor: pointer;
     color: #744a29;
     transition: color .2s;
@@ -131,4 +132,18 @@
 
 .invoice-view-right {
     text-align: right;
+}
+
+.email-modal {
+    background-color:antiquewhite;
+    z-index: 2;
+    position: absolute;
+    top: 3rem;
+    left: 10rem;
+    height: 80%;
+    width: 900px;
+    border-radius: 10px;
+    border: solid 2px #744a29;
+    box-shadow: 5px 5px 5px rgb(87, 86, 86);
+    padding: 1.5em;
 }

@@ -11,7 +11,6 @@ export default class Search extends Component {
         super(props);
         this.state = {
             searchType: "beef",
-            // customer: "",
             searchField: "customer",
             searchCriteria: "",
             searchResults: [],
@@ -26,13 +25,9 @@ export default class Search extends Component {
     }
 
     async search() {
-        // console.log("search")
-        // console.log(this.state.searchCriteria)
-        // console.log(this.state.searchType)
-        // console.log(this.state.searchField)
         if (this.state.searchField === "customer") {
             const res = await axios.get(`/search/${this.state.searchType}Customer/${this.state.searchCriteria}`)
-            console.log(res.data)
+            // console.log(res.data)
             this.setState({
                 searchResults: res.data
             })
@@ -524,7 +519,7 @@ export default class Search extends Component {
                     <div className='search-results-item-title'>Sold By</div>
                     <div className='search-results-item-title'>Phone</div>
                     <div className='search-results-item-title'>Total</div>
-                    <div className='search-results-item-title'>Cut Wt</div>
+                    <div className='search-results-item-title'>Carcass Wt</div>
                     <div className='search-results-item-title'>Net Wt</div>
                     <div className='search-results-item-title'></div>
                 </div>

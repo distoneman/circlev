@@ -351,13 +351,13 @@ export default class PorkForm extends Component {
                             <InputMask 
                                 //mask="999-999-9999" maskChar={null}
                                 className="pork-text-input pork-input-short"
-                                maxlength="45"
+                                maxLength="45"
                                 value={this.state.phone}
                                 onChange={e => this.handleChange("phone", e)} />
                             <label>Cell:</label>
                             <input type="checkbox"
                                 checked={this.state.cellPhone}
-                                onClick={e => this.toggleCell()} />
+                                onChange={e => this.toggleCell()} />
                         </div>
                         <label className='pork-label-right'>Baskets:</label>
                         <input type="type" className="pork-text-input pork-input-short"
