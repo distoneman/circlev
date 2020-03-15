@@ -273,6 +273,149 @@ export default class EmailForm extends Component {
         })
     }
 
+    generalInvoice = async () => {
+        let invoiceHeader = 
+        `<div>
+            ${this.state.message}
+        </div>
+        <hr>
+        <br/><br/>
+        <div> 
+            <b>Invoice Date:  </b> ${moment(this.state.invoice.invoice_date).format('MM/DD/YYYY')} 
+        </div>
+        <br/>
+        <div>
+            <b>Sold By:  </b> ${this.state.invoice.sold_by}
+        </div>
+        <br/>
+        <div>
+            <b>Customer Name:  </b> ${this.state.invoice.customer}
+        </div>
+        <br/>
+        <div>
+            <table border='1px' cellpadding='3px'>
+                <tr>
+                    <th width='75px'>Quantity</th>
+                    <th width='300px'>Description</th>
+                    <th width='75px'>Price</th>
+                    <th width='150px'>Amount</th>
+                </tr>`
+        let invoiceBody = 
+            `<tr>
+                <td>${this.state.invoice.qty_line1}</td>
+                <td>${this.state.invoice.desc_line1}</td>
+                <td>$${this.state.invoice.price_line1}</td>
+                <td>$${this.state.invoice.total_line1}</td>
+            </tr>`
+        // console.log(this.state.invoice.qty_line2)
+        if(Number(this.state.invoice.qty_line2) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line2}</td>
+                <td>${this.state.invoice.desc_line2}</td>
+                <td>$${this.state.invoice.price_line2}</td>
+                <td>$${this.state.invoice.total_line2}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line3) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line3}</td>
+                <td>${this.state.invoice.desc_line3}</td>
+                <td>$${this.state.invoice.price_line3}</td>
+                <td>$${this.state.invoice.total_line3}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line4) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line4}</td>
+                <td>${this.state.invoice.desc_line4}</td>
+                <td>$${this.state.invoice.price_line4}</td>
+                <td>$${this.state.invoice.total_line4}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line5) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line5}</td>
+                <td>${this.state.invoice.desc_line5}</td>
+                <td>$${this.state.invoice.price_line5}</td>
+                <td>$${this.state.invoice.total_line5}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line6) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line6}</td>
+                <td>${this.state.invoice.desc_line6}</td>
+                <td>$${this.state.invoice.price_line6}</td>
+                <td>$${this.state.invoice.total_line6}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line7) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line7}</td>
+                <td>${this.state.invoice.desc_line7}</td>
+                <td>$${this.state.invoice.price_line7}</td>
+                <td>$${this.state.invoice.total_line7}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line8) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line8}</td>
+                <td>${this.state.invoice.desc_line8}</td>
+                <td>$${this.state.invoice.price_line8}</td>
+                <td>$${this.state.invoice.total_line8}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line9) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line9}</td>
+                <td>${this.state.invoice.desc_line9}</td>
+                <td>$${this.state.invoice.price_line9}</td>
+                <td>$${this.state.invoice.total_line9}</td>
+            </tr>`
+        }
+        if(Number(this.state.invoice.qty_line10) !== 0){
+            invoiceBody = invoiceBody +
+            `<tr>
+                <td>${this.state.invoice.qty_line10}</td>
+                <td>${this.state.invoice.desc_line10}</td>
+                <td>$${this.state.invoice.price_line10}</td>
+                <td>$${this.state.invoice.total_line10}</td>
+            </tr>`
+        }
+
+// ***Footer
+        let invoiceFooter = 
+            `<tr>
+                <td colspan='3' align='right'><b>TOTAL</b></td>
+                <td>$${this.state.invoice.sub_total}</td>
+            </tr>
+            <tr>
+                <td colspan='3' align='right'><b>TAX</b></td>
+                <td>$${this.state.invoice.tax_amt}</td>
+            </tr>
+            <tr>
+                <td colspan='3' align='right'><b>TOTAL</b></td>
+                <td>$${this.state.invoice.total}</td>
+            </tr>
+
+            </table>
+        </div>`            
+
+        let invoiceMessage = invoiceHeader + invoiceBody + invoiceFooter
+
+        this.setState({
+            message: invoiceMessage
+        })
+
+    }
+
     async sendMail() {
         if (this.props.searchType === 'beef') {
             await this.beefInvoice();
@@ -286,6 +429,9 @@ export default class EmailForm extends Component {
         }
         else if(this.props.searchType === 'circleV'){
             await this.circleVInvoice();
+        }
+        else if(this.props.searchType === 'invoice'){
+            await this.generalInvoice();
         }
         axios.post('/mail/send', {
             email: this.state.email,
