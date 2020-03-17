@@ -290,8 +290,33 @@ export default class EmailForm extends Component {
         <br/>
         <div>
             <b>Customer Name:  </b> ${this.state.invoice.customer}
-        </div>
-        <br/>
+        </div>`
+        if(this.state.invoice.memo != null && this.state.invoice.memo !== ''){
+            invoiceHeader = invoiceHeader +
+            `<br/>
+            <div>
+                <b>Memo:  </b> ${this.state.invoice.memo}  
+            </div>`
+        }
+        if(this.state.invoice.tax_id_num != null &&
+            this.state.invoice.tax_id_num !== ''){
+                invoiceHeader = invoiceHeader +
+                `<br/>
+                <div>
+                    <b>Tax ID:  </b> ${this.state.invoice.tax_id_num}
+                </div>`    
+        }
+        if(this.state.invoice.po_num != null &&
+            this.state.invoice.po_num !== ''){
+                invoiceHeader = invoiceHeader +
+                `<br/>
+                <div>
+                    <b>PO Number:  </b> ${this.state.invoice.po_num}
+                </div>`
+    
+        }
+        invoiceHeader = invoiceHeader +
+        `<br/>
         <div>
             <table border='1px' cellpadding='3px'>
                 <tr>
