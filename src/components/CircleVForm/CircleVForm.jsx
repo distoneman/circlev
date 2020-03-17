@@ -106,6 +106,11 @@ export default class CircleVForm extends Component {
         await this.resetState();
     };
 
+    printNoSave = async () => {
+        await this.printInvoice();
+        await this.resetState();
+    }
+
     calcTotal = async () => {
         let totalLine1 = this.state.qtyLine1 * this.state.priceLine1;
         let totalLine2 = this.state.qtyLine2 * this.state.priceLine2;
@@ -375,6 +380,8 @@ export default class CircleVForm extends Component {
                                 <button className='circleV-save-btn'
                                     onClick={() => this.update()}>Update</button>
                             )}
+                            <button className = 'circleV-save-btn'
+                                onClick={() => this.printNoSave()}>Print No Save</button>
                     </div>
                 </div>
                 <iframe title="pdf" id="output" className='circleV-pdf-iframe'></iframe>
