@@ -41,6 +41,7 @@ export default class Search extends Component {
         }
         if (this.state.searchField === "invoiceDate") {
             console.log("search date")
+            console.log(this.state.searchCriteria)
             const res = await axios.get(`/search/${this.state.searchType}InvoiceDate/?invoiceDate=${this.state.searchCriteria}`)
             console.log(res.data)
             this.setState({
