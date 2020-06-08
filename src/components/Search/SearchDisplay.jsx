@@ -74,7 +74,7 @@ export default class SearchDisplay extends Component {
                             <FaEdit className='fa-icon' />
                         </Link>
                         <FaTrashAlt className='fa-icon'
-                            onClick={() => this.props.deleteInvoice(this.props.id)} />
+                            onClick={() => this.props.deleteInvoice(this.props.id, this.props.customer)} />
                         <FaEnvelope className='fa-icon'
                             onClick={this.toggleEmailModal} />
                         {/* <FaComment className='fa-icon' /> */}
