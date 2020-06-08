@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import moment from 'moment';
 import jsPDF from "jspdf";
+import Swal from 'sweetalert2';
 
 import './Search.css';
 import SearchDisplay from './SearchDisplay';
@@ -61,9 +62,29 @@ export default class Search extends Component {
 
     }
 
-    deleteInvoice = async (invoiceID) => {
-        await axios.delete(`/${this.state.searchType}/delete/${invoiceID}`)
-        this.search();
+    deleteInvoice = async (invoiceID, customer) => {
+        Swal.fire({
+            title: `Are you sure you want to delete 
+                ${customer}`,
+            // text: "You won't be able to revert this!",
+            // type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Delete'
+        }).then((result) => {
+            if (result.value) {
+                axios.delete(`/${this.state.searchType}/delete/${invoiceID}`)
+                //   this.printInvoice();
+                // this.resetState();
+                // Swal.fire(
+                //   'Invoice Printed'
+                // )
+            }
+            this.search()
+        })
+
+        // this.search();
     }
 
     printBeefInvoice = async (invoiceID) => {
