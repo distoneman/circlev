@@ -113,34 +113,34 @@ export default class Search extends Component {
             doc.text(this.state.invoice[0].slaughter, 20, 85, { align: 'right' });
             doc.text('Beef Slaughter', 27, 85);
             doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 85, { align: 'right' });
-            doc.text(slaughterTotal, 132, 85, { align: 'right' })
+            doc.text(`$${slaughterTotal}`, 132, 85, { align: 'right' })
         }
         if (this.state.invoice[0].qtyCut !== 0) {
             doc.text(this.state.invoice[0].qty_cut, 20, 95, { align: 'right' })
             doc.text('Cut & Wrap (Carcass Weight)', 27, 95);
             doc.text(`$${this.state.invoice[0].price_cut}`, 102, 95, { align: 'right' });
-            doc.text(cutWrapTotal, 132, 95, { align: 'right' });
+            doc.text(`$${cutWrapTotal}`, 132, 95, { align: 'right' });
         }
         if (this.state.invoice[0].qty_patties !== 0) {
             doc.text(this.state.invoice[0].qty_patties, 20, 105, { align: 'right' })
             doc.text('Patties', 27, 105);
             doc.text(`$${this.state.invoice[0].price_patties}`, 102, 105, { align: 'right' });
-            doc.text(pattiesTotal, 132, 105, { align: 'right' });
+            doc.text(`$${pattiesTotal}`, 132, 105, { align: 'right' });
         }
         if (this.state.invoice[0].qty_brand !== 0) {
             doc.text(this.state.invoice[0].qty_brand, 20, 115, { align: 'right' });
             doc.text('Brand Inspection', 27, 115);
             doc.text(`$${this.state.invoice[0].price_brand}`, 102, 115, { align: 'right' });
-            doc.text(brandTotal, 132, 115, { align: 'right' });
+            doc.text(`$${brandTotal}`, 132, 115, { align: 'right' });
         }
         if (Number(this.state.invoice[0].qty_other) !== 0) {
             doc.text(this.state.invoice[0].qty_other, 20, 125, { align: 'right' });
             doc.text(this.state.invoice[0].desc_other, 27, 125);
             doc.text(`$${this.state.invoice[0].price_other}`, 102, 125, { align: 'right' });
-            doc.text(otherTotal, 132, 125, { align: 'right' });
+            doc.text(`$${otherTotal}`, 132, 125, { align: 'right' });
         }
         doc.text('Total', 100, 135);
-        doc.text(total, 132, 135, { align: 'right' });
+        doc.text(`$${total}`, 132, 135, { align: 'right' });
         if (this.state.invoice[0].message != null) {
             doc.text(this.state.invoice[0].message, 27, 150, { maxWidth: '90' })
         }
@@ -152,7 +152,7 @@ export default class Search extends Component {
     }
 
     printPorkInvoice = async (invoiceID) => {
-        console.log(this.state.invoice)
+        // console.log(this.state.invoice)
         await this.searchOne(invoiceID)
         const doc = new jsPDF({
             orientation: 'p',
@@ -169,25 +169,25 @@ export default class Search extends Component {
             , 20, 77, { align: 'right' });
         doc.text('Pork Slaughter', 27, 77);
         doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 77, { align: 'right' });
-        doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_slaughter}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
         doc.text('Cut & Wrap (Carcass Weight)', 27, 85);
         doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
-        doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_cut}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_cure.toString(), 20, 93, { align: 'right' })
         doc.text('Cure', 27, 93);
         doc.text(`$${this.state.invoice[0].price_cure}`, 102, 93, { align: 'right' });
-        doc.text(this.state.invoice[0].total_cure.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_cure}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 93, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_link.toString(), 20, 101, { align: 'right' });
         doc.text('Link/Patty Sausage', 27, 101);
         doc.text(`$${this.state.invoice[0].price_link}`, 102, 101, { align: 'right' });
-        doc.text(this.state.invoice[0].total_link.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_link}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 101, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_bulk.toString(), 20, 108, { align: 'right' });
@@ -196,18 +196,18 @@ export default class Search extends Component {
         doc.text(this.state.invoice[0].qty_fat.toString(), 20, 116, { align: 'right' });
         doc.text('Fat Rendered', 27, 116);
         doc.text(`$${this.state.invoice[0].price_fat}`, 102, 116, { align: 'right' });
-        doc.text(this.state.invoice[0].total_fat.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_fat}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 116, { align: 'right' });
 
         if (Number(this.state.invoice[0].qtyOther) !== 0) {
             doc.text(this.state.invoice[0].qty_other.toString(), 20, 124, { align: 'right' });
             doc.text(this.state.invoice[0].desc_other, 27, 124);
             doc.text(`$${this.state.invoice[0].price_other}`, 102, 124, { align: 'right' });
-            doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_other}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 124, { align: 'right' });
         }
         doc.text('Total', 100, 132);
-        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 132, { align: 'right' });
         doc.text(`${this.state.invoice[0].lard} lbs of Lard`, 60, 140)
         doc.text(this.state.invoice[0].message, 27, 155, { maxWidth: '90' })
@@ -237,30 +237,30 @@ export default class Search extends Component {
             , 20, 77, { align: 'right' });
         doc.text('Sheep Slaughter', 27, 77);
         doc.text(`$${this.state.invoice[0].price_slaughter}`, 102, 77, { align: 'right' });
-        doc.text(this.state.invoice[0].total_slaughter.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_slaughter}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_cut.toString(), 20, 85, { align: 'right' })
         doc.text('Cut & Wrap (Carcass Weight)', 27, 85);
         doc.text(`$${this.state.invoice[0].price_cut}`, 102, 85, { align: 'right' });
-        doc.text(this.state.invoice[0].total_cut.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_cut}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' });
 
         doc.text(this.state.invoice[0].qty_bone.toString(), 20, 93, { align: 'right' })
         doc.text('Bone & Roll', 27, 93);
         doc.text(`$${this.state.invoice[0].price_bone}`, 102, 93, { align: 'right' });
-        doc.text(this.state.invoice[0].total_bone.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_bone}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 93, { align: 'right' });
 
         if (Number(this.state.invoice[0].qty_other) !== 0) {
             doc.text(this.state.invoice[0].qty_other.toString(), 20, 101, { align: 'right' });
             doc.text(this.state.invoice[0].desc_other, 27, 101);
             doc.text(`$${this.state.invoice[0].price_other}`, 102, 101, { align: 'right' });
-            doc.text(this.state.invoice[0].total_other.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_other}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 101, { align: 'right' });
         }
         doc.text('Total', 100, 109);
-        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 109, { align: 'right' });
         doc.text(this.state.invoice[0].message, 27, 120, { maxWidth: '90' })
         doc.text(`${this.state.invoice[0].net_weight} Net Weight Misc. Sheep Cuts`, 60, 150)
@@ -291,26 +291,26 @@ export default class Search extends Component {
             , 20, 77, { align: 'right' });
         doc.text(this.state.invoice[0].desc_line1, 27, 77);
         doc.text(`$${this.state.invoice[0].price_line1}`, 102, 77, { align: 'right' });
-        doc.text(this.state.invoice[0].total_line1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_line1}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
         doc.text(this.state.invoice[0].qty_line2.toString()
             , 20, 85, { align: 'right' });
         doc.text(this.state.invoice[0].desc_line2, 27, 85);
         doc.text(`$${this.state.invoice[0].price_line2}`, 102, 85, { align: 'right' });
-        doc.text(this.state.invoice[0].total_line2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_line2}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 85, { align: 'right' })
 
         doc.text('Sub Total', 100, 93, { align: 'right' });
-        doc.text(this.state.invoice[0].sub_total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].sub_total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 93, { align: 'right' })
 
         doc.text('Tax', 100, 101, { align: 'right' });
-        doc.text(this.state.invoice[0].tax_amt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].tax_amt}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 101, { align: 'right' })
 
         doc.text('Total', 100, 109, { align: 'right' });
-        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 109, { align: 'right' });
 
         if (Number(this.state.invoice[0].amt_paid) !== 0) {
@@ -319,7 +319,7 @@ export default class Search extends Component {
                 132, 117, { align: 'right' });
 
             doc.text('Balance', 100, 125, { align: 'right' });
-            doc.text(this.state.invoice[0].balance.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].balance}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 125, { align: 'right' });
         }
 
@@ -353,7 +353,7 @@ export default class Search extends Component {
             , 20, 77, { align: 'right' });
         doc.text(this.state.invoice[0].desc_line1, 27, 77);
         doc.text(`$${this.state.invoice[0].price_line1}`, 102, 77, { align: 'right' });
-        doc.text(this.state.invoice[0].total_line1.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total_line1}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 77, { align: 'right' })
 
         if (Number(this.state.invoice[0].qty_line2) !== 0) {
@@ -361,7 +361,7 @@ export default class Search extends Component {
                 , 20, 85, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line2, 27, 85);
             doc.text(`$${this.state.invoice[0].price_line2}`, 102, 85, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line2.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line2}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 85, { align: 'right' })
         }
 
@@ -370,7 +370,7 @@ export default class Search extends Component {
                 , 20, 93, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line3, 27, 93);
             doc.text(`$${this.state.invoice[0].price_line3}`, 102, 93, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line3.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line3}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 93, { align: 'right' })
         }
 
@@ -379,7 +379,7 @@ export default class Search extends Component {
                 , 20, 101, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line4, 27, 101);
             doc.text(`$${this.state.invoice[0].price_line4}`, 102, 101, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line4.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line4}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 101, { align: 'right' })
         }
 
@@ -388,7 +388,7 @@ export default class Search extends Component {
                 , 20, 108, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line5, 27, 108);
             doc.text(`$${this.state.invoice[0].price_line5}`, 102, 108, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line5.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line5}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 108, { align: 'right' })
         }
 
@@ -397,7 +397,7 @@ export default class Search extends Component {
                 , 20, 116, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line6, 27, 116);
             doc.text(`$${this.state.invoice[0].price_line6}`, 102, 116, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line6.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line6}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 116, { align: 'right' })
         }
 
@@ -406,7 +406,7 @@ export default class Search extends Component {
                 , 20, 124, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line7, 27, 124);
             doc.text(`$${this.state.invoice[0].price_line7}`, 102, 124, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line7.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line7}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 124, { align: 'right' })
         }
 
@@ -415,7 +415,7 @@ export default class Search extends Component {
                 , 20, 132, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line8, 27, 132);
             doc.text(`$${this.state.invoice[0].price_line8}`, 102, 132, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line8.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line8}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 132, { align: 'right' })
         }
 
@@ -424,7 +424,7 @@ export default class Search extends Component {
                 , 20, 140, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line9, 27, 140);
             doc.text(`$${this.state.invoice[0].price_line9}`, 102, 140, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line9.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line9}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 140, { align: 'right' })
         }
 
@@ -433,20 +433,20 @@ export default class Search extends Component {
                 , 20, 148, { align: 'right' });
             doc.text(this.state.invoice[0].desc_line10, 27, 148);
             doc.text(`$${this.state.invoice[0].price_line10}`, 102, 148, { align: 'right' });
-            doc.text(this.state.invoice[0].total_line10.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+            doc.text(`$${this.state.invoice[0].total_line10}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
                 132, 148, { align: 'right' })
         }
 
         doc.text('Sub Total', 100, 156, { align: 'right' });
-        doc.text(this.state.invoice[0].sub_total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].sub_total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 156, { align: 'right' })
 
         doc.text('Tax', 100, 164, { align: 'right' });
-        doc.text(this.state.invoice[0].tax_amt.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].tax_amt}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 164, { align: 'right' })
 
         doc.text('Total', 100, 172, { align: 'right' });
-        doc.text(this.state.invoice[0].total.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
+        doc.text(`$${this.state.invoice[0].total}`.toLocaleString('us-US', { style: 'currency', currency: 'USD' }),
             132, 172, { align: 'right' });
 
         // doc.save('invoice.pdf')
