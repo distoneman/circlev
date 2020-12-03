@@ -64,11 +64,11 @@ export default class CircleVForm extends Component {
                 descLine2: res.data[0].desc_line2,
                 priceLine2: res.data[0].price_line2,
                 totalLine2: res.data[0].total_line2,
-                subTotal: res.data[0].sub_total,
-                taxAmt: res.data[0].tax_amt,
-                total: res.data[0].total,
-                amtPaid: res.data[0].amt_paid,
-                balance: res.data[0].balance,
+                subTotal: `$${res.data[0].sub_total}`,
+                taxAmt: `$${res.data[0].tax_amt}`,
+                total: `$${res.data[0].total}`,
+                amtPaid: `$${res.data[0].amt_paid}`,
+                balance: `$${res.data[0].balance}`,
                 netWeight: res.data[0].net_weight,
                 message: res.data[0].message
             })

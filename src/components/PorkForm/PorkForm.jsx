@@ -84,7 +84,7 @@ export default class PorkForm extends Component {
                 lard: res.data[0].lard,
                 netWeight: res.data[0].net_weight,
                 message: res.data[0].message,
-                total: res.data[0].total,
+                total: `$${res.data[0].total}`,
                 slaughterTotal: res.data[0].total_slaughter,
                 cutWrapTotal: res.data[0].total_cut,
                 cureTotal: res.data[0].total_cure,
