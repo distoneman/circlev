@@ -129,10 +129,10 @@ export default class InvoiceForm extends Component {
                 descLine10: res.data[0].desc_line10,
                 priceLine10: res.data[0].price_line10,
                 totalLine10: res.data[0].total_line10,
-                subTotal: res.data[0].sub_total,
-                taxAmt: res.data[0].tax_amt,
+                subTotal: `$${res.data[0].sub_total}`,
+                taxAmt: `$${res.data[0].tax_amt}`,
                 taxRate: .03,
-                total: res.data[0].total
+                total: `$${res.data[0].total}`
             })
         }
     }

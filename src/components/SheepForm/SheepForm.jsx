@@ -70,7 +70,7 @@ export default class SheepForm extends Component {
                 descOther: res.data[0].desc_other,
                 priceOther: res.data[0].price_other,
                 netWeight: res.data[0].net_weight,
-                total: res.data[0].total,
+                total: `$${res.data[0].total}`,
                 slaughterTotal: res.data[0].total_slaughter,
                 cutWrapTotal: res.data[0].total_cut,
                 boneTotal: res.data[0].total_bone,

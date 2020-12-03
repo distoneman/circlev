@@ -72,7 +72,7 @@ export default class BeefForm extends Component {
         qtyOther: res.data[0].qty_other,
         descOther: res.data[0].desc_other,
         priceOther: res.data[0].price_other,
-        total: res.data[0].total,
+        total: `$${res.data[0].total}`,
         message: res.data[0].message
       })
     }
